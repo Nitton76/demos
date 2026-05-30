@@ -52,6 +52,16 @@
   .demo .go{margin-top:16px;font-size:14px;font-weight:800;color:var(--green-2)}
   .demo.web .go{color:#1666C6}
 
+  /* why a pos */
+  .whygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:24px}
+  .why{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(20,22,18,.05)}
+  .why .wic{font-size:26px;margin-bottom:10px}
+  .why .wt{font-weight:800;font-size:17px;letter-spacing:-.01em}
+  .why .wd{font-size:13.5px;color:var(--ink-2);margin-top:7px}
+  .why .wd b{color:var(--ink)}
+  .roadmap{margin-top:22px;background:#EFFBEF;border:1px solid #D2F0D6;border-radius:14px;padding:16px 18px;font-size:13.5px;color:var(--ink-2)}
+  .roadmap b{color:var(--green-2)}
+
   /* business case */
   .case{background:var(--ink);color:#EAEFE9;border-radius:28px;padding:clamp(28px,5vw,52px);margin-top:8px}
   .case .eyebrow{color:#7CEB82}
@@ -103,7 +113,7 @@
       <span class="wm">COWBOLT</span><span class="reg">Register</span>
     </div>
     <h1>The simplest way on earth to <b>get paid in Bitcoin and dollars</b>.</h1>
-    <div class="lede">A merchant signs in with the wallet they already have and, in under 60 seconds, takes USD-priced payments that settle instantly — as Bitcoin over Lightning or USDT over Liquid — straight to their own keys. No bank. No card terminal. No approval.</div>
+    <div class="lede">Sign up and we create a free, self-custody wallet for you on the spot. In under 60 seconds you're taking USD-priced payments that settle instantly — as Bitcoin over Lightning or USDT over Liquid — straight to keys only you control. No bank. No card terminal. No approval.</div>
     <div class="kpis">
       <span class="kpi"><span class="dot"></span> Non-custodial · keys stay with the merchant</span>
       <span class="kpi"><span class="dot" style="background:var(--green)"></span> Lightning · instant</span>
@@ -133,6 +143,31 @@
         <div class="go">Open the web POS →</div>
       </a>
     </div>
+  </div></div>
+
+  <!-- WHY A POS -->
+  <div class="section" style="padding-top:8px"><div class="wrap">
+    <div class="eyebrow">Why a POS — not just a wallet?</div>
+    <h2>A wallet moves money. A register runs a business.</h2>
+    <div class="lead2">A plain wallet is built for one person spending their own money. A shop is many hands, money that belongs to the business, and a need to know exactly what happened. That specificity is the product — and it compounds with every feature we add.</div>
+    <div class="whygrid">
+      <div class="why">
+        <div class="wic">👥</div>
+        <div class="wt">Roles, not just keys</div>
+        <div class="wd">Staff take payments into the business register — but they <b>can't transfer funds, withdraw, or touch the business account</b>. Only the owner moves money. A cashier never holds the treasury or the recovery phrase.</div>
+      </div>
+      <div class="why">
+        <div class="wic">📊</div>
+        <div class="wt">Books that reconcile</div>
+        <div class="wd">Every sale is tagged — by staff member, by day, by rail — and exportable. A wallet shows a balance; a register shows <b>what the business actually did</b>.</div>
+      </div>
+      <div class="why">
+        <div class="wic">🏪</div>
+        <div class="wt">One register, many hands</div>
+        <div class="wd">Add a cashier in seconds, remove them just as fast. No shared recovery phrase, no risk that a departing employee walks off with the keys to the money.</div>
+      </div>
+    </div>
+    <div class="roadmap"><b>On the roadmap:</b> reporting dashboards · staff management &amp; role-based permissions · shift reconciliation · multi-location registers — each one a reason a business stays, that a bare wallet can never match.</div>
   </div></div>
 
   <!-- BUSINESS CASE -->
