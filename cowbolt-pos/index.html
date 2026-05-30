@@ -34,6 +34,13 @@
   .brandrow img{width:30px;height:30px}
   .brandrow .wm{font-weight:900;letter-spacing:.04em;font-size:20px}
   .brandrow .reg{font-weight:700;color:var(--ink-2);font-size:14px}
+  .brandsub{text-align:center;color:var(--ink-2);font-size:12.5px;margin:-2px 0 6px}
+  .herotext{text-align:center;margin-bottom:2px}
+  .pitch{font-size:clamp(18px,4.6vw,22px);font-weight:800;letter-spacing:-.02em;line-height:1.35;max-width:520px;margin:0 auto;color:var(--ink)}
+  .pitch b{color:var(--green-2)}
+  .kpis2{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+  .kpi2{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:100px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--ink-2);box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .kpi2 .pd{width:7px;height:7px;border-radius:50%;background:var(--green)}
 
   .card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow)}
   h2{font-size:21px;font-weight:800;letter-spacing:-.02em;text-align:center}
@@ -111,6 +118,16 @@
     <!-- ===== LOGIN ===== -->
     <div id="scLogin" class="stack">
       <div class="brandrow"><img class="markimg mk" alt="Cowbolt"><span class="wm">COWBOLT</span><span class="reg">Register</span></div>
+      <div class="brandsub">Web POS · self-custody till for Bitcoin &amp; USDT</div>
+      <div class="herotext">
+        <div class="pitch">The <b>Stripe Payment Link for Bitcoin</b>. Sign in with the Cowbolt wallet you already have → in under 60 seconds, take USD-priced payments that settle instantly as <b>BTC over Lightning</b> or <b>USDT over Liquid</b> — straight to your own keys.</div>
+        <div class="kpis2">
+          <span class="kpi2"><span class="pd"></span> Non-custodial · keys stay with you</span>
+          <span class="kpi2"><span class="pd" style="background:var(--green)"></span> Lightning · instant</span>
+          <span class="kpi2"><span class="pd" style="background:var(--usdt)"></span> USDT · dollar-stable</span>
+          <span class="kpi2"><span class="pd" style="background:var(--ink-2)"></span> Any phone, Mac or PC</span>
+        </div>
+      </div>
       <div class="card">
         <h2>Sign in to your register</h2>
         <div class="sub">Take Bitcoin &amp; USDT payments from any device.</div>
