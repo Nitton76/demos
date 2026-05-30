@@ -6,8 +6,8 @@
 <title>Cowbolt Register — POS Portal Mockup</title>
 <style>
   :root{
-    --green:#16C61C;          /* Cowbolt brand green (sampled #1AD31F) */
-    --green-2:#0FA516;        /* darker green for gradients/active */
+    --green:#02CF0A;          /* Cowbolt brand green (sampled #1AD31F) */
+    --green-2:#02A006;        /* darker green for gradients/active */
     --ink:#1B1C1A;            /* Cowbolt near-black (sampled #202020) */
     --ink-2:#5C615A;
     --paper:#FBFCFA;          /* clean off-white */
@@ -39,7 +39,7 @@
   .masthead{display:flex;align-items:center;gap:16px;margin-bottom:8px}
   .logo{
     width:54px;height:54px;border-radius:15px;background:#fff;border:1px solid var(--line);
-    display:grid;place-items:center;box-shadow:0 8px 20px rgba(22,198,28,.18);
+    display:grid;place-items:center;box-shadow:0 8px 20px rgba(2,207,10,.18);
   }
   .logo img{width:34px;height:34px}
   .masthead h1{font-size:30px;font-weight:800;letter-spacing:-.02em}
@@ -78,18 +78,18 @@
   .appbar .brand{display:flex;align-items:center;gap:7px;font-weight:900;font-size:15px;letter-spacing:.02em}
   .appbar .brand img{width:20px;height:20px}
   .appbar .brand .reg{font-weight:700;letter-spacing:-.01em;color:var(--ink-2);font-size:13px;text-transform:none}
-  .avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#A8F0AC,#16C61C);display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px}
+  .avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#A8F0AC,#02CF0A);display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px}
   .body{flex:1 1 auto;overflow:hidden;padding:2px 18px 0;display:flex;flex-direction:column;gap:14px}
   .scroll{overflow-y:auto}
   .navbar{height:58px;flex:0 0 auto;border-top:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:space-around;padding:0 8px}
   .navbar .nav{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--ink-2);font-weight:600}
   .navbar .nav.active{color:var(--green-2)}
   .navbar .nav .gi{font-size:18px;line-height:1}
-  .navbar .plus{width:50px;height:50px;border-radius:16px;background:linear-gradient(150deg,var(--green),var(--green-2));color:#fff;display:grid;place-items:center;font-size:26px;font-weight:700;margin-top:-18px;box-shadow:0 8px 18px rgba(22,198,28,.4)}
+  .navbar .plus{width:50px;height:50px;border-radius:16px;background:linear-gradient(150deg,var(--green),var(--green-2));color:#fff;display:grid;place-items:center;font-size:26px;font-weight:700;margin-top:-18px;box-shadow:0 8px 18px rgba(2,207,10,.4)}
 
   .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px}
   .muted{color:var(--ink-2)} .small{font-size:12px} .xsmall{font-size:11px}
-  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:linear-gradient(150deg,var(--green),var(--green-2));color:#fff;border:none;border-radius:16px;padding:15px;font-size:15.5px;font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(22,198,28,.30);letter-spacing:-.01em}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:linear-gradient(150deg,var(--green),var(--green-2));color:#fff;border:none;border-radius:16px;padding:15px;font-size:15.5px;font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(2,207,10,.30);letter-spacing:-.01em}
   .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none;font-weight:600}
   .btn.dark{background:var(--ink);box-shadow:none}
   .btn.sm{padding:12px;font-size:14px;border-radius:14px}
@@ -127,14 +127,16 @@
   .rail{flex:1;border:1.5px solid var(--line);border-radius:16px;padding:12px;text-align:center;cursor:pointer;transition:.15s;background:#fff;user-select:none}
   .rail .rt{font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;gap:5px}
   .rail .rs{font-size:10.5px;color:var(--ink-2);margin-top:2px}
-  .rail.on{border-color:var(--green);background:#EFFBEF;box-shadow:0 4px 12px rgba(22,198,28,.12)}
+  .rail.on{border-color:var(--green);background:#EFFBEF;box-shadow:0 4px 12px rgba(2,207,10,.12)}
   .rail.on.usdt{border-color:var(--usdt);background:#EEF8F3;box-shadow:0 4px 12px rgba(38,161,123,.12)}
+  .rail.on.btc{border-color:#F7931A;background:#FFF6EC;box-shadow:0 4px 12px rgba(247,147,26,.12)}
+  .rail{min-width:0}
   .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:2px}
   .key{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 0;text-align:center;font-size:19px;font-weight:700;cursor:pointer;user-select:none}
   .key:active{background:#F1F4EF}
 
   .cust .merch{text-align:center;padding:6px 0 2px}
-  .cust .merch .av{width:46px;height:46px;border-radius:50%;margin:0 auto 6px;background:linear-gradient(135deg,#A8F0AC,#16C61C);display:grid;place-items:center;color:#fff;font-weight:800;font-size:18px}
+  .cust .merch .av{width:46px;height:46px;border-radius:50%;margin:0 auto 6px;background:linear-gradient(135deg,#A8F0AC,#02CF0A);display:grid;place-items:center;color:#fff;font-weight:800;font-size:18px}
   .cust .pay{text-align:center;font-size:30px;font-weight:800;letter-spacing:-.03em;margin-top:2px}
   .cust .for{text-align:center;font-size:12.5px;color:var(--ink-2)}
   .qr{width:150px;height:150px;margin:4px auto 0;border-radius:18px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;position:relative;overflow:hidden}
@@ -161,7 +163,7 @@
   .summ b{color:var(--ink)}
 
   .connect{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;padding:0 28px;gap:8px}
-  .connect .mark{width:78px;height:78px;border-radius:22px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;box-shadow:0 12px 28px rgba(22,198,28,.18);margin-bottom:6px}
+  .connect .mark{width:78px;height:78px;border-radius:22px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;box-shadow:0 12px 28px rgba(2,207,10,.18);margin-bottom:6px}
   .connect .mark img{width:46px;height:46px}
   .connect h3{font-size:22px;font-weight:900;letter-spacing:.02em}
   .connect h3 .reg{font-weight:700;letter-spacing:-.01em;color:var(--ink-2);text-transform:none;display:block;font-size:14px;margin-top:1px}
@@ -278,6 +280,7 @@
             <div class="label" style="margin-bottom:6px">Accept</div>
             <div class="rails">
               <div class="rail on" id="railLN" onclick="toggleRail('LN')"><div class="rt">⚡ Lightning</div><div class="rs">Fastest · BTC</div></div>
+              <div class="rail btc" id="railBTC" onclick="toggleRail('BTC')"><div class="rt">₿ On-chain</div><div class="rs">Any wallet · BTC</div></div>
               <div class="rail on usdt" id="railUSDT" onclick="toggleRail('USDT')"><div class="rt">₮ USDT</div><div class="rs">Steady · Liquid</div></div>
             </div>
           </div>
@@ -308,8 +311,9 @@
           <div class="cust for">Table 4</div>
           <div class="label" style="text-align:center;margin-top:2px">Choose how to pay</div>
           <div class="rails">
-            <div class="rail on" id="cRailLN" onclick="custRail('LN')"><div class="rt">⚡ Bitcoin</div><div class="rs">Lightning · instant</div><div class="small" style="margin-top:3px;font-weight:700">0.00037 BTC</div></div>
-            <div class="rail usdt" id="cRailUSDT" onclick="custRail('USDT')"><div class="rt">₮ USDT</div><div class="rs">Liquid · stable</div><div class="small" style="margin-top:3px;font-weight:700">25.00 ₮</div></div>
+            <div class="rail on" id="cRailLN" onclick="custRail('LN')"><div class="rt">⚡ Lightning</div><div class="rs">instant</div><div class="small" style="margin-top:3px;font-weight:700">0.00037 BTC</div></div>
+            <div class="rail btc" id="cRailBTC" onclick="custRail('BTC')"><div class="rt">₿ On-chain</div><div class="rs">any wallet</div><div class="small" style="margin-top:3px;font-weight:700">0.00037 BTC</div></div>
+            <div class="rail usdt" id="cRailUSDT" onclick="custRail('USDT')"><div class="rt">₮ USDT</div><div class="rs">stable</div><div class="small" style="margin-top:3px;font-weight:700">25.00 ₮</div></div>
           </div>
           <div class="qr" id="qr"><svg viewBox="0 0 29 29" shape-rendering="crispEdges" id="qrSvg"></svg></div>
           <div class="xsmall muted" style="text-align:center" id="qrCap">Scan with any Lightning wallet</div>
@@ -406,7 +410,7 @@
 
   <footer>
     <b style="color:var(--ink)">COWBOLT Register</b> — interactive mockup · captured ideation (Cowbolt parked / zero-burn until activation).<br>
-    Brand sampled from the real Cowbolt logo (green #16C61C, near-black ink) + the Aug-2025 product memo voice.<br>
+    Brand sampled from the real Cowbolt logo (green #02CF0A, near-black ink) + the Aug-2025 product memo voice.<br>
     Spec: <b>Context/Cowbolt/ideas/2026-05-30-cowbolt-register-pos-portal-spec.md</b>
   </footer>
 
@@ -414,7 +418,7 @@
 
 <script>
   // embed real Cowbolt mark
-  const MARK="data:image/png;base64,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";
+  const MARK="data:image/png;base64,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";
   ["m0","m1","m2"].forEach(id=>{const e=document.getElementById(id);if(e)e.src=MARK;});
 
   const BTC_USD=67420; let amtStr="25.00";
@@ -431,13 +435,16 @@
     document.getElementById("usdtEq").textContent=n.toFixed(2);
     document.getElementById("lockAmt").textContent=n.toFixed(2);}
   render();
-  function toggleRail(r){const el=document.getElementById(r==="LN"?"railLN":"railUSDT");
-    const other=document.getElementById(r==="LN"?"railUSDT":"railLN");
-    if(el.classList.contains("on")&&!other.classList.contains("on"))return;
+  const RAILS={LN:"railLN",BTC:"railBTC",USDT:"railUSDT"};
+  function toggleRail(r){const el=document.getElementById(RAILS[r]);
+    const onCount=Object.values(RAILS).filter(id=>document.getElementById(id).classList.contains("on")).length;
+    if(el.classList.contains("on")&&onCount<=1)return;
     el.classList.toggle("on");}
-  function custRail(r){const ln=document.getElementById("cRailLN"),us=document.getElementById("cRailUSDT");
-    if(r==="LN"){ln.classList.add("on");us.classList.remove("on");document.getElementById("qrCap").textContent="Scan with any Lightning wallet";}
-    else{us.classList.add("on");ln.classList.remove("on");document.getElementById("qrCap").textContent="Scan with any Liquid wallet";}
+  const CRAILS={LN:"cRailLN",BTC:"cRailBTC",USDT:"cRailUSDT"};
+  const CAP={LN:"Scan with any Lightning wallet",BTC:"Scan with any Bitcoin wallet · on-chain",USDT:"Scan with any Liquid wallet"};
+  function custRail(r){
+    Object.entries(CRAILS).forEach(([k,id])=>document.getElementById(id).classList.toggle("on",k===r));
+    document.getElementById("qrCap").textContent=CAP[r];
     drawQR("qrSvg",r);}
   let paid=false;
   function simulatePay(){if(paid){location.reload();return;}paid=true;
@@ -456,13 +463,13 @@
           <div class="xsmall" style="margin-top:8px;color:var(--green-2);font-weight:700">New to Bitcoin? Get Cowbolt free →</div>
         </div>`;},900);}
   function drawQR(id,seedKey){const svg=document.getElementById(id);if(!svg)return;
-    const N=29;let seed=(seedKey==="USDT")?9173:4421;
+    const N=29;let seed=(seedKey==="USDT")?9173:(seedKey==="BTC")?6271:4421;
     function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;}
     let cells="";
     function finder(x,y){cells+=`<rect x="${x}" y="${y}" width="7" height="7" fill="#1B1C1A"/><rect x="${x+1}" y="${y+1}" width="5" height="5" fill="#fff"/><rect x="${x+2}" y="${y+2}" width="3" height="3" fill="#1B1C1A"/>`;}
     for(let y=0;y<N;y++)for(let x=0;x<N;x++){const inF=(x<8&&y<8)||(x>N-9&&y<8)||(x<8&&y>N-9);if(inF)continue;if(rnd()>0.55)cells+=`<rect x="${x}" y="${y}" width="1" height="1" fill="#1B1C1A"/>`;}
     finder(0,0);finder(N-7,0);finder(0,N-7);
-    const accent=(seedKey==="USDT")?"#26A17B":"#16C61C";
+    const accent=(seedKey==="USDT")?"#26A17B":(seedKey==="BTC")?"#F7931A":"#02CF0A";
     cells+=`<rect x="13" y="13" width="3" height="3" rx="0.6" fill="${accent}"/>`;
     svg.innerHTML=cells;}
   drawQR("qrSvg","LN");drawQR("qrStatic","LN");
