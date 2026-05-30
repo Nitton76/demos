@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Cowbolt Register — the Cowbolt App (design preview)</title>
-<meta name="description" content="Cowbolt Register — the mobile app design preview. Self-custody till for Bitcoin & USDT.">
+<title>The Cowbolt App — collaborate, cost split and settle in Bitcoin</title>
+<meta name="description" content="Cowbolt — collaborate, cost split and settle in Bitcoin. For teams, friends and families. A non-custodial Bitcoin + USDT app.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,417 +16,192 @@
     --btc:#F68703; --btc-soft:#FFF3E4;             /* Bitcoin · Lightning */
     --usdt:#02BB83; --usdt-soft:#E6F8F1;           /* USDT · Liquid */
     --ok:#079A0D; --ok-soft:#E9F9EA;
-    --amber:#C98A00; --red:#C0492F;
-    --radius:22px;
+    --radius:20px;
     --shadow:0 1px 2px rgba(20,22,18,.04);
     --shadow-lg:0 18px 50px rgba(20,22,18,.10);
     font-size:16px;
   }
-  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;margin:0;padding:0;text-rendering:optimizeLegibility}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   body{
     font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    background:var(--paper);color:var(--ink);line-height:1.5;padding:48px 20px 80px;
+    color:var(--ink);line-height:1.55;background:var(--paper);
   }
   .serif{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.01em}
-  .wrap{max-width:1180px;margin:0 auto}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+  a{color:inherit;text-decoration:none}
+  a:focus-visible{outline:2px solid var(--brand-ink);outline-offset:3px;border-radius:6px}
   svg{display:block}
 
-  /* ---------- page header ---------- */
-  .masthead{display:flex;align-items:center;gap:14px;margin-bottom:6px}
-  .masthead .wm{height:30px;width:auto}
-  .masthead .reg{font-size:17px;font-weight:600;color:var(--ink-2);letter-spacing:.01em;align-self:center}
-  .masthead .sub{color:var(--ink-2);font-size:14px;margin-top:14px;max-width:70ch}
-  .tagline{margin:22px 0 30px;font-size:18px;color:var(--ink);max-width:80ch;line-height:1.55}
-  .tagline b{color:var(--brand-ink);font-weight:600}
-  .pill{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);
-    border-radius:100px;padding:6px 13px;font-size:12.5px;font-weight:500;color:var(--ink-2)}
-  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--brand)}
-  .legend{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:38px}
+  .eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+  h1{font-size:clamp(30px,4.6vw,46px);line-height:1.08;letter-spacing:-.025em}
+  .lede{font-size:clamp(15.5px,1.9vw,19px);color:var(--ink-2);max-width:40ch;margin-top:16px}
+  h2{font-size:clamp(22px,3vw,30px);line-height:1.14;letter-spacing:-.02em}
+  .lead2{color:var(--ink-2);font-size:16px;margin-top:10px;max-width:46ch;line-height:1.6}
 
-  .section-label{display:flex;align-items:baseline;gap:12px;margin:26px 2px 4px;
-    border-top:1px solid var(--line);padding-top:26px}
-  .section-label h2{font-size:12px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--ink-3)}
-  .section-label span{font-size:13px;color:var(--ink-2)}
+  /* brand bar */
+  .brandbar{display:flex;align-items:center;gap:10px;padding:22px 0 0}
+  .brandbar .wm{height:24px;width:auto}
+  .brandbar .reg{font-size:14px;font-weight:600;color:var(--ink-2);letter-spacing:.01em}
 
-  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:34px 30px;align-items:start}
-  .frame-wrap{display:flex;flex-direction:column;align-items:center;gap:13px}
-  .cap{font-size:13px;color:var(--ink-2);text-align:center;max-width:300px;line-height:1.5}
-  .cap b{color:var(--ink);font-weight:600;display:block;font-size:14px;margin-bottom:2px}
+  /* back link */
+  .back{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--ink-2);margin-top:18px}
+  .back:hover{color:var(--ink)}
 
-  /* ---------- phone ---------- */
-  .phone{width:300px;height:620px;background:#0B0D09;border-radius:46px;padding:11px;
-    box-shadow:var(--shadow-lg);position:relative;flex:0 0 auto}
-  .screen{width:100%;height:100%;background:var(--paper);border-radius:36px;overflow:hidden;
-    position:relative;display:flex;flex-direction:column}
-  .notch{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:118px;height:26px;
-    background:#0B0D09;border-radius:0 0 16px 16px;z-index:20}
-  .statusbar{height:38px;display:flex;align-items:center;justify-content:space-between;
-    padding:6px 22px 0 24px;font-size:12.5px;font-weight:600;color:var(--ink);flex:0 0 auto}
-  .statusbar .ic{display:flex;gap:5px;align-items:center;font-size:11px}
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:30px 0 14px}
+  .hero .copy .tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--brand-ink);background:var(--ok-soft);border:1px solid #D6EFD8;
+    border-radius:100px;padding:5px 12px;margin-bottom:18px}
+  .hero .copy .tag .d{width:6px;height:6px;border-radius:50%;background:var(--brand)}
+  .stores{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;align-items:center}
+  .stores img{height:42px;width:auto;display:block;border-radius:8px}
+  .storenote{font-size:12px;color:var(--ink-3);margin-top:14px}
 
-  .appbar{display:flex;align-items:center;justify-content:space-between;padding:8px 18px 12px;flex:0 0 auto}
-  .appbar .brand{display:flex;align-items:center;gap:7px}
-  .appbar .brand .wm{height:15px;width:auto}
-  .appbar .brand .reg{font-weight:600;color:var(--ink-2);font-size:12.5px}
-  .appbar .ttl{font-size:14px;font-weight:600;letter-spacing:-.01em}
-  .avatar{width:30px;height:30px;border-radius:50%;background:var(--brand-ink);display:grid;
-    place-items:center;color:#fff;font-weight:700;font-size:13px}
-  .body{flex:1 1 auto;overflow:hidden;padding:2px 18px 0;display:flex;flex-direction:column;gap:14px}
-  .scroll{overflow-y:auto}
-  .navbar{height:58px;flex:0 0 auto;border-top:1px solid var(--line);background:#fff;
-    display:flex;align-items:center;justify-content:space-around;padding:0 8px}
-  .navbar .nav{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--ink-3);font-weight:600}
-  .navbar .nav.active{color:var(--ink)}
-  .navbar .nav .gi{font-size:18px;line-height:1}
-  .navbar .plus{width:48px;height:48px;border-radius:15px;background:var(--brand-ink);color:#fff;
-    display:grid;place-items:center;font-size:25px;font-weight:600;margin-top:-16px}
+  /* phone with video */
+  .phonewrap{display:flex;justify-content:center}
+  .phone{width:288px;background:#0B0D09;border-radius:42px;padding:10px;box-shadow:var(--shadow-lg);position:relative}
+  .phone .notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:112px;height:24px;
+    background:#0B0D09;border-radius:0 0 15px 15px;z-index:5}
+  .phone video{display:block;width:100%;border-radius:33px;background:#fff;aspect-ratio:576/1280;object-fit:cover}
 
-  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
-  .muted{color:var(--ink-2)} .small{font-size:12px} .xsmall{font-size:11px}
-  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--brand-ink);
-    color:#fff;border:none;border-radius:15px;padding:15px;font:inherit;font-size:15px;font-weight:600;
-    letter-spacing:-.01em;cursor:pointer;transition:transform .06s}
-  .btn:active{transform:scale(.985)}
-  .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line-2);font-weight:600}
-  .btn.dark{background:var(--ink)}
-  .btn.sm{padding:12px;font-size:14px;border-radius:13px}
-  .trust{display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:var(--ink-2);
-    background:var(--ok-soft);border:1px solid #D6EFD8;border-radius:13px;padding:10px 12px;line-height:1.4}
-  .trust b{color:var(--ok);font-weight:600}
-  .trust svg{flex:0 0 auto;color:var(--ok);margin-top:1px}
-  .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
-  .label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-bottom:3px}
+  /* feature pills */
+  .pills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:30px}
+  .pill{display:flex;flex-direction:column;gap:7px}
+  .pill .ic{width:40px;height:40px;border-radius:11px;border:1px solid var(--line);background:var(--card);
+    display:grid;place-items:center}
+  .pill .ic img{width:22px;height:22px}
+  .pill .pt{font-weight:700;font-size:16px;letter-spacing:-.01em;margin-top:4px}
+  .pill .pd{font-size:13.5px;color:var(--ink-2);line-height:1.5}
 
-  .today{background:#fff;border:1px solid var(--line)}
-  .today .big{font-size:38px;font-weight:700;letter-spacing:-.03em}
-  .today .dual{font-size:12.5px;color:var(--ink-3);margin-top:4px}
-  .txn{display:flex;align-items:center;gap:11px;padding:11px 2px;border-bottom:1px solid var(--line)}
-  .txn:last-child{border-bottom:none}
-  .txn .g{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:14px;flex:0 0 auto}
-  .g.ok{background:var(--ok-soft);color:var(--ok)}
-  .g.wait{background:#FFF6E5;color:var(--amber)}
-  .g.fail{background:#FBE7E1;color:var(--red)}
-  .txn .mid{flex:1 1 auto;min-width:0}
-  .txn .amt{font-weight:600;font-size:14.5px}
-  .txn .meta{font-size:11.5px;color:var(--ink-3)}
-  .txn .time{font-size:11.5px;color:var(--ink-3);flex:0 0 auto}
-  .chip-asset{font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:100px}
-  .a-ln{background:var(--btc-soft);color:#C76A00}
-  .a-usdt{background:var(--usdt-soft);color:#018a61}
+  .section{padding:44px 0}
+  .divider{border:none;border-top:1px solid var(--line);margin:0}
 
-  .amount-display{text-align:center;padding:6px 0 2px}
-  .amount-display .amt{font-size:52px;font-weight:700;letter-spacing:-.04em}
-  .amount-display .amt .cur{color:var(--ink-3);font-weight:600}
-  .equiv{font-size:14px;color:var(--ink-2);text-align:center;font-weight:500;margin-top:4px}
-  .equiv b{color:var(--ink);font-weight:600}
-  .rate{font-size:11px;color:var(--ink-3);text-align:center;margin-top:3px}
-  .memo{width:100%;border:1.5px solid var(--line-2);border-radius:13px;padding:12px 14px;font-size:13.5px;font-family:inherit;color:var(--ink);outline:none}
-  .memo::placeholder{color:var(--ink-3)}
-  .memo:focus{border-color:var(--ink)}
-  .rails{display:flex;gap:9px}
-  .rail{flex:1;border:1.5px solid var(--line-2);border-radius:14px;padding:11px 8px;text-align:center;
-    cursor:pointer;transition:.12s;background:#fff;user-select:none;min-width:0}
-  .rail .rt{font-weight:600;font-size:12.5px;display:flex;align-items:center;justify-content:center;gap:4px}
-  .rail .rs{font-size:10px;color:var(--ink-3);margin-top:2px}
-  .rail.on{border-color:var(--btc);background:var(--btc-soft)}
-  .rail.on.usdt{border-color:var(--usdt);background:var(--usdt-soft)}
-  .rail.on.btc{border-color:var(--btc);background:var(--btc-soft)}
-  .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:2px}
-  .key{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 0;text-align:center;
-    font-size:19px;font-weight:500;cursor:pointer;user-select:none}
-  .key:active{background:#F4F4F1}
+  /* feature rows */
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;padding:34px 0}
+  .feat.flip .shot{order:2}
+  .shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg)}
+  .feat .ft{font-size:clamp(20px,2.6vw,27px);line-height:1.15;letter-spacing:-.02em}
+  .feat .fd{font-size:15px;color:var(--ink-2);margin-top:10px;max-width:42ch;line-height:1.6}
 
-  .cust .merch{text-align:center;padding:6px 0 2px}
-  .cust .merch .av{width:46px;height:46px;border-radius:50%;margin:0 auto 7px;background:var(--brand-ink);
-    display:grid;place-items:center;color:#fff;font-weight:700;font-size:18px}
-  .cust .merch .nm{font-size:14px;font-weight:600;letter-spacing:-.01em}
-  .cust .pay{text-align:center;font-size:30px;letter-spacing:-.03em;margin-top:4px}
-  .cust .for{text-align:center;font-size:12.5px;color:var(--ink-3)}
-  .qr{width:150px;height:150px;margin:4px auto 0;border-radius:16px;border:1px solid var(--line);
-    background:#fff;display:grid;place-items:center;position:relative;overflow:hidden;padding:8px}
-  .qr svg{width:100%;height:100%}
-  .qr.pulse{animation:pulse .9s ease}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(7,154,13,.45)}100%{box-shadow:0 0 0 22px rgba(7,154,13,0)}}
-  .status-row{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12.5px;color:var(--ink-2);font-weight:500}
-  .status-row .d{width:8px;height:8px;border-radius:50%;background:var(--amber);animation:blink 1.1s infinite}
-  @keyframes blink{50%{opacity:.3}}
-
-  .success{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;padding:0 26px;gap:6px}
-  .check{width:90px;height:90px;border-radius:50%;background:var(--ok-soft);display:grid;place-items:center;margin-bottom:8px}
-  .check svg{width:48px;height:48px}
-  .success .big{font-size:26px;letter-spacing:-.02em}
-  .success.merchant .big{color:var(--ok)}
-  .draw{stroke-dasharray:48;stroke-dashoffset:48;animation:draw .6s .15s ease forwards}
-  @keyframes draw{to{stroke-dashoffset:0}}
-
-  .chips{display:flex;gap:7px}
-  .fchip{font-size:12px;font-weight:600;padding:6px 13px;border-radius:100px;border:1px solid var(--line-2);
-    background:#fff;color:var(--ink-2);cursor:pointer}
-  .fchip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-  .daygroup{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:10px 0 2px}
-  .summ{font-size:12.5px;color:var(--ink-2);padding:2px 0 8px;border-bottom:1px solid var(--line)}
-  .summ b{color:var(--ink);font-weight:600}
-
-  .connect{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;padding:0 28px;gap:9px}
-  .connect .mark{display:flex;align-items:center;gap:8px;margin-bottom:4px}
-  .connect .mark .wm{height:26px;width:auto}
-  .connect .mark .reg{font-size:14px;font-weight:600;color:var(--ink-2)}
-  .connect p{font-size:13.5px;color:var(--ink-2);max-width:230px;line-height:1.5}
-  .feat{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--ink-2);font-weight:500}
-  .feat svg{color:var(--brand-ink);flex:0 0 auto}
-
-  .docard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;width:300px}
-  .embed{background:var(--ink);border-radius:13px;padding:13px;color:#C7F9C9;
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;line-height:1.5;overflow:auto;white-space:pre}
-  .embed .t{color:#5BE061} .embed .a{color:#8FD9FF}
-  .linkrow{display:flex;gap:8px;align-items:center;background:#F3F3F0;border:1px solid var(--line);
-    border-radius:12px;padding:11px 13px;margin:12px 0 6px;font-size:12.5px}
-  .linkrow .url{font-family:ui-monospace,Menlo,monospace;color:var(--ink)}
-  .linkrow .copy{margin-left:auto;font-weight:600;color:var(--brand-ink)}
-
-  footer{border-top:1px solid var(--line);margin-top:54px;padding-top:28px;color:var(--ink-2);
+  footer{border-top:1px solid var(--line);margin-top:10px;padding:30px 0 56px;color:var(--ink-2);
     font-size:12.5px;text-align:center;line-height:1.7}
-  footer b{color:var(--ink);font-weight:600}
-  @media(max-width:520px){body{padding:24px 8px 60px}.phone{width:280px;height:580px}}
+  footer a{color:var(--brand-ink);font-weight:600}
+  footer .heart{color:var(--ink)}
+
+  @media(max-width:760px){
+    .hero{grid-template-columns:1fr;gap:28px}
+    .hero .phonewrap{order:-1}
+    .lede{max-width:none}
+    .feat{grid-template-columns:1fr;gap:20px;padding:26px 0}
+    .feat.flip .shot{order:0}
+    .section{padding:34px 0}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <div class="masthead">
-    <span data-wm class="wm"></span><span class="reg">Register</span>
-  </div>
-  <div class="masthead"><div class="sub">The Cowbolt App — mobile design preview · self-custody till for Bitcoin &amp; USDT</div></div>
+  <header class="wrap">
+    <div class="brandbar"><span data-wm class="wm"></span><span class="reg">App</span></div>
+    <a class="back" href="./index.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> All demos</a>
+  </header>
 
-  <div class="tagline">
-    The <b>Stripe Payment Link for Bitcoin</b>. We create a free, self-custody wallet for you →
-    in under 60 seconds, show a QR or share a link that takes USD-priced payments and settles instantly
-    as <b>BTC over Lightning</b> or <b>USDT over Liquid</b> — straight to your own keys.
-  </div>
-
-  <div class="legend">
-    <span class="pill"><span class="dot" style="background:var(--brand-ink)"></span> Non-custodial · keys stay with merchant</span>
-    <span class="pill"><span class="dot" style="background:var(--btc)"></span> Lightning (BTC) · instant</span>
-    <span class="pill"><span class="dot" style="background:var(--usdt)"></span> Liquid (USDT) · stable</span>
-    <span class="pill"><span class="dot" style="background:var(--ink-3)"></span> Powered by Breeze SDK</span>
-  </div>
-
-  <!-- ================= MERCHANT ================= -->
-  <div class="section-label"><h2>Merchant flow</h2><span>onboarding to first live QR in &lt;60s</span></div>
-  <div class="gallery">
-
-    <!-- 1. CONNECT -->
-    <div class="frame-wrap">
-      <div class="phone"><div class="notch"></div><div class="screen">
-        <div class="statusbar"><span>9:41</span><span class="ic">●●● ⚡ 100%</span></div>
-        <div class="connect">
-          <div class="mark"><span data-wm class="wm"></span><span class="reg">Register</span></div>
-          <p>Get paid in Bitcoin &amp; dollars. No merchant account. No approval.</p>
-          <div style="height:8px"></div>
-          <button class="btn">Create my register</button>
-          <button class="btn ghost sm" style="margin-top:2px">I already use Cowbolt → sign in</button>
-          <div style="height:14px"></div>
-          <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Your keys never leave your phone</div>
-          <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg> We create a self-custody wallet for you</div>
-          <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg> No email, no KYC, no signup form</div>
-        </div>
-      </div></div>
-      <div class="cap"><b>1 · Get started</b>We spin up your self-custody wallet → set a PIN. 0–15s.</div>
-    </div>
-
-    <!-- 2. DASHBOARD -->
-    <div class="frame-wrap">
-      <div class="phone"><div class="notch"></div><div class="screen">
-        <div class="statusbar"><span>9:41</span><span class="ic">●●● ⚡ 100%</span></div>
-        <div class="appbar">
-          <div class="brand"><span data-wm class="wm"></span><span class="reg">Register</span></div>
-          <div class="avatar">M</div>
-        </div>
-        <div class="body scroll">
-          <div>
-            <div class="label">Today</div>
-            <div class="card today">
-              <div class="big">$480.00</div>
-              <div class="muted small">received · 6 payments</div>
-              <div class="dual">≈ 0.00712 BTC · 120.00 USDT</div>
-            </div>
-          </div>
-          <button class="btn">＋ New payment</button>
-          <div>
-            <div class="row"><div class="label">Recent</div><div class="xsmall muted">See all →</div></div>
-            <div class="card" style="padding:4px 14px">
-              <div class="txn"><div class="g ok">✓</div><div class="mid"><div class="amt">$25.00 <span class="chip-asset a-ln">⚡ LN</span></div><div class="meta">Table 4</div></div><div class="time">2m</div></div>
-              <div class="txn"><div class="g ok">✓</div><div class="mid"><div class="amt">$80.00 <span class="chip-asset a-usdt">₮ USDT</span></div><div class="meta">Invoice #214</div></div><div class="time">14m</div></div>
-              <div class="txn"><div class="g wait">◷</div><div class="mid"><div class="amt">$40.00</div><div class="meta">link · waiting</div></div><div class="time">—</div></div>
-            </div>
-          </div>
-          <div class="trust"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/></svg><span>Funds go <b>straight to your wallet</b>. We never hold them.</span></div>
-          <div style="height:6px"></div>
-        </div>
-        <div class="navbar">
-          <div class="nav active"><span class="gi">⌂</span>Home</div>
-          <div class="plus">＋</div>
-          <div class="nav"><span class="gi">≣</span>History</div>
-        </div>
-      </div></div>
-      <div class="cap"><b>2 · Dashboard</b>USD hero ticks up live as money lands. One-tap to charge again.</div>
-    </div>
-
-    <!-- 3. CREATE PAYMENT (interactive) -->
-    <div class="frame-wrap">
-      <div class="phone"><div class="notch"></div><div class="screen">
-        <div class="statusbar"><span>9:41</span><span class="ic">●●● ⚡ 100%</span></div>
-        <div class="appbar"><div class="small muted">←</div><div class="ttl">New payment</div><div class="small muted">Cancel</div></div>
-        <div class="body" style="gap:11px">
-          <div class="amount-display">
-            <div class="amt"><span class="cur">$</span><span id="amt">25.00</span></div>
-            <div class="equiv">≈ <b id="btcEq">0.00037</b> BTC&nbsp; · &nbsp;<b id="usdtEq">25.00</b> USDT</div>
-            <div class="rate">1 BTC = $67,420 · refreshed just now ◔</div>
-          </div>
-          <input class="memo" placeholder="What's it for? (optional)" value="Table 4">
-          <div>
-            <div class="label" style="margin-bottom:7px">Accept</div>
-            <div class="rails">
-              <div class="rail on" id="railLN" onclick="toggleRail('LN')"><div class="rt">⚡ Lightning</div><div class="rs">Fastest · BTC</div></div>
-              <div class="rail btc" id="railBTC" onclick="toggleRail('BTC')"><div class="rt">₿ On-chain</div><div class="rs">Any wallet · BTC</div></div>
-              <div class="rail on usdt" id="railUSDT" onclick="toggleRail('USDT')"><div class="rt">₮ USDT</div><div class="rs">Steady · Liquid</div></div>
-            </div>
-          </div>
-          <div class="keypad" id="keypad"></div>
-          <button class="btn sm">Create payment →</button>
-          <div class="xsmall muted" style="text-align:center">Customer pays exactly $<span id="lockAmt">25.00</span>. Rate locks 10 min.</div>
-        </div>
-      </div></div>
-      <div class="cap"><b>3 · Create payment</b>Tap the keypad — BTC &amp; USDT roll live. Try it. 25–45s.</div>
-    </div>
-
-  </div>
-
-  <!-- ================= CUSTOMER ================= -->
-  <div class="section-label"><h2>Customer flow</h2><span>what the buyer sees — QR, link, or embedded button · no app required</span></div>
-  <div class="gallery">
-
-    <!-- 4. CUSTOMER PAY (interactive) -->
-    <div class="frame-wrap">
-      <div class="phone"><div class="notch"></div><div class="screen cust" id="custScreen">
-        <div class="statusbar"><span>9:41</span><span class="ic">●●● ⚡ 100%</span></div>
-        <div class="body" style="gap:11px;padding-top:6px">
-          <div class="merch">
-            <div class="av">M</div>
-            <div class="nm">Maya's Coffee</div>
-          </div>
-          <div class="cust pay serif">Pay $25.00</div>
-          <div class="cust for">Table 4</div>
-          <div class="label" style="text-align:center;margin-top:2px">Choose how to pay</div>
-          <div class="rails">
-            <div class="rail on" id="cRailLN" onclick="custRail('LN')"><div class="rt">⚡ Lightning</div><div class="rs">instant</div><div class="small" style="margin-top:3px;font-weight:600">0.00037 BTC</div></div>
-            <div class="rail btc" id="cRailBTC" onclick="custRail('BTC')"><div class="rt">₿ On-chain</div><div class="rs">any wallet</div><div class="small" style="margin-top:3px;font-weight:600">0.00037 BTC</div></div>
-            <div class="rail usdt" id="cRailUSDT" onclick="custRail('USDT')"><div class="rt">₮ USDT</div><div class="rs">stable</div><div class="small" style="margin-top:3px;font-weight:600">25.00 ₮</div></div>
-          </div>
-          <div class="qr" id="qr"><svg viewBox="0 0 29 29" shape-rendering="crispEdges" id="qrSvg"></svg></div>
-          <div class="xsmall muted" style="text-align:center" id="qrCap">Scan with any Lightning wallet</div>
-          <button class="btn sm ghost" onclick="simulatePay()">Open in wallet ↗</button>
-          <div class="status-row" id="custStatus"><span class="d"></span> Waiting for payment… · expires 9:42</div>
-          <div class="xsmall muted" style="text-align:center">Paid directly to Maya · Powered by Cowbolt</div>
-        </div>
-      </div></div>
-      <div class="cap"><b>4 · Customer payment page</b>Tap "Open in wallet" to simulate a Lightning pay → watch it settle.</div>
-    </div>
-
-    <!-- 5. SUCCESS (merchant) -->
-    <div class="frame-wrap">
-      <div class="phone"><div class="notch"></div><div class="screen">
-        <div class="statusbar"><span>9:41</span><span class="ic">●●● ⚡ 100%</span></div>
-        <div class="success merchant">
-          <div class="check"><svg viewBox="0 0 24 24" fill="none"><path class="draw" d="M5 13l4 4L19 7" stroke="#079A0D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="big serif">+$25.00 received</div>
-          <div class="muted small">⚡ Lightning · 0.00037 BTC · just now</div>
-          <div class="small" style="color:var(--ok);font-weight:600;margin-top:2px">Now in your wallet.</div>
-          <div style="height:14px"></div>
-          <button class="btn sm" style="max-width:200px">＋ New payment</button>
-          <div class="xsmall muted" style="margin-top:8px">Back to dashboard</div>
-        </div>
-      </div></div>
-      <div class="cap"><b>5 · Paid ✓ (merchant)</b>Auto-flips on settlement. The loop is one tap forever after.</div>
-    </div>
-
-    <!-- 6. TRANSACTIONS -->
-    <div class="frame-wrap">
-      <div class="phone"><div class="notch"></div><div class="screen">
-        <div class="statusbar"><span>9:41</span><span class="ic">●●● ⚡ 100%</span></div>
-        <div class="appbar"><div class="small muted">←</div><div class="ttl">Transactions</div><div class="small muted">⤓ Export</div></div>
-        <div class="body scroll" style="gap:10px">
-          <div class="chips"><span class="fchip on">All</span><span class="fchip">⚡ BTC</span><span class="fchip">₮ USDT</span></div>
-          <div class="summ">This week · <b>$1,240</b> · 22 paid</div>
-          <div>
-            <div class="daygroup">Today</div>
-            <div class="txn"><div class="g ok">✓</div><div class="mid"><div class="amt">$25.00 <span class="chip-asset a-ln">⚡ LN</span></div><div class="meta">Table 4</div></div><div class="time">2:14p</div></div>
-            <div class="txn"><div class="g ok">✓</div><div class="mid"><div class="amt">$80.00 <span class="chip-asset a-usdt">₮ USDT</span></div><div class="meta">Invoice #214</div></div><div class="time">11:02a</div></div>
-            <div class="txn"><div class="g wait">◷</div><div class="mid"><div class="amt">$40.00</div><div class="meta">link · waiting</div></div><div class="time">—</div></div>
-            <div class="txn"><div class="g fail">✕</div><div class="mid"><div class="amt" style="color:var(--ink-3)">$15.00</div><div class="meta">expired</div></div><div class="time">9:30a</div></div>
-            <div class="daygroup">Yesterday</div>
-            <div class="txn"><div class="g ok">✓</div><div class="mid"><div class="amt">$120.00 <span class="chip-asset a-ln">⚡ LN</span></div><div class="meta">Counter sale</div></div><div class="time">6:40p</div></div>
-            <div class="txn"><div class="g ok">✓</div><div class="mid"><div class="amt">$30.00 <span class="chip-asset a-usdt">₮ USDT</span></div><div class="meta">—</div></div><div class="time">1:15p</div></div>
-          </div>
-          <div class="xsmall muted" style="text-align:center;padding:4px">Tap any row → txid + verify on explorer ↗</div>
-        </div>
-        <div class="navbar">
-          <div class="nav"><span class="gi">⌂</span>Home</div>
-          <div class="plus">＋</div>
-          <div class="nav active"><span class="gi">≣</span>History</div>
-        </div>
-      </div></div>
-      <div class="cap"><b>6 · Transactions</b>USD-native, dual-rail, every row provably self-custodial.</div>
-    </div>
-
-  </div>
-
-  <!-- ================= ENTRY POINTS ================= -->
-  <div class="section-label"><h2>Three doors, one checkout</h2><span>QR · shareable link · embeddable button</span></div>
-  <div class="gallery">
-    <div class="frame-wrap" style="align-self:start">
-      <div class="docard">
-        <div class="label">In-person — QR</div>
-        <div class="qr" style="margin:12px auto 6px"><svg viewBox="0 0 29 29" shape-rendering="crispEdges" id="qrStatic"></svg></div>
-        <div class="xsmall muted" style="text-align:center">Tape it to the cart. Any Lightning/Liquid wallet scans it.</div>
+  <!-- HERO -->
+  <div class="wrap"><div class="hero">
+    <div class="copy">
+      <span class="tag"><span class="d"></span> Live on iOS &amp; Android</span>
+      <h1 class="serif">Collaborate, cost split and settle in Bitcoin.</h1>
+      <div class="lede">For teams, friends and families. Split shared costs, chat in private, and settle up peer-to-peer in Bitcoin or USDT, straight from a non-custodial wallet only you control.</div>
+      <div class="stores">
+        <a href="https://apps.apple.com/kz/app/cowbolt/id6502505502" target="_blank" rel="noopener"><img src="./cowbolt-site/assets/brand/download_appstore.png" alt="Download on the App Store"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.guten.cowbolt" target="_blank" rel="noopener"><img src="./cowbolt-site/assets/brand/download_googleplay.png" alt="Get it on Google Play"></a>
       </div>
-      <div class="cap"><b>QR code</b>Counter, market stall, coffee cart.</div>
+      <div class="storenote">A real transaction, recorded in the app →</div>
     </div>
-    <div class="frame-wrap" style="align-self:start">
-      <div class="docard">
-        <div class="label">Remote — shareable link</div>
-        <div class="linkrow">
-          <span style="color:var(--brand-ink)">🔗</span><span class="url">pay.cowbolt.com/maya/25</span>
-          <span class="copy">Copy</span>
-        </div>
-        <div class="xsmall muted">Drop into WhatsApp, iMessage, email, an invoice. Opens in browser — no app needed.</div>
+    <div class="phonewrap">
+      <div class="phone">
+        <div class="notch"></div>
+        <video src="./assets/cowbolt-transaction.mp4" autoplay muted loop playsinline poster="./assets/app-screen2.jpg"></video>
       </div>
-      <div class="cap"><b>Shareable link</b>Cross-border invoicing, online sales.</div>
     </div>
-    <div class="frame-wrap" style="align-self:start">
-      <div class="docard">
-        <div class="label">Online — embeddable button</div>
-        <div class="embed" style="margin:12px 0 10px">&lt;<span class="t">script</span> <span class="a">src</span>=<span>"pay.cowbolt.com/btn.js"</span>
-&nbsp;&nbsp;<span class="a">data-shop</span>=<span>"maya"</span> <span class="a">data-amount</span>=<span>"25.00"</span>&gt;
-&lt;/<span class="t">script</span>&gt;</div>
-        <button class="btn sm dark">⚡ Pay with Bitcoin or USDT</button>
-        <div class="xsmall muted" style="margin-top:8px">Paste anywhere. The button stays in sync with live rates.</div>
+  </div></div>
+
+  <!-- FEATURE PILLS -->
+  <div class="section" style="padding-top:14px"><div class="wrap">
+    <div class="pills">
+      <div class="pill">
+        <div class="ic"><img src="./cowbolt-site/assets/icons/costsplit.svg" alt=""></div>
+        <div class="pt">Cost split</div>
+        <div class="pd">Manage costs. For your next trip or a new business project.</div>
       </div>
-      <div class="cap"><b>Embeddable button</b>Stripe-style web checkout (Phase 2).</div>
+      <div class="pill">
+        <div class="ic"><img src="./cowbolt-site/assets/icons/teamchat.svg" alt=""></div>
+        <div class="pt">Team chat</div>
+        <div class="pd">Talk in private. Teamwork on a Bitcoin standard.</div>
+      </div>
+      <div class="pill">
+        <div class="ic"><img src="./cowbolt-site/assets/icons/lightning.svg" alt=""></div>
+        <div class="pt">Peer to peer</div>
+        <div class="pd">Settle, receive and store your funds in a non-custodial wallet.</div>
+      </div>
+      <div class="pill">
+        <div class="ic"><img src="./cowbolt-site/assets/icons/tether.svg" alt=""></div>
+        <div class="pt">Tether USDT</div>
+        <div class="pd">Remit and hold dollars with seamless support of USDT.</div>
+      </div>
+    </div>
+  </div></div>
+
+  <hr class="divider">
+
+  <!-- FEATURE ROWS (real app screens) -->
+  <div class="wrap">
+    <div class="feat">
+      <div class="shot"><img src="./assets/app-screen1.jpg" alt="Cowbolt groups list"></div>
+      <div class="text">
+        <div class="ft serif">Teamwork across borders. Simplified.</div>
+        <div class="fd">Cowbolt gives you a tool to collaborate without a middleman, making group management secure and easy.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="feat flip">
+      <div class="shot"><img src="./assets/app-screen2.jpg" alt="Group expenses and messages"></div>
+      <div class="text">
+        <div class="ft serif">Track costs and share ideas in private.</div>
+        <div class="fd">Manage your group's shared expenses and settle up whenever you decide.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="feat">
+      <div class="shot"><img src="./assets/app-screen3.jpg" alt="Peer-to-peer settlement in USDT"></div>
+      <div class="text">
+        <div class="ft serif">Non-custodial settlement. Peer to peer.</div>
+        <div class="fd">Enjoy instant global settlements to anyone who has the Cowbolt App, or a similar Lightning or Liquid wallet.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="feat flip">
+      <div class="shot"><img src="./assets/app-screen4.jpg" alt="Hold Bitcoin or Tether USDT"></div>
+      <div class="text">
+        <div class="ft serif">Hold your own Bitcoin or Tether USDT.</div>
+        <div class="fd">Lightning and Liquid give the perfect balance of security and cheap transactions, for both Bitcoin and Tether USDT.</div>
+      </div>
     </div>
   </div>
 
-  <footer>
-    <b>Cowbolt Register</b> — the Cowbolt App · design preview · captured ideation (Cowbolt parked / zero-burn until activation).<br>
-    Brand matched to the Cowbolt Register Web POS — Fraunces + Inter, bolt green #02CF0A, ink #17181A.<br>
-    Spec: <b>Context/Cowbolt/ideas/2026-05-30-cowbolt-register-pos-portal-spec.md</b>
-  </footer>
-
-</div>
+  <footer><div class="wrap">
+    The Cowbolt App · live on <a href="https://apps.apple.com/kz/app/cowbolt/id6502505502" target="_blank" rel="noopener">iOS</a> &amp; <a href="https://play.google.com/store/apps/details?id=com.guten.cowbolt" target="_blank" rel="noopener">Android</a> · demo hub on GitHub Pages, Nitton76.<br>
+    Collaborate freely, no permission needed. From Sweden <span class="heart">🇸🇪</span> with love.
+  </div></div>
 
 <script>
 /* real Cowbolt wordmark (bolt = brand green) — identical to cowbolt-pos */
-const WORDMARK = `<svg viewBox="0 0 782 278" xmlns="http://www.w3.org/2000/svg" aria-label="Cowbolt" style="height:100%;width:auto;display:block">
+const WORDMARK = `<svg viewBox="0 0 782 278" xmlns="http://www.w3.org/2000/svg" aria-label="Cowbolt" style="height:24px;width:auto;display:block">
 <path d="M744.349 122.471H725.362V109.388H778V122.471H759.013V176.51H744.349V122.471Z" fill="#17181A"/>
 <path d="M670.533 109.388H685.196V162.858H712.361V176.51H670.533V109.388Z" fill="#17181A"/>
 <path d="M568.856 143.142C568.856 137.77 569.733 132.903 571.488 128.542C573.305 124.181 575.812 120.484 579.008 117.45C582.203 114.353 585.995 111.983 590.381 110.339C594.768 108.696 599.561 107.875 604.763 107.875C609.964 107.875 614.757 108.696 619.144 110.339C623.53 111.983 627.322 114.353 630.518 117.45C633.713 120.484 636.189 124.181 637.943 128.542C639.761 132.903 640.669 137.77 640.669 143.142C640.669 148.514 639.761 153.381 637.943 157.742C636.189 162.103 633.713 165.832 630.518 168.929C627.322 171.963 623.53 174.302 619.144 175.945C614.757 177.588 609.964 178.41 604.763 178.41C599.561 178.41 594.768 177.588 590.381 175.945C585.995 174.302 582.203 171.963 579.008 168.929C575.812 165.832 573.305 162.103 571.488 157.742C569.733 153.381 568.856 148.514 568.856 143.142ZM584.083 143.142C584.083 146.302 584.553 149.21 585.493 151.864C586.496 154.456 587.906 156.731 589.723 158.69C591.54 160.586 593.702 162.072 596.209 163.146C598.778 164.221 601.629 164.758 604.763 164.758C607.896 164.758 610.716 164.221 613.222 163.146C615.791 162.072 617.985 160.586 619.802 158.69C621.619 156.731 622.998 154.456 623.938 151.864C624.94 149.21 625.442 146.302 625.442 143.142C625.442 140.045 624.94 137.169 623.938 134.515C622.998 131.86 621.619 129.585 619.802 127.689C617.985 125.73 615.791 124.213 613.222 123.138C610.716 122.064 607.896 121.526 604.763 121.526C601.629 121.526 598.778 122.064 596.209 123.138C593.702 124.213 591.54 125.73 589.723 127.689C587.906 129.585 586.496 131.86 585.493 134.515C584.553 137.169 584.083 140.045 584.083 143.142Z" fill="#17181A"/>
@@ -437,59 +212,6 @@ const WORDMARK = `<svg viewBox="0 0 782 278" xmlns="http://www.w3.org/2000/svg" 
 <path d="M2 163.913H22.9619L51.6627 118.714V85.7219L2 163.913ZM80.2279 57H58.6207V120.057L57.0077 122.596H56.9784L36.8816 154.245H36.8743L30.7338 163.913H51.6957L80.2279 118.978V57ZM89.8547 162.595H89.8767L87.3472 166.536V228.198H108.969V165.479L136.383 122.596H115.414L89.8547 162.595ZM108.969 57H87.3472V120.049L85.7268 122.596H85.7121L60.2997 162.595H60.3071L58.6207 165.252V228.198H80.2279V165.487L108.969 120.526V57ZM165.095 122.596H144.14L115.912 166.778V199.543L165.095 122.596Z" fill="#02CF0A"/>
 </svg>`;
 document.querySelectorAll('[data-wm]').forEach(e=>{e.innerHTML=WORDMARK;});
-
-const BTC_USD=67420; let amtStr="25.00";
-const keys=["1","2","3","4","5","6","7","8","9",".","0","⌫"];
-const kp=document.getElementById("keypad");
-keys.forEach(k=>{const d=document.createElement("div");d.className="key";d.textContent=k;d.onclick=()=>press(k);kp.appendChild(d);});
-function press(k){let cur=amtStr.replace(/[^0-9.]/g,"");
-  if(k==="⌫"){cur=cur.slice(0,-1)||"0";}else if(k==="."){if(!cur.includes("."))cur+=".";}else{if(cur==="0")cur=k;else cur+=k;}
-  if(cur.includes(".")){const[a,b]=cur.split(".");cur=a+"."+b.slice(0,2);}
-  amtStr=cur;render();}
-function render(){const n=parseFloat(amtStr||"0")||0;
-  document.getElementById("amt").textContent=amtStr||"0";
-  document.getElementById("btcEq").textContent=(n/BTC_USD).toFixed(5);
-  document.getElementById("usdtEq").textContent=n.toFixed(2);
-  document.getElementById("lockAmt").textContent=n.toFixed(2);}
-render();
-const RAILS={LN:"railLN",BTC:"railBTC",USDT:"railUSDT"};
-function toggleRail(r){const el=document.getElementById(RAILS[r]);
-  const onCount=Object.values(RAILS).filter(id=>document.getElementById(id).classList.contains("on")).length;
-  if(el.classList.contains("on")&&onCount<=1)return;
-  el.classList.toggle("on");}
-const CRAILS={LN:"cRailLN",BTC:"cRailBTC",USDT:"cRailUSDT"};
-const CAP={LN:"Scan with any Lightning wallet",BTC:"Scan with any Bitcoin wallet · on-chain",USDT:"Scan with any Liquid wallet"};
-function custRail(r){
-  Object.entries(CRAILS).forEach(([k,id])=>document.getElementById(id).classList.toggle("on",k===r));
-  document.getElementById("qrCap").textContent=CAP[r];
-  drawQR("qrSvg",r);}
-let paid=false;
-function simulatePay(){if(paid){location.reload();return;}paid=true;
-  const qr=document.getElementById("qr"),st=document.getElementById("custStatus");
-  qr.classList.add("pulse");st.innerHTML='<span style="color:var(--ok);font-weight:600">⚡ Payment seen…</span>';
-  setTimeout(()=>{const scr=document.getElementById("custScreen");
-    scr.querySelector(".body").innerHTML=`
-      <div class="success" style="height:520px">
-        <div class="check"><svg viewBox="0 0 24 24" fill="none"><path class="draw" d="M5 13l4 4L19 7" stroke="#079A0D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="big serif">Paid $25.00</div>
-        <div class="muted small">to Maya's Coffee</div>
-        <div class="small" style="margin-top:4px">⚡ Lightning · Settled in 0.8s</div>
-        <div style="height:14px"></div>
-        <button class="btn sm" style="max-width:200px" onclick="location.reload()">View receipt</button>
-        <div class="xsmall muted" style="margin-top:12px;max-width:220px">You paid directly. No bank, no middleman, no fees added.</div>
-        <div class="xsmall" style="margin-top:8px;color:var(--brand-ink);font-weight:600">New to Bitcoin? Get Cowbolt free →</div>
-      </div>`;},900);}
-function drawQR(id,seedKey){const svg=document.getElementById(id);if(!svg)return;
-  const N=29;let seed=(seedKey==="USDT")?9173:(seedKey==="BTC")?6271:4421;
-  function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;}
-  let cells="";
-  function finder(x,y){cells+=`<rect x="${x}" y="${y}" width="7" height="7" fill="#17181A"/><rect x="${x+1}" y="${y+1}" width="5" height="5" fill="#fff"/><rect x="${x+2}" y="${y+2}" width="3" height="3" fill="#17181A"/>`;}
-  for(let y=0;y<N;y++)for(let x=0;x<N;x++){const inF=(x<8&&y<8)||(x>N-9&&y<8)||(x<8&&y>N-9);if(inF)continue;if(rnd()>0.55)cells+=`<rect x="${x}" y="${y}" width="1" height="1" fill="#17181A"/>`;}
-  finder(0,0);finder(N-7,0);finder(0,N-7);
-  const accent=(seedKey==="USDT")?"#02BB83":(seedKey==="BTC")?"#F7931A":"#F68703";
-  cells+=`<rect x="13" y="13" width="3" height="3" rx="0.6" fill="${accent}"/>`;
-  svg.innerHTML=cells;}
-drawQR("qrSvg","LN");drawQR("qrStatic","LN");
 </script>
 </body>
 </html>
