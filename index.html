@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guten Demos</title>
+<style>
+  :root{--ink:#1B1C1A;--ink-2:#5C615A;--paper:#FBFCFA;--card:#fff;--line:#E9ECE7;--green:#16C61C;--green-2:#0FA516;}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1100px 560px at 80% -10%,#E8FBE9 0%,rgba(232,251,233,0) 55%),var(--paper);
+    color:var(--ink);line-height:1.5;min-height:100vh;padding:56px 20px 80px}
+  .wrap{max-width:880px;margin:0 auto}
+  h1{font-size:34px;font-weight:800;letter-spacing:-.025em}
+  .sub{color:var(--ink-2);font-size:16px;margin-top:6px;margin-bottom:34px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+  a.card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);
+    border-radius:20px;padding:22px;box-shadow:0 10px 30px rgba(20,22,18,.06);transition:.15s}
+  a.card:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(20,22,18,.10);border-color:#D9E6DA}
+  .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--green-2);background:#E6F9E7;border-radius:100px;padding:3px 10px;margin-bottom:12px}
+  .card h2{font-size:19px;font-weight:800;letter-spacing:-.01em}
+  .card p{font-size:13.5px;color:var(--ink-2);margin-top:6px}
+  .card .go{margin-top:14px;font-size:13px;font-weight:700;color:var(--green-2)}
+  footer{margin-top:48px;color:var(--ink-2);font-size:12.5px}
+  .soon{opacity:.55;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Guten Demos</h1>
+  <div class="sub">Live prototypes and product demos. Works on any device — no install.</div>
+
+  <div class="grid">
+    <a class="card" href="./cowbolt-pos/">
+      <span class="tag">Cowbolt</span>
+      <h2>Cowbolt Register — Web POS</h2>
+      <p>Take Bitcoin &amp; USDT payments from any phone, Mac or PC. Simple login → 2FA → charge at your handle. Non-custodial.</p>
+      <div class="go">Open the POS →</div>
+    </a>
+
+    <a class="card" href="./cowbolt-mockup.html">
+      <span class="tag">Cowbolt</span>
+      <h2>Cowbolt Register — Design Mockup</h2>
+      <p>High-fidelity walkthrough of every screen: merchant flow, customer payment page, transactions, embed.</p>
+      <div class="go">View the mockup →</div>
+    </a>
+  </div>
+
+  <footer>Hosted on GitHub Pages · Nitton76</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Cowbolt Register — Web POS</title>
+<style>
+  :root{
+    --green:#16C61C; --green-2:#0FA516; --ink:#1B1C1A; --ink-2:#5C615A;
+    --paper:#FBFCFA; --card:#FFFFFF; --line:#E9ECE7;
+    --ok:#16A82A; --ok-soft:#E7F8E9; --amber:#C98A00; --red:#C0492F; --usdt:#26A17B;
+    --shadow:0 14px 40px rgba(20,22,18,.10),0 2px 8px rgba(20,22,18,.05);
+  }
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    background:
+      radial-gradient(1100px 560px at 80% -10%,#E8FBE9 0%,rgba(232,251,233,0) 55%),
+      radial-gradient(800px 480px at -10% 8%,#EEF6EF 0%,rgba(238,246,239,0) 50%),
+      var(--paper);
+    color:var(--ink);line-height:1.45;min-height:100%;
+    display:flex;flex-direction:column;align-items:center;
+  }
+  /* fake browser chrome to convey the handle URL */
+  .urlbar{width:100%;max-width:560px;margin:18px auto 0;padding:0 16px}
+  .urlbar .bar{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:100px;padding:8px 14px;font-size:13px;color:var(--ink-2);box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .urlbar .lock{color:var(--ok)}
+  .urlbar .host{color:var(--ink);font-weight:700}
+  .stage{flex:1 1 auto;width:100%;max-width:560px;padding:18px 16px 40px;display:flex;flex-direction:column}
+
+  .markimg{display:block}
+  .brandrow{display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0 4px}
+  .brandrow img{width:30px;height:30px}
+  .brandrow .wm{font-weight:900;letter-spacing:.04em;font-size:20px}
+  .brandrow .reg{font-weight:700;color:var(--ink-2);font-size:14px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow)}
+  h2{font-size:21px;font-weight:800;letter-spacing:-.02em;text-align:center}
+  .sub{font-size:13.5px;color:var(--ink-2);text-align:center;margin-top:4px;margin-bottom:18px}
+  .label{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);margin:0 2px 6px}
+  .field{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:14px;padding:0 14px;background:#fff;margin-bottom:14px}
+  .field:focus-within{border-color:var(--green)}
+  .field input{flex:1;border:none;outline:none;padding:14px 0;font-size:15px;font-family:inherit;color:var(--ink);background:transparent}
+  .field .suffix{color:var(--ink-2);font-size:14px;font-weight:600;white-space:nowrap}
+  .field .prefix{color:var(--ink-2);font-size:15px;margin-right:2px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:linear-gradient(150deg,var(--green),var(--green-2));color:#fff;border:none;border-radius:15px;padding:15px;font-size:15.5px;font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(22,198,28,.30);letter-spacing:-.01em}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none;font-weight:600}
+  .btn.dark{background:var(--ink);box-shadow:none}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none}
+  .muted{color:var(--ink-2)} .small{font-size:12px} .xsmall{font-size:11px} .center{text-align:center}
+  .link{color:var(--green-2);font-weight:700;cursor:pointer}
+  .hint{margin-top:14px;font-size:11.5px;color:var(--ink-2);text-align:center;background:#F4F7F3;border:1px solid var(--line);border-radius:12px;padding:9px 12px}
+  .trust{display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:var(--ink-2);background:var(--ok-soft);border:1px solid #D2F0D6;border-radius:13px;padding:10px 12px;line-height:1.35;margin-top:16px}
+  .trust b{color:var(--ok)}
+
+  /* 2FA boxes */
+  .otp{display:flex;gap:9px;justify-content:center;margin:6px 0 4px}
+  .otp input{width:46px;height:56px;text-align:center;font-size:24px;font-weight:800;border:1.5px solid var(--line);border-radius:13px;outline:none;font-family:inherit;color:var(--ink)}
+  .otp input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(22,198,28,.12)}
+
+  /* POS */
+  .topbar{display:flex;align-items:center;justify-content:space-between;width:100%;margin-bottom:6px}
+  .topbar .brand{display:flex;align-items:center;gap:8px;font-weight:900;letter-spacing:.02em;font-size:15px}
+  .topbar .brand img{width:20px;height:20px}
+  .topbar .who{display:flex;align-items:center;gap:8px}
+  .topbar .who .h{font-size:12.5px;color:var(--ink-2);font-weight:600}
+  .avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#A8F0AC,#16C61C);display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px}
+  .today{background:linear-gradient(160deg,#fff,#F1FCF2);border:1px solid #D9F2DB}
+  .today .big{font-size:40px;font-weight:800;letter-spacing:-.03em}
+  .today .dual{font-size:12.5px;color:var(--ink-2);margin-top:3px}
+  .amt-display{text-align:center;padding:8px 0 2px}
+  .amt-display .amt{font-size:clamp(46px,16vw,64px);font-weight:800;letter-spacing:-.04em}
+  .amt-display .amt .cur{color:var(--ink-2);font-weight:700}
+  .equiv{font-size:14px;color:var(--ink-2);text-align:center;font-weight:600;margin-top:2px}
+  .equiv b{color:var(--ink)}
+  .rate{font-size:11px;color:var(--ink-2);text-align:center;margin-top:3px}
+  .rails{display:flex;gap:10px;margin-top:6px}
+  .rail{flex:1;border:1.5px solid var(--line);border-radius:15px;padding:12px;text-align:center;cursor:pointer;background:#fff;user-select:none;transition:.15s}
+  .rail .rt{font-weight:800;font-size:14px} .rail .rs{font-size:10.5px;color:var(--ink-2);margin-top:2px}
+  .rail.on{border-color:var(--green);background:#EFFBEF}
+  .rail.on.usdt{border-color:var(--usdt);background:#EEF8F3}
+  .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
+  .key{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 0;text-align:center;font-size:21px;font-weight:700;cursor:pointer;user-select:none}
+  .key:active{background:#F1F4EF}
+  .qr{width:200px;height:200px;margin:8px auto 0;border-radius:18px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;overflow:hidden}
+  .qr svg{width:172px;height:172px}
+  .qr.pulse{animation:pulse .9s ease}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(22,168,42,.5)}100%{box-shadow:0 0 0 26px rgba(22,168,42,0)}}
+  .statusrow{display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;color:var(--ink-2);font-weight:600;margin-top:4px}
+  .statusrow .d{width:8px;height:8px;border-radius:50%;background:var(--amber);animation:blink 1.1s infinite}
+  @keyframes blink{50%{opacity:.3}}
+  .check{width:96px;height:96px;border-radius:50%;background:var(--ok-soft);display:grid;place-items:center;margin:0 auto 10px}
+  .check svg{width:54px;height:54px}
+  .draw{stroke-dasharray:48;stroke-dashoffset:48;animation:draw .6s .15s ease forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .stack{display:flex;flex-direction:column;gap:14px}
+  .hidden{display:none!important}
+  footer{width:100%;max-width:560px;padding:0 16px 24px;color:var(--ink-2);font-size:11.5px;text-align:center;line-height:1.6}
+  /* desktop: keep it a centered phone-width column on big screens for fidelity, but stretch comfortably */
+  @media(min-width:600px){ .stage{padding-top:24px} }
+</style>
+</head>
+<body>
+
+  <div class="urlbar"><div class="bar"><span class="lock">🔒</span><span><span class="host" id="urlHost">publix</span>.cowbolt.com</span><span style="margin-left:auto" class="muted">↻</span></div></div>
+
+  <div class="stage">
+
+    <!-- ===== LOGIN ===== -->
+    <div id="scLogin" class="stack">
+      <div class="brandrow"><img class="markimg mk" alt="Cowbolt"><span class="wm">COWBOLT</span><span class="reg">Register</span></div>
+      <div class="card">
+        <h2>Sign in to your register</h2>
+        <div class="sub">Take Bitcoin &amp; USDT payments from any device.</div>
+        <div class="label">Your handle</div>
+        <div class="field"><input id="inHandle" value="publix" autocomplete="username" spellcheck="false"><span class="suffix">.cowbolt.com</span></div>
+        <div class="label">Password</div>
+        <div class="field"><input id="inPass" type="password" value="••••••••" autocomplete="current-password"></div>
+        <button class="btn" onclick="toOtp()">Continue →</button>
+        <div class="hint">Demo — any handle works. Try <b>publix</b>, <b>mariascafe</b>, or your own.</div>
+      </div>
+      <div class="trust"><span>🔒</span><span>Non-custodial. Payments settle <b>straight to your wallet</b> — Cowbolt never holds your money.</span></div>
+      <div class="center small muted" style="margin-top:4px">New here? <span class="link">Create a register</span></div>
+    </div>
+
+    <!-- ===== 2FA ===== -->
+    <div id="scOtp" class="stack hidden">
+      <div class="brandrow"><img class="markimg mk" alt="Cowbolt"><span class="wm">COWBOLT</span><span class="reg">Register</span></div>
+      <div class="card">
+        <h2>Enter your code</h2>
+        <div class="sub">We sent a 6-digit code to your Cowbolt app for <b id="otpHandle">publix</b>.cowbolt.com</div>
+        <div class="otp" id="otp">
+          <input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric">
+          <input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric">
+        </div>
+        <button class="btn" id="otpBtn" onclick="toPos()" disabled>Verify &amp; open register</button>
+        <div class="center small muted" style="margin-top:14px"><span class="link" onclick="fillOtp()">Use demo code 123456</span> · <span class="link" onclick="back('scLogin','scOtp')">Back</span></div>
+        <div class="hint">2FA is required every sign-in. Any 6 digits work in this demo.</div>
+      </div>
+    </div>
+
+    <!-- ===== POS DASHBOARD ===== -->
+    <div id="scPos" class="stack hidden">
+      <div class="topbar">
+        <div class="brand"><img class="markimg mk" alt=""> COWBOLT</div>
+        <div class="who"><span class="h" id="posHandle">publix.cowbolt.com</span><div class="avatar" id="posAv">P</div></div>
+      </div>
+      <div class="card today">
+        <div class="label">Today</div>
+        <div class="big" id="todayTotal">$0.00</div>
+        <div class="muted small"><span id="todayCount">0</span> payments · settled to your wallet</div>
+        <div class="dual">Bitcoin (Lightning) + USDT (Liquid)</div>
+      </div>
+      <button class="btn" onclick="show('scCharge')">＋ New payment</button>
+      <div class="card" style="padding:6px 16px">
+        <div class="label" style="margin:10px 2px 2px">Recent</div>
+        <div id="recent"><div class="center muted small" style="padding:14px 0">No payments yet — create your first one.</div></div>
+      </div>
+      <div class="center small muted"><span class="link" onclick="signout()">Sign out</span></div>
+    </div>
+
+    <!-- ===== CREATE CHARGE ===== -->
+    <div id="scCharge" class="stack hidden">
+      <div class="topbar">
+        <div class="brand"><span class="link" onclick="show('scPos')">← Register</span></div>
+        <div class="who"><span class="h" id="posHandle2">publix.cowbolt.com</span></div>
+      </div>
+      <div class="card">
+        <div class="amt-display">
+          <div class="amt"><span class="cur">$</span><span id="amt">0</span></div>
+          <div class="equiv">≈ <b id="btcEq">0.00000</b> BTC&nbsp; · &nbsp;<b id="usdtEq">0.00</b> USDT</div>
+          <div class="rate">1 BTC = $67,420 · live rate ◔</div>
+        </div>
+        <div class="rails">
+          <div class="rail on" id="railLN" onclick="toggleRail('LN')"><div class="rt">⚡ Lightning</div><div class="rs">Fastest · BTC</div></div>
+          <div class="rail on usdt" id="railUSDT" onclick="toggleRail('USDT')"><div class="rt">₮ USDT</div><div class="rs">Steady · Liquid</div></div>
+        </div>
+        <div class="keypad" id="keypad"></div>
+        <button class="btn" id="chargeBtn" onclick="toPayPage()" disabled style="margin-top:8px">Create payment →</button>
+        <div class="center xsmall muted" style="margin-top:8px">Customer pays exactly $<span id="lockAmt">0.00</span> · rate locks 10 min</div>
+      </div>
+    </div>
+
+    <!-- ===== CUSTOMER PAY PAGE ===== -->
+    <div id="scPay" class="stack hidden">
+      <div class="card" id="payCard">
+        <div class="center"><div class="avatar" id="payAv" style="margin:0 auto 6px;width:46px;height:46px;font-size:18px">P</div></div>
+        <h2 id="payMerch">Publix</h2>
+        <div class="sub" id="payHost">publix.cowbolt.com</div>
+        <div class="center" style="font-size:30px;font-weight:800;letter-spacing:-.03em">Pay $<span id="payAmt">0.00</span></div>
+        <div class="rails" style="margin-top:14px">
+          <div class="rail on" id="cRailLN" onclick="custRail('LN')"><div class="rt">⚡ Bitcoin</div><div class="rs">Lightning · instant</div><div class="small" style="margin-top:3px;font-weight:700" id="cBtc">0 BTC</div></div>
+          <div class="rail usdt" id="cRailUSDT" onclick="custRail('USDT')"><div class="rt">₮ USDT</div><div class="rs">Liquid · stable</div><div class="small" style="margin-top:3px;font-weight:700" id="cUsdt">0 ₮</div></div>
+        </div>
+        <div class="qr" id="qr"><svg viewBox="0 0 29 29" shape-rendering="crispEdges" id="qrSvg"></svg></div>
+        <div class="center xsmall muted" id="qrCap" style="margin-top:6px">Scan with any Lightning wallet</div>
+        <button class="btn ghost" style="margin-top:12px" onclick="simulatePay()">Open in wallet ↗</button>
+        <div class="statusrow" id="payStatus"><span class="d"></span> Waiting for payment… · expires 9:42</div>
+        <div class="center xsmall muted" style="margin-top:4px">🔒 Paid directly to the merchant · Powered by Cowbolt</div>
+      </div>
+      <div class="center small muted"><span class="link" onclick="show('scCharge')">← Back to register</span></div>
+    </div>
+
+  </div>
+
+  <footer>
+    <b style="color:var(--ink)">COWBOLT Register — Web POS</b> · works on any phone, Mac or PC · no app to install.<br>
+    Demo build · captured ideation (Cowbolt parked / zero-burn until activation).
+  </footer>
+
+<script>
+  const MARK="data:image/png;base64,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";
+  document.querySelectorAll(".mk").forEach(e=>e.src=MARK);
+  const BTC_USD=67420;
+  let handle="publix", amtStr="0", paid=false;
+
+  function show(id){
+    ["scLogin","scOtp","scPos","scCharge","scPay"].forEach(s=>document.getElementById(s).classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
+    window.scrollTo(0,0);
+  }
+  function back(to,from){show(to);}
+  function cap(s){return s? s.charAt(0).toUpperCase()+s.slice(1) : s;}
+
+  // ---- login -> otp ----
+  function toOtp(){
+    handle=(document.getElementById("inHandle").value.trim().toLowerCase().replace(/[^a-z0-9-]/g,""))||"publix";
+    document.getElementById("urlHost").textContent=handle;
+    document.getElementById("otpHandle").textContent=handle;
+    show("scOtp");
+    setTimeout(()=>document.querySelector("#otp input").focus(),60);
+  }
+  // ---- otp boxes ----
+  const otp=document.getElementById("otp");
+  const boxes=[...otp.querySelectorAll("input")];
+  boxes.forEach((b,i)=>{
+    b.addEventListener("input",()=>{ b.value=b.value.replace(/[^0-9]/g,""); if(b.value&&i<5)boxes[i+1].focus(); checkOtp(); });
+    b.addEventListener("keydown",e=>{ if(e.key==="Backspace"&&!b.value&&i>0)boxes[i-1].focus(); });
+  });
+  function checkOtp(){ const full=boxes.every(b=>b.value.length===1); document.getElementById("otpBtn").disabled=!full; }
+  function fillOtp(){ "123456".split("").forEach((d,i)=>boxes[i].value=d); checkOtp(); }
+
+  // ---- otp -> pos ----
+  function toPos(){
+    const H=cap(handle), I=H.charAt(0).toUpperCase();
+    document.getElementById("posHandle").textContent=handle+".cowbolt.com";
+    document.getElementById("posHandle2").textContent=handle+".cowbolt.com";
+    document.getElementById("posAv").textContent=I;
+    document.getElementById("payAv").textContent=I;
+    document.getElementById("payMerch").textContent=H;
+    document.getElementById("payHost").textContent=handle+".cowbolt.com";
+    show("scPos");
+  }
+  function signout(){ boxes.forEach(b=>b.value=""); checkOtp(); amtStr="0"; renderAmt(); recentItems=[]; renderRecent(); show("scLogin"); }
+
+  // ---- keypad ----
+  const keys=["1","2","3","4","5","6","7","8","9",".","0","⌫"];
+  const kp=document.getElementById("keypad");
+  keys.forEach(k=>{const d=document.createElement("div");d.className="key";d.textContent=k;d.onclick=()=>press(k);kp.appendChild(d);});
+  function press(k){
+    let cur=amtStr.replace(/[^0-9.]/g,"");
+    if(k==="⌫"){cur=cur.slice(0,-1)||"0";}
+    else if(k==="."){if(!cur.includes("."))cur+=".";}
+    else{if(cur==="0")cur=k;else cur+=k;}
+    if(cur.includes(".")){const[a,b]=cur.split(".");cur=a+"."+b.slice(0,2);}
+    amtStr=cur; renderAmt();
+  }
+  function renderAmt(){
+    const n=parseFloat(amtStr||"0")||0;
+    document.getElementById("amt").textContent=amtStr||"0";
+    document.getElementById("btcEq").textContent=(n/BTC_USD).toFixed(5);
+    document.getElementById("usdtEq").textContent=n.toFixed(2);
+    document.getElementById("lockAmt").textContent=n.toFixed(2);
+    document.getElementById("chargeBtn").disabled=!(n>0);
+  }
+  function toggleRail(r){
+    const el=document.getElementById(r==="LN"?"railLN":"railUSDT");
+    const other=document.getElementById(r==="LN"?"railUSDT":"railLN");
+    if(el.classList.contains("on")&&!other.classList.contains("on"))return;
+    el.classList.toggle("on");
+  }
+
+  // ---- create -> pay page ----
+  function toPayPage(){
+    const n=parseFloat(amtStr||"0")||0;
+    document.getElementById("payAmt").textContent=n.toFixed(2);
+    document.getElementById("cBtc").textContent=(n/BTC_USD).toFixed(5)+" BTC";
+    document.getElementById("cUsdt").textContent=n.toFixed(2)+" ₮";
+    paid=false;
+    document.getElementById("payStatus").innerHTML='<span class="d"></span> Waiting for payment… · expires 9:42';
+    document.getElementById("qr").classList.remove("pulse");
+    custRail("LN");
+    show("scPay");
+  }
+  function custRail(r){
+    const ln=document.getElementById("cRailLN"),us=document.getElementById("cRailUSDT");
+    if(r==="LN"){ln.classList.add("on");us.classList.remove("on");document.getElementById("qrCap").textContent="Scan with any Lightning wallet";}
+    else{us.classList.add("on");ln.classList.remove("on");document.getElementById("qrCap").textContent="Scan with any Liquid wallet";}
+    drawQR("qrSvg",r);
+  }
+  let recentItems=[];
+  function renderRecent(){
+    const box=document.getElementById("recent");
+    if(!recentItems.length){box.innerHTML='<div class="center muted small" style="padding:14px 0">No payments yet — create your first one.</div>';return;}
+    box.innerHTML=recentItems.slice(0,6).map(it=>`
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 2px;border-bottom:1px solid var(--line)">
+        <div style="width:30px;height:30px;border-radius:50%;background:var(--ok-soft);color:var(--ok);display:grid;place-items:center;font-size:14px">✓</div>
+        <div style="flex:1"><div style="font-weight:700;font-size:14.5px">$${it.amt.toFixed(2)} <span style="font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:100px;background:${it.rail==='LN'?'#E6F9E7':'#E2F4ED'};color:${it.rail==='LN'?'var(--green-2)':'var(--usdt)'}">${it.rail==='LN'?'⚡ LN':'₮ USDT'}</span></div><div style="font-size:11.5px;color:var(--ink-2)">just now</div></div>
+      </div>`).join("");
+  }
+  function simulatePay(){
+    if(paid){ show("scPos"); return; }
+    paid=true;
+    const rail=document.getElementById("cRailLN").classList.contains("on")?"LN":"USDT";
+    const n=parseFloat(amtStr||"0")||0;
+    document.getElementById("qr").classList.add("pulse");
+    document.getElementById("payStatus").innerHTML='<span style="color:var(--ok);font-weight:700">⚡ Payment seen…</span>';
+    setTimeout(()=>{
+      document.getElementById("payCard").innerHTML=`
+        <div class="check"><svg viewBox="0 0 24 24" fill="none"><path class="draw" d="M5 13l4 4L19 7" stroke="#16A82A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 style="color:var(--ok)">Paid $${n.toFixed(2)}</h2>
+        <div class="sub">to ${cap(handle)} · ${rail==='LN'?'⚡ Lightning · settled in 0.8s':'₮ USDT · settled on Liquid'}</div>
+        <button class="btn" onclick="afterPaid()">Done — new payment</button>
+        <div class="center xsmall muted" style="margin-top:12px">You paid directly. No bank, no middleman, no fees added.</div>`;
+      // record + update dashboard
+      recentItems.unshift({amt:n,rail});
+      const total=recentItems.reduce((s,i)=>s+i.amt,0);
+      document.getElementById("todayTotal").textContent="$"+total.toFixed(2);
+      document.getElementById("todayCount").textContent=recentItems.length;
+      renderRecent();
+    },900);
+  }
+  function afterPaid(){
+    // restore pay card shell for next time
+    document.getElementById("payCard").innerHTML=document.getElementById("payCardTpl").innerHTML;
+    amtStr="0"; renderAmt(); show("scCharge");
+  }
+
+  // ---- decorative QR ----
+  function drawQR(id,seedKey){
+    const svg=document.getElementById(id); if(!svg)return;
+    const N=29; let seed=(seedKey==="USDT")?9173:4421;
+    function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;}
+    let cells="";
+    function finder(x,y){cells+=`<rect x="${x}" y="${y}" width="7" height="7" fill="#1B1C1A"/><rect x="${x+1}" y="${y+1}" width="5" height="5" fill="#fff"/><rect x="${x+2}" y="${y+2}" width="3" height="3" fill="#1B1C1A"/>`;}
+    for(let y=0;y<N;y++)for(let x=0;x<N;x++){const inF=(x<8&&y<8)||(x>N-9&&y<8)||(x<8&&y>N-9);if(inF)continue;if(rnd()>0.55)cells+=`<rect x="${x}" y="${y}" width="1" height="1" fill="#1B1C1A"/>`;}
+    finder(0,0);finder(N-7,0);finder(0,N-7);
+    cells+=`<rect x="13" y="13" width="3" height="3" rx="0.6" fill="${seedKey==='USDT'?'#26A17B':'#16C61C'}"/>`;
+    svg.innerHTML=cells;
+  }
+
+  // stash a clean copy of the pay card markup so we can restore it after a sale
+  const tpl=document.createElement("div"); tpl.id="payCardTpl"; tpl.className="hidden";
+  tpl.innerHTML=document.getElementById("payCard").innerHTML; document.body.appendChild(tpl);
+
+  renderAmt();
+</script>
+</body>
+</html>
