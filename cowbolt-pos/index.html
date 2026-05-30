@@ -106,6 +106,25 @@
   @keyframes draw{to{stroke-dashoffset:0}}
   .stack{display:flex;flex-direction:column;gap:14px}
   .hidden{display:none!important}
+  /* admin */
+  .seclabel{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);margin:2px 2px 8px}
+  .staffrow{display:flex;align-items:center;gap:11px;padding:11px 2px;border-bottom:1px solid var(--line)}
+  .staffrow:last-child{border-bottom:none}
+  .staffrow .ini{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#A8F0AC,#02CF0A);display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;flex:0 0 auto}
+  .staffrow .nm{flex:1;min-width:0}
+  .staffrow .nm .n{font-weight:700;font-size:14px}
+  .staffrow .nm .e{font-size:11.5px;color:var(--ink-2)}
+  .rolepill{font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:100px;text-transform:uppercase;letter-spacing:.03em}
+  .r-owner{background:#FDEFD9;color:#B5740A} .r-manager{background:#E2EEFB;color:#1666C6} .r-cashier{background:#E6F9E7;color:var(--green-2)}
+  .xbtn{background:none;border:none;color:var(--red);font-size:16px;cursor:pointer;padding:4px;opacity:.7}
+  .xbtn:hover{opacity:1}
+  .addform{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .addform input,.addform select{flex:1;min-width:110px;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;font-size:13.5px;font-family:inherit;color:var(--ink);background:#fff}
+  .rolekey{font-size:11.5px;color:var(--ink-2);line-height:1.5;margin-top:10px;background:#F4F7F3;border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .rolekey b{color:var(--ink)}
+  .exprow{display:flex;gap:9px;margin-top:6px;flex-wrap:wrap}
+  .exprow .btn{flex:1;min-width:150px}
+  .logos{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:12px;font-size:11.5px;color:var(--ink-2);font-weight:600}
   footer{width:100%;max-width:560px;padding:0 16px 24px;color:var(--ink-2);font-size:11.5px;text-align:center;line-height:1.6}
   /* desktop: keep it a centered phone-width column on big screens for fidelity, but stretch comfortably */
   @media(min-width:600px){ .stage{padding-top:24px} }
@@ -174,8 +193,9 @@
         <div class="dual">Bitcoin — Lightning &amp; on-chain — + USDT (Liquid)</div>
       </div>
       <button class="btn" onclick="show('scCharge')">＋ New payment</button>
+      <button class="btn ghost" onclick="show('scAdmin')">⚙ Settings · staff · export</button>
       <div class="card" style="padding:6px 16px">
-        <div class="label" style="margin:10px 2px 2px">Recent</div>
+        <div class="row" style="margin:10px 2px 2px"><div class="label">Recent</div><div class="link xsmall" onclick="exportCSV()">⤓ Export CSV</div></div>
         <div id="recent"><div class="center muted small" style="padding:14px 0">No payments yet — create your first one.</div></div>
       </div>
       <div class="center small muted"><span class="link" onclick="signout()">Sign out</span></div>
@@ -223,6 +243,49 @@
         <div class="center xsmall muted" style="margin-top:4px">🔒 Paid directly to the merchant · Powered by Cowbolt</div>
       </div>
       <div class="center small muted"><span class="link" onclick="show('scCharge')">← Back to register</span></div>
+    </div>
+
+    <!-- ===== ADMIN / SETTINGS ===== -->
+    <div id="scAdmin" class="stack hidden">
+      <div class="topbar">
+        <div class="brand"><span class="link" onclick="show('scPos')">← Register</span></div>
+        <div class="who"><span class="h">Owner settings</span></div>
+      </div>
+
+      <div class="card">
+        <div class="seclabel">Your handle</div>
+        <div class="row">
+          <div><div style="font-weight:800;font-size:16px" id="admHandle">publix.cowbolt.com</div><div class="xsmall muted">Your storefront address</div></div>
+          <div class="rolepill r-owner">$200 / mo</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="row"><div class="seclabel" style="margin-bottom:0">Staff &amp; access</div><div class="link xsmall" onclick="toggleAdd()">＋ Add staff</div></div>
+        <div id="addForm" class="addform hidden">
+          <input id="newName" placeholder="Name">
+          <select id="newRole"><option value="cashier">Cashier</option><option value="manager">Manager</option></select>
+          <button class="btn sm" style="flex:0 0 auto;width:auto;padding:11px 16px" onclick="addStaff()">Add</button>
+        </div>
+        <div id="staffList" style="margin-top:8px"></div>
+        <div class="rolekey">
+          <b>Cashier</b> — takes payments only. Can't move funds, can't see settings or staff.<br>
+          <b>Manager</b> — everything a cashier can, plus view reports &amp; export.<br>
+          <b>Owner</b> — full control: move/withdraw funds, manage staff, billing &amp; handle.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="seclabel">Export &amp; bookkeeping</div>
+        <div class="xsmall muted" style="margin:-2px 2px 4px">Every sale, tagged by staff, day and rail. Send your books to your accountant in one tap.</div>
+        <div class="exprow">
+          <button class="btn sm" onclick="exportCSV()">⤓ Export transactions (CSV)</button>
+          <button class="btn sm ghost" onclick="sendToCPA()">✉ Send to my CPA</button>
+        </div>
+        <div class="logos">Works with &nbsp;·&nbsp; QuickBooks &nbsp;·&nbsp; Xero &nbsp;·&nbsp; any spreadsheet</div>
+      </div>
+
+      <div class="center small muted"><span class="link" onclick="show('scPos')">← Back to register</span></div>
     </div>
 
   </div>
@@ -273,9 +336,11 @@
     document.getElementById("payAv").textContent=I;
     document.getElementById("payMerch").textContent=H;
     document.getElementById("payHost").textContent=handle+".cowbolt.com";
+    document.getElementById("admHandle").textContent=handle+".cowbolt.com";
+    if(!seeded){ staff=[]; seedSamples(); renderStaff(); seeded=true; }
     show("scPos");
   }
-  function signout(){ boxes.forEach(b=>b.value=""); checkOtp(); amtStr="0"; renderAmt(); recentItems=[]; renderRecent(); show("scLogin"); }
+  function signout(){ boxes.forEach(b=>b.value=""); checkOtp(); amtStr="0"; renderAmt(); recentItems=[]; renderRecent(); seeded=false; staff=[]; show("scLogin"); }
 
   // ---- keypad ----
   const keys=["1","2","3","4","5","6","7","8","9",".","0","⌫"];
@@ -362,7 +427,7 @@
         <button class="btn" onclick="afterPaid()">Done — new payment</button>
         <div class="center xsmall muted" style="margin-top:12px">You paid directly. No bank, no middleman, no fees added.</div>`;
       // record + update dashboard
-      recentItems.unshift({amt:n,rail});
+      recentItems.unshift({amt:n,rail,by:"Owner",time:nowHM()});
       const total=recentItems.reduce((s,i)=>s+i.amt,0);
       document.getElementById("todayTotal").textContent="$"+total.toFixed(2);
       document.getElementById("todayCount").textContent=recentItems.length;
@@ -373,6 +438,68 @@
     // restore pay card shell for next time
     document.getElementById("payCard").innerHTML=document.getElementById("payCardTpl").innerHTML;
     amtStr="0"; renderAmt(); show("scCharge");
+  }
+
+  // ---- admin: staff + roles ----
+  let seeded=false, staff=[];
+  function seedDefaults(){const H=cap(handle);staff=[
+    {name:H+" (you)",role:"owner",you:true},
+    {name:"Maria Santos",role:"cashier"},
+    {name:"Diego Arias",role:"manager"},
+  ];}
+  function roleClass(r){return r==="owner"?"r-owner":r==="manager"?"r-manager":"r-cashier";}
+  function roleDesc(r){return r==="owner"?"Full access":r==="manager"?"Reports + payments":"Payments only";}
+  function renderStaff(){
+    if(!staff.length) seedDefaults();
+    document.getElementById("staffList").innerHTML=staff.map((s,i)=>`
+      <div class="staffrow">
+        <div class="ini">${s.name.trim().charAt(0).toUpperCase()}</div>
+        <div class="nm"><div class="n">${s.name}</div><div class="e">${roleDesc(s.role)}</div></div>
+        <span class="rolepill ${roleClass(s.role)}">${s.role}</span>
+        ${s.you?'':`<button class="xbtn" title="Remove" onclick="removeStaff(${i})">✕</button>`}
+      </div>`).join("");
+  }
+  function toggleAdd(){document.getElementById("addForm").classList.toggle("hidden");}
+  function addStaff(){
+    const n=document.getElementById("newName").value.trim(); if(!n)return;
+    staff.push({name:n,role:document.getElementById("newRole").value});
+    document.getElementById("newName").value="";
+    document.getElementById("addForm").classList.add("hidden");
+    renderStaff();
+  }
+  function removeStaff(i){ staff.splice(i,1); renderStaff(); }
+
+  // ---- sample data + bookkeeping export ----
+  function nowHM(){const d=new Date();return (""+d.getHours()).padStart(2,"0")+":"+(""+d.getMinutes()).padStart(2,"0");}
+  function seedSamples(){
+    recentItems=[
+      {amt:4.50,  rail:"LN",   by:"Maria Santos", time:"08:12"},
+      {amt:120.00,rail:"BTC",  by:"Owner",        time:"09:40"},
+      {amt:25.00, rail:"LN",   by:"Maria Santos", time:"11:02", memo:"Table 4"},
+      {amt:80.00, rail:"USDT", by:"Diego Arias",  time:"13:15", memo:"Invoice #214"},
+    ];
+    const total=recentItems.reduce((s,i)=>s+i.amt,0);
+    document.getElementById("todayTotal").textContent="$"+total.toFixed(2);
+    document.getElementById("todayCount").textContent=recentItems.length;
+    renderRecent();
+  }
+  const RAILNAME={LN:"Bitcoin (Lightning)",BTC:"Bitcoin (on-chain)",USDT:"USDT (Liquid)"};
+  function exportCSV(){
+    const today=new Date().toISOString().slice(0,10);
+    const rows=[["Date","Time","Amount USD","Asset / rail","Taken by","Status","Reference"]];
+    recentItems.forEach(it=>rows.push([today,it.time||"",it.amt.toFixed(2),RAILNAME[it.rail]||it.rail,it.by||"Owner","Settled",it.memo||""]));
+    const csv=rows.map(r=>r.map(c=>`"${(""+c).replace(/"/g,'""')}"`).join(",")).join("\n");
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+    a.download=handle+"-cowbolt-transactions-"+today+".csv";
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+  function sendToCPA(){
+    const today=new Date().toISOString().slice(0,10);
+    const total=recentItems.reduce((s,i)=>s+i.amt,0).toFixed(2);
+    const lines=recentItems.map(it=>`${it.time||""}  $${it.amt.toFixed(2)}  ${RAILNAME[it.rail]||it.rail}  (${it.by||"Owner"})`).join("%0D%0A");
+    window.location.href=`mailto:?subject=Cowbolt%20books%20${today}%20-%20${cap(handle)}&body=`+
+      `Hi,%0D%0A%0D%0A${cap(handle)}'s Cowbolt Register transactions for ${today} (total $${total}), from ${handle}.cowbolt.com:%0D%0A%0D%0A${lines}%0D%0A%0D%0AFull CSV attached.`;
   }
 
   // ---- decorative QR ----
