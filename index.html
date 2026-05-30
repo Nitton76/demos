@@ -2,168 +2,214 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Cowbolt Register — the simplest way to get paid in Bitcoin</title>
+<meta name="description" content="Cowbolt Register — open your register, get paid in Bitcoin and dollars, keep your keys. A non-custodial point of sale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --green:#02CF0A;--green-2:#02A006;--ink:#1B1C1A;--ink-2:#5C615A;
-    --paper:#FBFCFA;--card:#fff;--line:#E9ECE7;--ok:#16A82A;--ok-soft:#E7F8E9;--usdt:#26A17B;
+    --ink:#17181A; --ink-2:#6B7178; --ink-3:#9AA0A4;
+    --paper:#FAFAF7; --card:#FFFFFF; --line:#ECEDE8; --line-2:#E2E4DE;
+    --brand:#02CF0A; --brand-ink:#079A0D;          /* the Cowbolt bolt */
+    --btc:#F68703; --btc-soft:#FFF3E4;             /* Bitcoin · Lightning */
+    --usdt:#02BB83; --usdt-soft:#E6F8F1;           /* USDT · Liquid */
+    --ok:#079A0D; --ok-soft:#E9F9EA;
+    /* dark-section tints */
+    --d-ink:#17181A; --d-card:rgba(255,255,255,.04); --d-line:rgba(255,255,255,.10);
+    --d-text:#C7CEC4; --d-text-2:#9BA398; --d-green:#5BE061; --d-warm:#E2A99B;
+    --radius:20px;
+    --shadow:0 1px 2px rgba(20,22,18,.04);
+    --shadow-lg:0 18px 50px rgba(20,22,18,.10);
+    font-size:16px;
   }
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
-    background:var(--paper);color:var(--ink);line-height:1.55}
-  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
-  .markimg{display:block}
-  a{color:inherit}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink);line-height:1.55;background:var(--paper);
+  }
+  .serif{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.01em}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+  a{color:inherit;text-decoration:none}
+  svg{display:block}
+  a:focus-visible{outline:2px solid var(--brand-ink);outline-offset:3px;border-radius:6px}
+  a.demo:focus-visible{outline-offset:4px}
 
-  /* hero */
-  .hero{background:
-      radial-gradient(1200px 600px at 80% -10%,#E8FBE9 0%,rgba(232,251,233,0) 55%),
-      radial-gradient(900px 500px at -10% 10%,#EEF6EF 0%,rgba(238,246,239,0) 50%),var(--paper);
-    padding:56px 0 12px}
-  .brandrow{display:flex;align-items:center;gap:12px;margin-bottom:22px}
-  .brandrow .logo{width:48px;height:48px;border-radius:14px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;box-shadow:0 8px 20px rgba(2,207,10,.18)}
-  .brandrow .logo img{width:30px;height:30px}
-  .brandrow .wm{font-weight:900;letter-spacing:.04em;font-size:22px}
-  .brandrow .reg{font-weight:700;color:var(--ink-2);font-size:15px}
-  h1{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:-.03em;max-width:760px}
-  h1 b{color:var(--green-2)}
-  .lede{font-size:clamp(16px,2.4vw,20px);color:var(--ink-2);max-width:680px;margin-top:16px}
-  .kpis{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-  .kpi{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:100px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--ink-2);box-shadow:0 1px 2px rgba(0,0,0,.03)}
-  .kpi .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+  /* ---------- shared type ---------- */
+  .eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+  h1{font-size:clamp(32px,5.2vw,52px);line-height:1.06;letter-spacing:-.025em;max-width:18ch}
+  h1 b{color:var(--brand-ink);font-weight:700}
+  h2{font-size:clamp(24px,3.4vw,34px);line-height:1.12;letter-spacing:-.02em}
+  .lede{font-size:clamp(15.5px,1.9vw,19px);color:var(--ink-2);max-width:62ch;margin-top:18px;line-height:1.55}
+  .lead2{color:var(--ink-2);font-size:16px;margin-top:10px;max-width:64ch}
 
-  /* demo chooser */
-  .section{padding:44px 0}
-  .eyebrow{font-size:13px;font-weight:800;letter-spacing:.10em;text-transform:uppercase;color:var(--green-2);margin-bottom:10px}
-  h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.02em}
-  .lead2{color:var(--ink-2);font-size:16px;margin-top:6px;max-width:680px}
-  .demos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:24px}
-  a.demo{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 10px 30px rgba(20,22,18,.06);transition:.16s}
-  a.demo:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(20,22,18,.11);border-color:#D2E8D4}
-  .demo .ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:28px;margin-bottom:16px}
-  .demo.app .ic{background:#EFFBEF}
-  .demo.web .ic{background:#E9F2FB}
-  .demo .pill{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border-radius:100px;padding:3px 10px;margin-bottom:10px}
-  .demo.app .pill{color:var(--green-2);background:#E6F9E7}
-  .demo.web .pill{color:#1666C6;background:#E2EEFB}
-  .demo h3{font-size:21px;font-weight:800;letter-spacing:-.01em}
-  .demo p{font-size:14px;color:var(--ink-2);margin-top:8px}
-  .demo .go{margin-top:16px;font-size:14px;font-weight:800;color:var(--green-2)}
-  .demo.web .go{color:#1666C6}
+  /* ---------- brand bar ---------- */
+  .brandbar{display:flex;align-items:center;gap:10px;padding:22px 0 0}
+  .brandbar .wm{height:24px;width:auto}
+  .brandbar .reg{font-size:14px;font-weight:600;color:var(--ink-2);letter-spacing:.01em}
 
-  /* why a pos */
-  .whygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:24px}
-  .why{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(20,22,18,.05)}
-  .why .wic{font-size:26px;margin-bottom:10px}
-  .why .wt{font-weight:800;font-size:17px;letter-spacing:-.01em}
-  .why .wd{font-size:13.5px;color:var(--ink-2);margin-top:7px}
-  .why .wd b{color:var(--ink)}
-  .roadmap{margin-top:22px;background:#EFFBEF;border:1px solid #D2F0D6;border-radius:14px;padding:16px 18px;font-size:13.5px;color:var(--ink-2)}
-  .roadmap b{color:var(--green-2)}
+  /* ---------- hero ---------- */
+  .hero{padding:30px 0 18px}
+  .kpis{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
+  .kpi{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);
+    border-radius:100px;padding:7px 14px;font-size:12.5px;font-weight:500;color:var(--ink-2)}
+  .kpi .dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;background:var(--brand)}
 
-  /* business case */
-  .case{background:var(--ink);color:#EAEFE9;border-radius:28px;padding:clamp(28px,5vw,52px);margin-top:8px}
-  .case .eyebrow{color:#7CEB82}
+  /* ---------- sections ---------- */
+  .section{padding:52px 0}
+  .section.tight{padding-top:14px}
+
+  /* ---------- demo chooser ---------- */
+  .demos{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:26px}
+  a.demo{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);padding:26px;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+  a.demo:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:var(--line-2)}
+  .demo .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;margin-bottom:18px;
+    background:var(--ok-soft);color:var(--brand-ink)}
+  .demo.web .ic{background:var(--btc-soft);color:#C76A00}
+  .demo .tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--ink-3);margin-bottom:11px}
+  .demo .tag .d{width:6px;height:6px;border-radius:50%;background:var(--brand)}
+  .demo.web .tag .d{background:var(--btc)}
+  .demo h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
+  .demo p{font-size:14px;color:var(--ink-2);margin-top:8px;line-height:1.55}
+  .demo .go{margin-top:auto;padding-top:18px;font-size:14px;font-weight:600;color:var(--brand-ink);
+    display:inline-flex;align-items:center;gap:6px}
+  .demo.web .go{color:#C76A00}
+  .demo .go svg{transition:transform .15s ease}
+  a.demo:hover .go svg{transform:translateX(3px)}
+
+  /* ---------- why a pos ---------- */
+  .whygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:16px;margin-top:28px}
+  .why{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .why .wic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;margin-bottom:14px;
+    background:var(--ok-soft);color:var(--brand-ink)}
+  .why .wt{font-weight:700;font-size:17px;letter-spacing:-.01em}
+  .why .wd{font-size:14px;color:var(--ink-2);margin-top:8px;line-height:1.55}
+  .why .wd b{color:var(--ink);font-weight:600}
+  .roadmap{margin-top:20px;background:var(--ok-soft);border:1px solid #D6EFD8;border-radius:14px;
+    padding:16px 18px;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+  .roadmap b{color:var(--brand-ink);font-weight:600}
+
+  /* ---------- business case (dark) ---------- */
+  .case{background:var(--d-ink);color:var(--d-text);border-radius:28px;padding:clamp(28px,5vw,54px);margin-top:8px}
+  .case .eyebrow{color:var(--d-green)}
   .case h2{color:#fff}
-  .case .lead2{color:#B6BEB3}
-  .problem{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:26px}
-  .prob{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:18px}
-  .prob .t{font-weight:800;font-size:15px;color:#fff;margin-bottom:5px}
-  .prob .d{font-size:13.5px;color:#AEB6AB}
-  .prob .old{font-size:12px;color:#E89B8C;margin-top:8px;font-weight:600}
-  .prob .new{font-size:12px;color:#7CEB82;margin-top:2px;font-weight:700}
+  .case .lead2{color:var(--d-text-2)}
 
-  .valgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:30px}
-  .val{display:flex;gap:12px;align-items:flex-start}
-  .val .v{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:rgba(124,235,130,.14);color:#7CEB82;display:grid;place-items:center;font-size:15px;font-weight:800}
-  .val .vt{font-weight:700;font-size:14.5px;color:#fff}
-  .val .vd{font-size:13px;color:#AEB6AB;margin-top:2px}
+  .problem{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:28px}
+  .prob{background:var(--d-card);border:1px solid var(--d-line);border-radius:16px;padding:18px}
+  .prob .t{font-weight:600;font-size:15px;color:#fff;margin-bottom:6px}
+  .prob .d{font-size:13.5px;color:var(--d-text-2);line-height:1.5}
+  .prob .ln{display:flex;align-items:center;gap:8px;font-size:12.5px;margin-top:10px;font-weight:500}
+  .prob .old{color:var(--d-warm)}
+  .prob .new{color:var(--d-green);font-weight:600;margin-top:3px}
+  .prob .ln svg{flex:0 0 auto}
 
-  .emerging{margin-top:34px;background:rgba(124,235,130,.07);border:1px solid rgba(124,235,130,.20);border-radius:18px;padding:22px}
-  .emerging h3{font-size:18px;font-weight:800;color:#fff;display:flex;align-items:center;gap:9px}
-  .emerging ul{list-style:none;margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px 22px}
-  .emerging li{font-size:13.5px;color:#C7CEC4;padding-left:20px;position:relative}
-  .emerging li::before{content:"→";position:absolute;left:0;color:#7CEB82;font-weight:800}
-  .emerging li b{color:#fff}
+  .valgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px 22px;margin-top:26px}
+  .val{display:flex;gap:13px;align-items:flex-start}
+  .val .v{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:rgba(91,224,97,.12);
+    color:var(--d-green);display:grid;place-items:center}
+  .val .vt{font-weight:600;font-size:14.5px;color:#fff}
+  .val .vd{font-size:13px;color:var(--d-text-2);margin-top:3px;line-height:1.5}
 
-  /* money */
-  .money{margin-top:26px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:24px}
-  .money h3{font-size:19px;font-weight:800;color:#fff}
-  .money .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
-  .mcard{background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px}
-  .mcard .num{font-size:26px;font-weight:800;color:#7CEB82;letter-spacing:-.02em}
-  .mcard .lbl{font-size:13px;color:#fff;font-weight:700;margin-top:2px}
-  .mcard .sub{font-size:12px;color:#AEB6AB;margin-top:6px}
-  .compare{margin-top:18px;font-size:13.5px;color:#C7CEC4}
-  .compare b{color:#fff}
-  .align{margin-top:16px;font-size:13.5px;color:#7CEB82;font-weight:700}
+  .emerging{margin-top:34px;background:rgba(91,224,97,.06);border:1px solid rgba(91,224,97,.18);
+    border-radius:18px;padding:24px}
+  .emerging h3{font-size:18px;font-weight:700;color:#fff;display:flex;align-items:center;gap:10px}
+  .emerging ul{list-style:none;margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:11px 24px}
+  .emerging li{font-size:13.5px;color:var(--d-text);padding-left:22px;position:relative;line-height:1.5}
+  .emerging li::before{content:"";position:absolute;left:0;top:7px;width:9px;height:9px;border-right:1.6px solid var(--d-green);
+    border-top:1.6px solid var(--d-green);transform:rotate(45deg)}
+  .emerging li b{color:#fff;font-weight:600}
 
-  .note{font-size:12px;color:#8A938A;margin-top:22px;line-height:1.5}
-  footer{padding:40px 0 60px;color:var(--ink-2);font-size:12.5px;text-align:center}
-  @media(max-width:560px){.hero{padding-top:40px}}
+  .money{margin-top:28px;background:var(--d-card);border:1px solid var(--d-line);border-radius:18px;padding:26px}
+  .money h3{font-size:19px;font-weight:700;color:#fff;display:flex;align-items:center;gap:10px}
+  .money .mrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+  .mcard{background:rgba(0,0,0,.22);border:1px solid var(--d-line);border-radius:14px;padding:18px}
+  .mcard .num{font-size:30px;font-weight:700;color:var(--d-green);letter-spacing:-.02em;font-feature-settings:"tnum"}
+  .mcard .num .u{font-size:15px;font-weight:600}
+  .mcard .lbl{font-size:13.5px;color:#fff;font-weight:600;margin-top:4px}
+  .mcard .sub{font-size:12.5px;color:var(--d-text-2);margin-top:8px;line-height:1.55}
+  .mcard .sub b{color:#fff;font-weight:600}
+  .compare{margin-top:18px;font-size:13.5px;color:var(--d-text);line-height:1.6}
+  .compare b{color:#fff;font-weight:600}
+  .align{margin-top:14px;font-size:13.5px;color:var(--d-green);font-weight:600;line-height:1.55}
+  .note{font-size:12px;color:var(--d-text-2);opacity:.85;margin-top:22px;line-height:1.55}
+
+  /* ---------- icon glyph (rail symbols) ---------- */
+  .glyph{font-weight:700;font-size:16px;line-height:1}
+
+  footer{border-top:1px solid var(--line);margin-top:8px;padding:30px 0 56px;color:var(--ink-2);
+    font-size:12.5px;text-align:center;line-height:1.7}
+  footer a{color:var(--brand-ink);font-weight:600}
+
+  @media(max-width:600px){
+    .section{padding:40px 0}
+    .demo .go{padding-top:16px}
+    .case{border-radius:20px}
+  }
 </style>
 </head>
 <body>
 
   <!-- HERO -->
+  <header class="wrap">
+    <div class="brandbar"><span data-wm class="wm"></span><span class="reg">Register</span></div>
+  </header>
   <div class="hero"><div class="wrap">
-    <div class="brandrow">
-      <div class="logo"><img class="markimg mk" alt="Cowbolt"></div>
-      <span class="wm">COWBOLT</span><span class="reg">Register</span>
-    </div>
-    <h1>The simplest way on earth to <b>get paid in Bitcoin and dollars</b>.</h1>
+    <h1 class="serif">The simplest way on earth to <b>get paid in Bitcoin and dollars</b>.</h1>
     <div class="lede">Sign up and we create a free, self-custody wallet for you on the spot. In under 60 seconds you're taking USD-priced payments that settle instantly — as Bitcoin over Lightning or USDT over Liquid — straight to keys only you control. No bank. No card terminal. No approval.</div>
     <div class="kpis">
-      <span class="kpi"><span class="dot"></span> Non-custodial · keys stay with the merchant</span>
-      <span class="kpi"><span class="dot" style="background:var(--green)"></span> Lightning · instant</span>
-      <span class="kpi"><span class="dot" style="background:#F7931A"></span> On-chain · any wallet</span>
+      <span class="kpi"><span class="dot" style="background:var(--brand-ink)"></span> Non-custodial · keys stay with the merchant</span>
+      <span class="kpi"><span class="dot" style="background:var(--btc)"></span> Lightning · instant</span>
+      <span class="kpi"><span class="dot" style="background:#C76A00"></span> On-chain · any wallet</span>
       <span class="kpi"><span class="dot" style="background:var(--usdt)"></span> USDT · dollar-stable</span>
-      <span class="kpi"><span class="dot" style="background:var(--ink-2)"></span> Any phone, Mac or PC</span>
+      <span class="kpi"><span class="dot" style="background:var(--ink-3)"></span> Any phone, Mac or PC</span>
     </div>
   </div></div>
 
   <!-- DEMO CHOOSER -->
   <div class="section"><div class="wrap">
     <div class="eyebrow">Try it</div>
-    <h2>Choose a demo</h2>
+    <h2 class="serif">Choose a demo</h2>
     <div class="lead2">Same product, two surfaces. Both run live in your browser — no install.</div>
     <div class="demos">
       <a class="demo app" href="./cowbolt-mockup.html">
-        <div class="ic">📱</div>
-        <div class="pill">Mobile app · design preview</div>
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
+        <div class="tag"><span class="d"></span> Mobile app · design preview</div>
         <h3>The Cowbolt App</h3>
         <p>Walk through every screen of the merchant experience on a phone — connect, charge, the customer payment page, success, and transaction history.</p>
-        <div class="go">Open the app demo →</div>
+        <span class="go">Open the app demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
       <a class="demo web" href="./cowbolt-pos/">
-        <div class="ic">💻</div>
-        <div class="pill">Web app · live &amp; interactive</div>
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 17.5V21"/></svg></div>
+        <div class="tag"><span class="d"></span> Web app · live &amp; interactive</div>
         <h3>The Web POS</h3>
         <p>The browser version any merchant can use on any device. Simple login → 2FA → charge at your handle (publix.cowbolt.com). Take a real test payment end-to-end.</p>
-        <div class="go">Open the web POS →</div>
+        <span class="go">Open the web POS <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </div>
   </div></div>
 
   <!-- WHY A POS -->
-  <div class="section" style="padding-top:8px"><div class="wrap">
+  <div class="section tight"><div class="wrap">
     <div class="eyebrow">Why a POS — not just a wallet?</div>
-    <h2>A wallet moves money. A register runs a business.</h2>
+    <h2 class="serif">A wallet moves money. A register runs a business.</h2>
     <div class="lead2">A plain wallet is built for one person spending their own money. A shop is many hands, money that belongs to the business, and a need to know exactly what happened. That specificity is the product — and it compounds with every feature we add.</div>
     <div class="whygrid">
       <div class="why">
-        <div class="wic">👥</div>
+        <div class="wic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 5.2a3.2 3.2 0 0 1 0 5.6M17.5 19a5.5 5.5 0 0 0-3-4.9"/></svg></div>
         <div class="wt">Roles, not just keys</div>
         <div class="wd">Staff take payments into the business register — but they <b>can't transfer funds, withdraw, or touch the business account</b>. Only the owner moves money. A cashier never holds the treasury or the recovery phrase.</div>
       </div>
       <div class="why">
-        <div class="wic">📊</div>
+        <div class="wic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h12a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 1 4 19.5Z"/><path d="M8 7h7M8 11h7M8 15h4"/></svg></div>
         <div class="wt">Books that reconcile</div>
         <div class="wd">Every sale is tagged — by staff member, by day, by rail — and exportable. A wallet shows a balance; a register shows <b>what the business actually did</b>.</div>
       </div>
       <div class="why">
-        <div class="wic">🏪</div>
+        <div class="wic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5 5.2 5a1 1 0 0 1 1-.8h11.6a1 1 0 0 1 1 .8L20 9.5"/><path d="M4 9.5h16v0a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-4 0Z"/><path d="M5.5 11.8V19a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-7.2"/></svg></div>
         <div class="wt">One register, many hands</div>
         <div class="wd">Add a cashier in seconds, remove them just as fast. No shared recovery phrase, no risk that a departing employee walks off with the keys to the money.</div>
       </div>
@@ -172,10 +218,10 @@
   </div></div>
 
   <!-- BUSINESS CASE -->
-  <div class="section"><div class="wrap">
+  <div class="section tight"><div class="wrap">
     <div class="case">
       <div class="eyebrow">The business case</div>
-      <h2>Built for the merchants the financial system left behind.</h2>
+      <h2 class="serif">Built for the merchants the financial system left behind.</h2>
       <div class="lead2">Two billion adults are unbanked. Billions more run small businesses on currencies that lose value by the month and card rails that take a brutal cut. Cowbolt Register hands every one of them a checkout that costs almost nothing and pays out instantly.</div>
 
       <!-- problem -> fix -->
@@ -183,43 +229,43 @@
         <div class="prob">
           <div class="t">No bank, no terminal</div>
           <div class="d">A card machine needs a merchant account, a credit check, and a $200–400 device.</div>
-          <div class="old">Old way: shut out entirely</div>
-          <div class="new">Cowbolt: a phone they already own</div>
+          <div class="ln old"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg> Old way: shut out entirely</div>
+          <div class="ln new"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> Cowbolt: a phone they already own</div>
         </div>
         <div class="prob">
           <div class="t">Fees that eat the margin</div>
           <div class="d">Card rails take 3–7% plus monthly terminal fees; cross-border adds FX gouging.</div>
-          <div class="old">Old way: 5–10% all-in</div>
-          <div class="new">Cowbolt: ~2% flat</div>
+          <div class="ln old"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg> Old way: 5–10% all-in</div>
+          <div class="ln new"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> Cowbolt: ~2% flat</div>
         </div>
         <div class="prob">
           <div class="t">Money held hostage</div>
           <div class="d">Banks hold payouts 2–30 days and freeze accounts without warning.</div>
-          <div class="old">Old way: wait days, risk a freeze</div>
-          <div class="new">Cowbolt: settles in ~1 second</div>
+          <div class="ln old"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg> Old way: wait days, risk a freeze</div>
+          <div class="ln new"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> Cowbolt: settles in ~1 second</div>
         </div>
         <div class="prob">
           <div class="t">Currency that melts</div>
           <div class="d">In high-inflation economies, today's takings are worth less by next week.</div>
-          <div class="old">Old way: hold a melting local note</div>
-          <div class="new">Cowbolt: take USDT, hold dollars</div>
+          <div class="ln old"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg> Old way: hold a melting local note</div>
+          <div class="ln new"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> Cowbolt: take USDT, hold dollars</div>
         </div>
       </div>
 
       <!-- merchant value prop -->
-      <div class="eyebrow" style="margin-top:38px">Why a merchant chooses it</div>
+      <div class="eyebrow" style="margin-top:40px">Why a merchant chooses it</div>
       <div class="valgrid">
-        <div class="val"><div class="v">⚡</div><div><div class="vt">Get paid in one second</div><div class="vd">Lightning settles instantly. Hand over the goods the moment "Paid ✓" shows — faster than a card terminal.</div></div></div>
-        <div class="val"><div class="v">🔒</div><div><div class="vt">The money is theirs, period</div><div class="vd">Non-custodial. Funds land in the merchant's own wallet — no bank can freeze it, no platform can hold it.</div></div></div>
-        <div class="val"><div class="v">$</div><div><div class="vt">Price in dollars, no math</div><div class="vd">Enter $25; the buyer pays exactly $25. Live conversion to BTC or USDT happens under the hood.</div></div></div>
-        <div class="val"><div class="v">🌍</div><div><div class="vt">Take money from anywhere</div><div class="vd">A shareable link or QR works across any border with no correspondent bank in the middle.</div></div></div>
-        <div class="val"><div class="v">📵</div><div><div class="vt">No hardware, no contract</div><div class="vd">Runs on the cheap Android they already have, in any browser. Nothing to buy, nothing to sign.</div></div></div>
-        <div class="val"><div class="v">🛡️</div><div><div class="vt">Hold dollars on demand</div><div class="vd">USDT on Liquid is a stable, dollar-pegged store of value — a lifeline where the local currency is collapsing.</div></div></div>
+        <div class="val"><div class="v"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div><div><div class="vt">Get paid in one second</div><div class="vd">Lightning settles instantly. Hand over the goods the moment "Paid ✓" shows — faster than a card terminal.</div></div></div>
+        <div class="val"><div class="v"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/></svg></div><div><div class="vt">The money is theirs, period</div><div class="vd">Non-custodial. Funds land in the merchant's own wallet — no bank can freeze it, no platform can hold it.</div></div></div>
+        <div class="val"><div class="v"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M7 6h7a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h8"/></svg></div><div><div class="vt">Price in dollars, no math</div><div class="vd">Enter $25; the buyer pays exactly $25. Live conversion to BTC or USDT happens under the hood.</div></div></div>
+        <div class="val"><div class="v"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.8 3 2.8 16 0 19M12 2.5c-2.8 3-2.8 16 0 19"/></svg></div><div><div class="vt">Take money from anywhere</div><div class="vd">A shareable link or QR works across any border with no correspondent bank in the middle.</div></div></div>
+        <div class="val"><div class="v"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M11 18.5h2M4 3l16 18"/></svg></div><div><div class="vt">No hardware, no contract</div><div class="vd">Runs on the cheap Android they already have, in any browser. Nothing to buy, nothing to sign.</div></div></div>
+        <div class="val"><div class="v"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/><path d="M12 7v9M14 9.2a2.3 2.3 0 0 0-2-1c-1.2 0-2 .7-2 1.6 0 2.2 4 1 4 3.2 0 .9-.8 1.6-2 1.6a2.3 2.3 0 0 1-2-1"/></svg></div><div><div class="vt">Hold dollars on demand</div><div class="vd">USDT on Liquid is a stable, dollar-pegged store of value — a lifeline where the local currency is collapsing.</div></div></div>
       </div>
 
       <!-- emerging markets -->
       <div class="emerging">
-        <h3>🌎 Why this matters most in poor countries</h3>
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.8 3 2.8 16 0 19M12 2.5c-2.8 3-2.8 16 0 19"/></svg> Why this matters most in poor countries</h3>
         <ul>
           <li><b>The unbanked get a checkout.</b> No bank account is the norm, not the exception — Cowbolt needs none.</li>
           <li><b>Inflation defense built in.</b> Vendors in Argentina, Nigeria, Lebanon, Turkey can keep takings in dollars (USDT) instead of a currency losing 30–100%/yr.</li>
@@ -232,10 +278,10 @@
 
       <!-- how we make money -->
       <div class="money">
-        <h3>💵 How Cowbolt makes money — on every transaction</h3>
-        <div class="row">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg> How Cowbolt makes money — on every transaction</h3>
+        <div class="mrow">
           <div class="mcard"><div class="num">2%</div><div class="lbl">Per-transaction fee</div><div class="sub">A thin fee on every payment a merchant receives — the core revenue line. Still far below the 5–10% all-in cost of cards + FX in these markets.</div></div>
-          <div class="mcard"><div class="num">$200<span style="font-size:15px">/mo</span></div><div class="lbl">Custom handle</div><div class="sub">A merchant's own storefront address — <b style="color:#fff">publix.cowbolt.com</b>. Flat monthly subscription per handle. Predictable recurring revenue on top of the fee.</div></div>
+          <div class="mcard"><div class="num">$200<span class="u">/mo</span></div><div class="lbl">Custom handle</div><div class="sub">A merchant's own storefront address — <b>publix.cowbolt.com</b>. Flat monthly subscription per handle. Predictable recurring revenue on top of the fee.</div></div>
           <div class="mcard"><div class="num">$0</div><div class="lbl">Our cost to settle</div><div class="sub">Lightning, on-chain and Liquid fees are fractions of a cent — so nearly all of the transaction fee is margin, at any volume, in any country.</div></div>
         </div>
         <div class="compare"><b>The wedge:</b> card networks charge 3–7% plus terminal rental; remittance corridors charge 5–10%. Cowbolt charges <b>just 2% per transaction</b> — plus <b>$200/mo</b> for merchants who want their own handle — and settles instantly, non-custodially, with no hardware.</div>
@@ -245,10 +291,21 @@
     </div>
   </div></div>
 
-  <footer>COWBOLT Register · live demos hosted on GitHub Pages · Nitton76 — <a href="https://github.com/Nitton76/demos" style="color:var(--green-2);font-weight:700">source</a></footer>
+  <footer><div class="wrap">Cowbolt Register · live demos hosted on GitHub Pages · Nitton76 — <a href="https://github.com/Nitton76/demos">source</a></div></footer>
 
 <script>
-  document.querySelectorAll(".mk").forEach(e=>e.src="data:image/png;base64,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");
+/* real Cowbolt wordmark (bolt = brand green) — identical to cowbolt-pos */
+const WORDMARK = `<svg viewBox="0 0 782 278" xmlns="http://www.w3.org/2000/svg" aria-label="Cowbolt" style="height:24px;width:auto;display:block">
+<path d="M744.349 122.471H725.362V109.388H778V122.471H759.013V176.51H744.349V122.471Z" fill="#17181A"/>
+<path d="M670.533 109.388H685.196V162.858H712.361V176.51H670.533V109.388Z" fill="#17181A"/>
+<path d="M568.856 143.142C568.856 137.77 569.733 132.903 571.488 128.542C573.305 124.181 575.812 120.484 579.008 117.45C582.203 114.353 585.995 111.983 590.381 110.339C594.768 108.696 599.561 107.875 604.763 107.875C609.964 107.875 614.757 108.696 619.144 110.339C623.53 111.983 627.322 114.353 630.518 117.45C633.713 120.484 636.189 124.181 637.943 128.542C639.761 132.903 640.669 137.77 640.669 143.142C640.669 148.514 639.761 153.381 637.943 157.742C636.189 162.103 633.713 165.832 630.518 168.929C627.322 171.963 623.53 174.302 619.144 175.945C614.757 177.588 609.964 178.41 604.763 178.41C599.561 178.41 594.768 177.588 590.381 175.945C585.995 174.302 582.203 171.963 579.008 168.929C575.812 165.832 573.305 162.103 571.488 157.742C569.733 153.381 568.856 148.514 568.856 143.142ZM584.083 143.142C584.083 146.302 584.553 149.21 585.493 151.864C586.496 154.456 587.906 156.731 589.723 158.69C591.54 160.586 593.702 162.072 596.209 163.146C598.778 164.221 601.629 164.758 604.763 164.758C607.896 164.758 610.716 164.221 613.222 163.146C615.791 162.072 617.985 160.586 619.802 158.69C621.619 156.731 622.998 154.456 623.938 151.864C624.94 149.21 625.442 146.302 625.442 143.142C625.442 140.045 624.94 137.169 623.938 134.515C622.998 131.86 621.619 129.585 619.802 127.689C617.985 125.73 615.791 124.213 613.222 123.138C610.716 122.064 607.896 121.526 604.763 121.526C601.629 121.526 598.778 122.064 596.209 123.138C593.702 124.213 591.54 125.73 589.723 127.689C587.906 129.585 586.496 131.86 585.493 134.515C584.553 137.169 584.083 140.045 584.083 143.142Z" fill="#17181A"/>
+<path d="M492.509 109.388H517.324C520.206 109.388 523.089 109.609 525.971 110.051C528.917 110.431 531.549 111.252 533.867 112.516C536.186 113.717 538.066 115.424 539.507 117.636C540.948 119.848 541.669 122.787 541.669 126.453C541.669 130.245 540.604 133.405 538.473 135.933C536.405 138.398 533.648 140.168 530.201 141.242V141.432C532.395 141.748 534.368 142.38 536.123 143.328C537.94 144.213 539.476 145.382 540.729 146.836C542.045 148.226 543.047 149.87 543.737 151.766C544.426 153.662 544.771 155.684 544.771 157.833C544.771 161.373 544.019 164.343 542.515 166.745C541.011 169.084 539.068 170.98 536.687 172.433C534.306 173.887 531.611 174.93 528.603 175.562C525.658 176.194 522.713 176.51 519.768 176.51H492.509V109.388ZM507.172 136.218H517.794C518.922 136.218 520.018 136.091 521.084 135.838C522.212 135.586 523.214 135.175 524.092 134.606C524.969 134.037 525.658 133.279 526.159 132.331C526.723 131.383 527.005 130.245 527.005 128.918C527.005 127.527 526.692 126.389 526.065 125.505C525.501 124.557 524.75 123.83 523.81 123.324C522.87 122.818 521.804 122.471 520.614 122.281C519.423 122.028 518.264 121.902 517.136 121.902H507.172V136.218ZM507.172 163.996H520.332C521.46 163.996 522.588 163.869 523.716 163.616C524.906 163.364 525.971 162.921 526.911 162.289C527.851 161.657 528.603 160.835 529.167 159.824C529.794 158.813 530.107 157.58 530.107 156.127C530.107 154.547 529.7 153.283 528.885 152.335C528.133 151.323 527.162 150.565 525.971 150.059C524.781 149.554 523.496 149.206 522.118 149.016C520.739 148.827 519.454 148.732 518.264 148.732H507.172V163.996Z" fill="#17181A"/>
+<path d="M371.977 109.388H387.956L398.578 152.429H398.766L412.677 109.388H426.307L440.124 153.567H440.312L451.498 109.388H466.349L446.892 176.51H433.827L419.163 130.055H418.975L404.312 176.51H391.716L371.977 109.388Z" fill="#17181A"/>
+<path d="M279.333 143.144C279.333 137.772 280.21 132.905 281.965 128.544C283.782 124.183 286.289 120.486 289.485 117.452C292.68 114.355 296.472 111.985 300.858 110.341C305.245 108.698 310.038 107.876 315.24 107.876C320.441 107.876 325.235 108.698 329.621 110.341C334.008 111.985 337.799 114.355 340.995 117.452C344.19 120.486 346.666 124.183 348.42 128.544C350.238 132.905 351.146 137.772 351.146 143.144C351.146 148.516 350.238 153.383 348.42 157.744C346.666 162.105 344.19 165.834 340.995 168.931C337.799 171.965 334.008 174.304 329.621 175.947C325.235 177.59 320.441 178.412 315.24 178.412C310.038 178.412 305.245 177.59 300.858 175.947C296.472 174.304 292.68 171.965 289.485 168.931C286.289 165.834 283.782 162.105 281.965 157.744C280.21 153.383 279.333 148.516 279.333 143.144ZM294.56 143.144C294.56 146.304 295.03 149.212 295.97 151.866C296.973 154.458 298.383 156.733 300.2 158.692C302.017 160.588 304.179 162.074 306.686 163.148C309.255 164.223 312.106 164.76 315.24 164.76C318.373 164.76 321.193 164.223 323.699 163.148C326.269 162.074 328.462 160.588 330.279 158.692C332.096 156.733 333.475 154.458 334.415 151.866C335.418 149.212 335.919 146.304 335.919 143.144C335.919 140.047 335.418 137.171 334.415 134.517C333.475 131.862 332.096 129.587 330.279 127.691C328.462 125.731 326.269 124.215 323.699 123.14C321.193 122.066 318.373 121.528 315.24 121.528C312.106 121.528 309.255 122.066 306.686 123.14C304.179 124.215 302.017 125.731 300.2 127.691C298.383 129.587 296.973 131.862 295.97 134.517C295.03 137.171 294.56 140.047 294.56 143.144Z" fill="#17181A"/>
+<path d="M244.352 127.025C242.911 125.256 241.125 123.897 238.994 122.949C236.926 122.001 234.514 121.526 231.756 121.526C228.999 121.526 226.43 122.064 224.049 123.138C221.73 124.213 219.694 125.73 217.939 127.689C216.247 129.585 214.9 131.86 213.897 134.515C212.957 137.169 212.487 140.045 212.487 143.142C212.487 146.302 212.957 149.21 213.897 151.864C214.9 154.456 216.247 156.731 217.939 158.69C219.631 160.586 221.605 162.072 223.861 163.146C226.179 164.221 228.655 164.758 231.286 164.758C234.294 164.758 236.958 164.126 239.276 162.862C241.595 161.598 243.506 159.828 245.01 157.553L257.229 166.749C254.41 170.731 250.838 173.67 246.514 175.566C242.19 177.462 237.741 178.41 233.166 178.41C227.965 178.41 223.171 177.588 218.785 175.945C214.398 174.302 210.607 171.963 207.411 168.929C204.215 165.832 201.709 162.103 199.892 157.742C198.137 153.381 197.26 148.514 197.26 143.142C197.26 137.77 198.137 132.903 199.892 128.542C201.709 124.181 204.215 120.484 207.411 117.45C210.607 114.353 214.398 111.983 218.785 110.339C223.171 108.696 227.965 107.875 233.166 107.875C235.046 107.875 236.989 108.064 238.994 108.443C241.062 108.759 243.067 109.297 245.01 110.055C247.015 110.813 248.926 111.825 250.744 113.089C252.561 114.353 254.19 115.901 255.632 117.734L244.352 127.025Z" fill="#17181A"/>
+<path d="M2 163.913H22.9619L51.6627 118.714V85.7219L2 163.913ZM80.2279 57H58.6207V120.057L57.0077 122.596H56.9784L36.8816 154.245H36.8743L30.7338 163.913H51.6957L80.2279 118.978V57ZM89.8547 162.595H89.8767L87.3472 166.536V228.198H108.969V165.479L136.383 122.596H115.414L89.8547 162.595ZM108.969 57H87.3472V120.049L85.7268 122.596H85.7121L60.2997 162.595H60.3071L58.6207 165.252V228.198H80.2279V165.487L108.969 120.526V57ZM165.095 122.596H144.14L115.912 166.778V199.543L165.095 122.596Z" fill="#02CF0A"/>
+</svg>`;
+document.querySelectorAll('[data-wm]').forEach(e=>{e.innerHTML=WORDMARK;});
 </script>
 </body>
 </html>
