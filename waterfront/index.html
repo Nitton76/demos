@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Waterfront — Build / Teardown Tier · 2026-06-12</title>
+<style>
+  :root{
+    --navy:#0d2b3e; --teal:#11808f; --teal2:#16a3b3; --sand:#f4efe6;
+    --ink:#13242e; --mut:#5d6f78; --line:#dde6ea; --bg:#f7fafb;
+    --g5:#1f9d57; --g4:#4caf6a; --g3:#d7a51e; --g2:#e07b39; --g1:#d2433a;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 18px 80px}
+  header{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;
+    padding:30px 18px 26px;border-radius:0 0 18px 18px;}
+  header .in{max-width:1180px;margin:0 auto}
+  h1{margin:0 0 4px;font-size:25px;letter-spacing:-.3px}
+  .sub{opacity:.92;font-size:14.5px;max-width:760px}
+  .pills{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+  .pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:600}
+  .stats{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0 6px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:13px;
+    padding:13px 16px;flex:1;min-width:150px}
+  .stat b{display:block;font-size:23px;color:var(--teal);line-height:1.1}
+  .stat span{font-size:12.5px;color:var(--mut)}
+  h2{font-size:18px;margin:34px 0 6px;color:var(--navy);
+    border-left:4px solid var(--teal2);padding-left:10px}
+  .note{font-size:13.5px;color:var(--mut);margin:0 0 14px}
+  .callout{background:#eaf6f7;border:1px solid #bfe3e7;border-left:5px solid var(--teal);
+    border-radius:11px;padding:14px 16px;margin:14px 0;font-size:14.5px}
+  .callout b{color:var(--navy)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px;margin-top:8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:15px 16px;position:relative;display:flex;flex-direction:column}
+  .rank{position:absolute;top:-9px;left:14px;background:var(--navy);color:#fff;
+    font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;letter-spacing:.4px}
+  .addr{font-weight:700;font-size:15.5px;margin:6px 0 1px;color:var(--navy)}
+  .loc{font-size:12.5px;color:var(--mut);margin-bottom:9px}
+  .price{font-size:21px;font-weight:800;color:var(--teal)}
+  .ptype{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;
+    color:#fff;padding:2px 8px;border-radius:6px;display:inline-block;margin:8px 0}
+  .t-lot{background:var(--g4)} .t-tear{background:var(--g2)} .t-home{background:var(--teal)}
+  .kv{font-size:13px;margin:2px 0;color:var(--ink)}
+  .kv b{color:var(--mut);font-weight:600}
+  .why{font-size:13px;color:var(--ink);margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
+  .tot{margin-top:10px;font-size:13px;font-weight:700}
+  .badge{display:inline-block;color:#fff;border-radius:7px;padding:2px 9px;font-weight:800;font-size:13px}
+  .b5{background:var(--g5)}.b4{background:var(--g4)}.b3{background:var(--g3)}.b2{background:var(--g2)}.b1{background:var(--g1)}
+  a.lk{color:var(--teal);font-weight:600;text-decoration:none;font-size:13px}
+  a.lk:hover{text-decoration:underline}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:13px;margin-top:8px;background:#fff}
+  table{border-collapse:collapse;width:100%;font-size:13px;min-width:880px}
+  th,td{padding:8px 9px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{background:var(--navy);color:#fff;position:sticky;top:0;font-size:12px}
+  tr:nth-child(even) td{background:#fafcfc}
+  .sc{font-weight:700;text-align:center;border-radius:5px;color:#fff;display:inline-block;width:24px}
+  .area{font-weight:700;color:var(--navy);background:var(--sand)!important}
+  .rec{font-weight:700;font-size:12px}
+  .footer{margin-top:30px;font-size:12.5px;color:var(--mut);border-top:1px solid var(--line);padding-top:16px}
+  ul.steps{padding-left:18px} ul.steps li{margin:5px 0;font-size:14.5px}
+  .small{font-size:12px;color:var(--mut)}
+</style>
+</head>
+<body>
+<header><div class="in">
+  <h1>Waterfront Search — Build / Teardown Tier</h1>
+  <div class="sub">Gulf-access lots, teardowns, and cheap-house-on-pilings candidates within ~1–2 hrs of Tampa,
+  centered on Tarpon Springs. Complements the 22 May round (which covered finished homes, $773K–$2.6M);
+  this is the build-it-yourself tier you asked for.</div>
+  <div class="pills">
+    <span class="pill">Run 2026-06-12</span>
+    <span class="pill">~40 active listings swept</span>
+    <span class="pill">Sold/pending filtered out</span>
+    <span class="pill">Tarpon Springs preferred</span>
+    <span class="pill">$59K – $700K</span>
+  </div>
+</div></header>
+
+<div class="wrap">
+
+  <div class="stats">
+    <div class="stat"><b>5</b><span>Tarpon / Pinellas candidates</span></div>
+    <div class="stat"><b>12</b><span>Pasco + Hernando Beach</span></div>
+    <div class="stat"><b>11</b><span>Citrus / Nature Coast</span></div>
+    <div class="stat"><b>$199K</b><span>cheapest shovel-ready build lot</span></div>
+  </div>
+
+  <div class="callout">
+    🏠 <b>A Sea Breeze Dr block we already know.</b> The two strongest Tarpon Springs finds — <b>1615</b> and
+    <b>1624 Sea Breeze Dr</b> — sit on a block we know well: the water, the flood exposure, the drive. 1615 is a clean
+    vacant lot ($700K, no HOA, dock-permitted); 1624 is a 1957 home to renovate or rebuild ($639K, ~181 days on market
+    = negotiable).
+  </div>
+
+  <h2>Top picks — ranked</h2>
+  <p class="note">Scored on your 16-category rubric (0–5 each, /80). Conservative where data is unverified;
+  flood zone, seawall condition and exact price still need a live confirm before any offer.</p>
+  <div class="cards">
+
+    <div class="card">
+      <span class="rank">TOP PICK · TARPON</span>
+      <div class="addr">1615 Sea Breeze Dr</div>
+      <div class="loc">Tarpon Springs 34689 · Pinellas · your street</div>
+      <div class="price">$700,000</div>
+      <span class="ptype t-lot">Vacant lot</span>
+      <div class="kv"><b>Water:</b> Direct Gulf, 150×70, no rear neighbors</div>
+      <div class="kv"><b>Build:</b> No HOA / no deed restriction, new central sewer</div>
+      <div class="kv"><b>Flood:</b> Coastal — build elevated (verify VE/AE)</div>
+      <div class="why">Cleanest blank-slate build in your preferred area. Dock permitted. Premium price but a true
+      pilings-ready Gulf lot on a Sea Breeze Dr block we know well.</div>
+      <div class="tot">Score <span class="badge b4">66/80</span> · Strong Candidate</div>
+      <div style="margin-top:8px"><a class="lk" href="https://www.redfin.com/FL/Tarpon-Springs/1615-Sea-Breeze-Dr-34689/home/47893642" target="_blank" rel="noopener">View listing ↗</a></div>
+    </div>
+
+    <div class="card">
+      <span class="rank">MOST BUILD-READY</span>
+      <div class="addr">3473 Gulf Coast Dr</div>
+      <div class="loc">Hernando Beach 34607 · ~1h15 from Tampa</div>
+      <div class="price">$369,900</div>
+      <span class="ptype t-lot">Vacant — permit-ready</span>
+      <div class="kv"><b>Water:</b> Saltwater canal, DIRECT no-lift Gulf</div>
+      <div class="kv"><b>Build:</b> Plans + survey + geo study included, impact fees PAID</div>
+      <div class="kv"><b>Done:</b> New 62 ft seawall + new dock</div>
+      <div class="why">Fastest path to breaking ground anywhere in the set — the seller already did the pre-construction
+      legwork. Caveat: VE flood zone (elevated build + higher insurance), Helene-flooded area.</div>
+      <div class="tot">Score <span class="badge b3">58/80</span> · Candidate · fastest to build</div>
+      <div style="margin-top:8px"><a class="lk" href="https://www.teamzre.com/property/W7884591/" target="_blank" rel="noopener">View listing ↗</a></div>
+    </div>
+
+    <div class="card">
+      <span class="rank">DEEP WATER · CLOSE</span>
+      <div class="addr">8126 Brighton Dr</div>
+      <div class="loc">Port Richey 34668 · Harbor Isles · ~50 min Tampa</div>
+      <div class="price">$395,000</div>
+      <span class="ptype t-lot">Vacant lot</span>
+      <div class="kv"><b>Water:</b> Deep-water canal, direct Gulf access</div>
+      <div class="kv"><b>Lot:</b> 11,353 sf — wide, no demo to manage</div>
+      <div class="kv"><b>Fresh:</b> ~6 days on market</div>
+      <div class="why">Most buildable width in the budget, deep water for a bigger boat, and no teardown logistics.
+      Closer to Tampa/Tarpon than the Nature Coast options.</div>
+      <div class="tot">Score <span class="badge b4">57/80</span> · Candidate</div>
+      <div style="margin-top:8px"><a class="lk" href="https://www.teamzre.com/property/TB8516505/" target="_blank" rel="noopener">View listing ↗</a></div>
+    </div>
+
+    <div class="card">
+      <span class="rank">BEST VALUE</span>
+      <div class="addr">11905 W Bayshore Dr</div>
+      <div class="loc">Crystal River 34429 · Nature Coast · ~1.5–2h Tampa</div>
+      <div class="price">$199,900</div>
+      <span class="ptype t-lot">Vacant — shovel-ready</span>
+      <div class="kv"><b>Water:</b> Canal → Crystal River → Gulf</div>
+      <div class="kv"><b>Build:</b> Cleared, surveyed, soil-tested, utilities at street</div>
+      <div class="kv"><b>Done:</b> 80 ft 2022 seawall (5-yr transferable warranty)</div>
+      <div class="why">Cheapest genuine build lot found — skip demolition entirely. The tradeoff is distance: 1.5–2 hrs
+      from Tampa and no sand beach. Verify fiber (Nature Coast may be cable/DSL only).</div>
+      <div class="tot">Score <span class="badge b3">56/80</span> · Candidate (value)</div>
+      <div style="margin-top:8px"><a class="lk" href="https://listings.showcaseocala.com/idx/details/homes/d172/850077" target="_blank" rel="noopener">View listing ↗</a></div>
+    </div>
+
+  </div>
+
+  <h2>Full scored comparison — build / teardown tier</h2>
+  <p class="note">WA=Water Access · D&amp;B=Dock/Boat · Sea=Seawall · Fld=Flood/Insurance · Hse=House/Buildability ·
+  Lot=Lot · Vw=Views · Loc=Location · Bch=Beach · ER=Emergency ≤12min · EMF · Dog · Nbhd · Hur=Hurricane · Net=Fiber · Prc=Price.
+  Rec: SC=Strong Candidate · C=Candidate · W=Watch.</p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Property</th><th>Type</th><th>Price</th><th>Water</th>
+      <th>WA</th><th>D&amp;B</th><th>Sea</th><th>Fld</th><th>Hse</th><th>Lot</th><th>Vw</th><th>Loc</th><th>Bch</th><th>ER</th><th>EMF</th><th>Dog</th><th>Nbhd</th><th>Hur</th><th>Net</th><th>Prc</th>
+      <th>TOTAL</th><th>Rec</th></tr>
+
+    <tr><td colspan="22" class="area">▸ Tarpon Springs / Pinellas — your preferred area</td></tr>
+    <tr><td>1615 Sea Breeze Dr</td><td>Lot</td><td>$700K</td><td>Direct Gulf</td>
+      <td>5</td><td>3</td><td>3</td><td>3</td><td>5</td><td>3</td><td>4</td><td>5</td><td>4</td><td>5</td><td>4</td><td>5</td><td>5</td><td>3</td><td>5</td><td>4</td><td><b>66</b></td><td class="rec" style="color:var(--g5)">SC</td></tr>
+    <tr><td>1624 Sea Breeze Dr</td><td>Home '57</td><td>$639K</td><td>Gulf views</td>
+      <td>5</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td><td>4</td><td>5</td><td>4</td><td>5</td><td>4</td><td>5</td><td>5</td><td>3</td><td>5</td><td>4</td><td><b>64</b></td><td class="rec" style="color:var(--g4)">C+</td></tr>
+    <tr><td>2482 Trade Winds Dr</td><td>Lot ½ac</td><td>$280K</td><td>Baywood/ICW</td>
+      <td>4</td><td>3</td><td>3</td><td>3</td><td>5</td><td>4</td><td>3</td><td>4</td><td>4</td><td>4</td><td>4</td><td>5</td><td>4</td><td>3</td><td>4</td><td>5</td><td><b>62</b></td><td class="rec" style="color:var(--g4)">C+</td></tr>
+
+    <tr><td colspan="22" class="area">▸ Pasco — best value &amp; inventory (~45–55 min Tampa)</td></tr>
+    <tr><td>8126 Brighton Dr, Port Richey</td><td>Lot</td><td>$395K</td><td>Deep canal/Gulf</td>
+      <td>4</td><td>3</td><td>3</td><td>3</td><td>5</td><td>4</td><td>3</td><td>3</td><td>2</td><td>4</td><td>4</td><td>5</td><td>3</td><td>3</td><td>3</td><td>5</td><td><b>57</b></td><td class="rec" style="color:var(--g4)">C</td></tr>
+    <tr><td>5250 Miller Bayou Dr, Port Richey</td><td>Lot · pre-demo'd</td><td>$199K</td><td>Bayou/Gulf</td>
+      <td>4</td><td>3</td><td>2</td><td>3</td><td>5</td><td>3</td><td>3</td><td>3</td><td>2</td><td>4</td><td>4</td><td>5</td><td>3</td><td>3</td><td>3</td><td>5</td><td><b>55</b></td><td class="rec" style="color:var(--g4)">C</td></tr>
+    <tr><td>9900 Island Harbor Dr, Port Richey</td><td>Teardown '75</td><td>$295K</td><td>Canal/Gulf no-bridge</td>
+      <td>4</td><td>3</td><td>3</td><td>2</td><td>4</td><td>3</td><td>3</td><td>3</td><td>2</td><td>4</td><td>4</td><td>5</td><td>3</td><td>3</td><td>3</td><td>5</td><td><b>54</b></td><td class="rec" style="color:var(--g3)">C (short sale)</td></tr>
+    <tr><td>4826 Treasure Dr, New Port Richey</td><td>Lot · tiny</td><td>$59K</td><td>Cross Bayou/Gulf</td>
+      <td>4</td><td>2</td><td>1</td><td>3</td><td>3</td><td>1</td><td>3</td><td>3</td><td>2</td><td>4</td><td>4</td><td>5</td><td>3</td><td>3</td><td>3</td><td>5</td><td><b>49</b></td><td class="rec" style="color:var(--g2)">W (cheap foothold)</td></tr>
+
+    <tr><td colspan="22" class="area">▸ Hernando Beach — post-Helene teardown supply (~1h15 Tampa)</td></tr>
+    <tr><td>3473 Gulf Coast Dr</td><td>Lot · permit-ready</td><td>$370K</td><td>Direct Gulf no-lift</td>
+      <td>5</td><td>5</td><td>5</td><td>2</td><td>5</td><td>3</td><td>3</td><td>3</td><td>2</td><td>3</td><td>4</td><td>5</td><td>3</td><td>2</td><td>3</td><td>5</td><td><b>58</b></td><td class="rec" style="color:var(--g4)">C</td></tr>
+    <tr><td>4530 Gulfstream Dr</td><td>Lot</td><td>$275K</td><td>Direct Gulf canal</td>
+      <td>5</td><td>4</td><td>4</td><td>2</td><td>5</td><td>3</td><td>3</td><td>3</td><td>2</td><td>3</td><td>4</td><td>5</td><td>3</td><td>2</td><td>3</td><td>5</td><td><b>56</b></td><td class="rec" style="color:var(--g4)">C</td></tr>
+    <tr><td>4064 Casa Ct</td><td>Lot 125'</td><td>$320K</td><td>Canal, mins to Gulf</td>
+      <td>4</td><td>4</td><td>4</td><td>2</td><td>5</td><td>4</td><td>3</td><td>3</td><td>2</td><td>3</td><td>4</td><td>5</td><td>3</td><td>2</td><td>3</td><td>5</td><td><b>56</b></td><td class="rec" style="color:var(--g4)">C</td></tr>
+
+    <tr><td colspan="22" class="area">▸ Citrus / Nature Coast — cheapest, farthest (~1.5–2h Tampa)</td></tr>
+    <tr><td>11905 W Bayshore Dr, Crystal River</td><td>Lot · shovel-ready</td><td>$200K</td><td>Canal→river→Gulf</td>
+      <td>4</td><td>3</td><td>5</td><td>3</td><td>5</td><td>3</td><td>3</td><td>2</td><td>2</td><td>4</td><td>4</td><td>5</td><td>3</td><td>3</td><td>2</td><td>5</td><td><b>56</b></td><td class="rec" style="color:var(--g4)">C (value)</td></tr>
+    <tr><td>2630 N Comanche Point, Crystal River</td><td>Cabin+dock '74</td><td>$425K</td><td>Deep canal/Gulf</td>
+      <td>5</td><td>5</td><td>4</td><td>3</td><td>3</td><td>2</td><td>3</td><td>2</td><td>2</td><td>4</td><td>4</td><td>5</td><td>3</td><td>3</td><td>2</td><td>5</td><td><b>55</b></td><td class="rec" style="color:var(--g4)">C</td></tr>
+    <tr><td>5509 S Garcia Rd, Homosassa</td><td>Teardown '72</td><td>$399K</td><td>Canal→Homosassa R</td>
+      <td>4</td><td>3</td><td>3</td><td>3</td><td>4</td><td>4</td><td>3</td><td>2</td><td>2</td><td>3</td><td>4</td><td>5</td><td>3</td><td>3</td><td>2</td><td>5</td><td><b>53</b></td><td class="rec" style="color:var(--g3)">C (teardown)</td></tr>
+  </table>
+  </div>
+  <p class="small">Also surfaced and active, not yet scored — Hudson/Leisure Beach canal homes (12739 3rd Isle $370K,
+  7637 Hatteras $460K fixer), Citrus river homes (6779 S Pinebranch $475K, 2272 S Todd Point $465K two-lot),
+  6845/6837 Sanderling Ln Hudson ($58K each, tiny lots), 4181 Orchid Dr Hernando Beach ($649K open-Gulf VE lot).</p>
+
+  <h2>What the data says</h2>
+  <div class="callout">
+    <b>Why so much cheap waterfront right now:</b> Hurricane Helene flooded the entire Pasco→Hernando→Citrus coast.
+    That's why teardowns, gutted "investor special" canal homes, and pre-demolished lots are abundant and cheap —
+    intact seawalls and docks, no house. Ideal for a pilings rebuild. The flip side: most of this inventory is
+    <b>VE or AE flood zone</b>, so elevated construction is mandatory and flood insurance runs higher (VE can be
+    $10K–$20K+/yr). For a new pilings build that's expected; for the math, budget it.
+  </div>
+
+  <h2>The core tradeoff</h2>
+  <p class="note">It comes down to <b>price vs. proximity to your life</b>:</p>
+  <div class="tablewrap"><table style="min-width:560px">
+    <tr><th>Area</th><th>Drive to Tampa</th><th>Entry price (Gulf-access lot)</th><th>Best for</th></tr>
+    <tr><td><b>Tarpon Springs</b></td><td>~40 min</td><td>$640K–$700K</td><td>Staying in your area, known water, fiber</td></tr>
+    <tr><td><b>Pasco (NPR/Port Richey)</b></td><td>~50 min</td><td>$200K–$395K</td><td>Best balance of price + closeness</td></tr>
+    <tr><td><b>Hernando Beach</b></td><td>~1h15</td><td>$275K–$370K</td><td>True open-Gulf access, permit-ready lots</td></tr>
+    <tr><td><b>Citrus (Crystal R./Homosassa)</b></td><td>~1.5–2h</td><td>$200K</td><td>Cheapest land, spring-fed rivers, manatees</td></tr>
+  </table></div>
+
+  <h2>Recommended next steps</h2>
+  <ul class="steps">
+    <li><b>Drive-by shortlist:</b> 1615 &amp; 1624 Sea Breeze are minutes from the Tarpon Springs core — worth a drive-by this week before committing analysis time elsewhere.</li>
+    <li><b>I deep-score any 2–3 you flag</b> — full FEMA flood zone (parcel-wide, not centroid), seawall age, dock permit status, Frontier fiber check, exact elevation + insurance estimate, and live price/DOM confirmation.</li>
+    <li><b>The off-market angle later:</b> when you're actively hunting, the Regrid layer (via a cloud agent, where the token already lives — nothing from you) can surface vacant/teardown parcels that aren't even listed, for direct-to-seller offers.</li>
+  </ul>
+
+  <div class="footer">
+    <b>Verification caveats.</b> Zillow/Redfin/Realtor/LandWatch block automated reads, so listings were sourced from
+    brokerage IDX feeds (teamzre.com, showcaseocala.com) and live search snippets, with sold/pending filtered out.
+    A few prices/MLS#s are marked verify-on-call. Scores are conservative rubric estimates — flood zone, seawall
+    condition, and insurance need a live look before any offer. Complements the 2026-05-22 finished-home round
+    (15 properties, top pick 1640 Sea Breeze 67/80). Generated 2026-06-12 · GutenOS waterfront scorer.
+  </div>
+</div>
+</body>
+</html>
