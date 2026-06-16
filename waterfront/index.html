@@ -65,6 +65,23 @@
   .footer{margin-top:30px;font-size:12.5px;color:var(--mut);border-top:1px solid var(--line);padding-top:16px}
   ul.steps{padding-left:18px} ul.steps li{margin:5px 0;font-size:14.5px}
   .small{font-size:12px;color:var(--mut)}
+  .feat{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);margin:20px 0 4px;
+    background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    box-shadow:0 8px 26px rgba(13,43,62,.12)}
+  @media(max-width:720px){.feat{grid-template-columns:1fr}}
+  .feat .ph{position:relative;min-height:240px;background:#dfe9ec}
+  .feat .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .feat .ph .tag{position:absolute;top:12px;left:12px;background:var(--g2);color:#fff;
+    font-size:10.5px;font-weight:800;letter-spacing:.5px;padding:4px 10px;border-radius:999px}
+  .feat .body{padding:18px 20px}
+  .feat .ttl{font-size:19px;font-weight:800;color:var(--navy);margin:2px 0 1px}
+  .feat .lc{font-size:12.5px;color:var(--mut);margin-bottom:8px}
+  .feat .pr{font-size:22px;font-weight:800;color:var(--teal);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .feat .row{display:flex;flex-wrap:wrap;gap:7px;margin:11px 0 2px}
+  .feat .chip{background:var(--sand);border:1px solid var(--line);border-radius:9px;padding:6px 10px;font-size:12px;font-weight:600}
+  .feat .cta{display:inline-block;margin-top:13px;background:var(--teal);color:#fff;text-decoration:none;
+    font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:9px}
+  .feat .cta:hover{background:var(--teal2)}
 </style>
 </head>
 <body>
@@ -79,6 +96,7 @@
     <span class="pill">Sold/pending filtered out</span>
     <span class="pill">Tarpon Springs preferred</span>
     <span class="pill">$59K – $700K</span>
+    <span class="pill">★ Updated 2026-06-15 · +1275 Mickler Ln</span>
   </div>
 </div></header>
 
@@ -89,6 +107,25 @@
     <div class="stat"><b>12</b><span>Pasco + Hernando Beach</span></div>
     <div class="stat"><b>11</b><span>Citrus / Nature Coast</span></div>
     <div class="stat"><b>$199K</b><span>cheapest shovel-ready build lot</span></div>
+  </div>
+
+  <div class="feat">
+    <div class="ph">
+      <span class="tag">★ UNDER ACTIVE CONSIDERATION · MEETING AGENT 6 PM 6/16</span>
+      <a href="1275-mickler-ln.html"><img src="img/1275-mickler-aerial.jpg" alt="Aerial of 1275 Mickler Ln — 1.31-acre waterfront lot on the Anclote River"></a>
+    </div>
+    <div class="body">
+      <div class="ttl">1275 Mickler Ln, Tarpon Springs</div>
+      <div class="lc">Anclote River · 1.31 acres · ~100 ft frontage · bridge-free ~8–12 min to the open Gulf</div>
+      <div class="pr">$975,000 <span class="badge b4" style="font-size:13px">57/80 · Consider</span></div>
+      <div class="row">
+        <span class="chip">🏗️ Build lot — demo + elevated rebuild</span>
+        <span class="chip">🛥️ Dock vetted (~$45–60K)</span>
+        <span class="chip">🌊 FEMA VE · Evac A</span>
+      </div>
+      <p style="font-size:13.5px;margin:9px 0 0">The biggest lot in the whole search, with a bridge-free Gulf run and a dock the seller already had feasibility-priced. The catch: it's the worst surge spot in the county and the land is priced above market — so buy the dirt at land value (~$700K), then build. Full scorecard, dock plan, and offer math inside.</p>
+      <a class="cta" href="1275-mickler-ln.html">View full scorecard →</a>
+    </div>
   </div>
 
   <div class="callout">
@@ -182,6 +219,8 @@
       <td>5</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td><td>4</td><td>5</td><td>4</td><td>5</td><td>4</td><td>5</td><td>5</td><td>3</td><td>5</td><td>4</td><td><b>64</b></td><td class="rec" style="color:var(--g4)">C+</td></tr>
     <tr><td>2482 Trade Winds Dr</td><td>Lot ½ac</td><td>$280K</td><td>Baywood/ICW</td>
       <td>4</td><td>3</td><td>3</td><td>3</td><td>5</td><td>4</td><td>3</td><td>4</td><td>4</td><td>4</td><td>4</td><td>5</td><td>4</td><td>3</td><td>4</td><td>5</td><td><b>62</b></td><td class="rec" style="color:var(--g4)">C+</td></tr>
+    <tr><td><a class="lk" href="1275-mickler-ln.html">1275 Mickler Ln ★</a></td><td>Build lot</td><td>$975K</td><td>Anclote R · bridge-free</td>
+      <td>4</td><td>3</td><td>2</td><td>2</td><td>4</td><td>5</td><td>4</td><td>4</td><td>3</td><td>4</td><td>4</td><td>5</td><td>2</td><td>3</td><td>3</td><td>5</td><td><b>57</b></td><td class="rec" style="color:var(--g4)">C</td></tr>
 
     <tr><td colspan="22" class="area">▸ Pasco — best value &amp; inventory (~45–55 min Tampa)</td></tr>
     <tr><td>8126 Brighton Dr, Port Richey</td><td>Lot</td><td>$395K</td><td>Deep canal/Gulf</td>
@@ -245,7 +284,7 @@
     brokerage IDX feeds (teamzre.com, showcaseocala.com) and live search snippets, with sold/pending filtered out.
     A few prices/MLS#s are marked verify-on-call. Scores are conservative rubric estimates — flood zone, seawall
     condition, and insurance need a live look before any offer. Complements the 2026-05-22 finished-home round
-    (15 properties, top pick 1640 Sea Breeze 67/80). Generated 2026-06-12 · GutenOS waterfront scorer.
+    (15 properties, top pick 1640 Sea Breeze 67/80). Generated 2026-06-12 · GutenOS waterfront scorer. Updated 2026-06-15: added <a class="lk" href="1275-mickler-ln.html">1275 Mickler Ln</a> (build thesis, 57/80) with a full scorecard sub-page.
   </div>
 </div>
 </body>
