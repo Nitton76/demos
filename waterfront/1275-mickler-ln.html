@@ -3,61 +3,145 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>1275 Mickler Ln — 57/80 Property Report</title>
+<title>1275 Mickler Ln — SeVe Waterfront</title>
 <style>
 :root {
-  --navy:#0d2b3e; --teal:#11808f; --teal2:#16a3b3; --sand:#f4efe6;
-  --ink:#13242e; --mut:#5d6f78; --line:#dde6ea; --bg:#f7fafb;
+  --navy:#0d2b3e; --teal:#11808f; --teal2:#16a3b3; --teal3:#e0f5f7;
+  --sand:#f4efe6; --ink:#13242e; --mut:#5d6f78;
+  --line:#dde6ea; --bg:#f7fafb; --card:#ffffff;
   --g5:#1f9d57; --g4:#4caf6a; --g3:#d7a51e; --g2:#e07b39; --g1:#d2433a;
-  --card:#ffffff;
+  --sidebar-w:252px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);
   font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
-.wrap{max-width:860px;margin:0 auto;padding:0 16px 80px}
-header{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;padding:22px 18px}
-header .in{max-width:860px;margin:0 auto}
+
+/* ── LAYOUT ── */
+.layout{display:flex;min-height:100vh}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;
+  background:var(--navy);color:#fff;
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  display:flex;flex-direction:column;
+  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.2) transparent;
+}
+.sb-brand{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,.12)}
+.sb-back{display:inline-flex;align-items:center;gap:5px;color:rgba(255,255,255,.7);
+  font-size:13px;font-weight:600;text-decoration:none;padding:5px 0;transition:color .15s}
+.sb-back:hover{color:#fff}
+.sb-title{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);
+  letter-spacing:.7px;text-transform:uppercase;margin-top:10px}
+.sb-site{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.2px}
+
+.sb-section{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sb-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);
+  text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px}
+
+.prop-item{display:block;text-decoration:none;border-radius:9px;
+  padding:10px 11px;margin-bottom:4px;transition:background .15s;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1)}
+.prop-item:hover{background:rgba(255,255,255,.13)}
+.prop-item.active{background:var(--teal);border-color:var(--teal2)}
+.prop-addr{font-size:13.5px;font-weight:700;color:#fff}
+.prop-loc{font-size:11.5px;color:rgba(255,255,255,.65);margin-top:1px}
+.prop-chips{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap;align-items:center}
+.score-chip{display:inline-block;background:rgba(0,0,0,.25);color:#fff;
+  font-size:12px;font-weight:800;padding:2px 8px;border-radius:6px}
+.tonight-chip{display:inline-block;background:#f59e0b;color:#7c2d12;
+  font-size:10px;font-weight:800;padding:2px 7px;border-radius:6px;
+  letter-spacing:.4px;text-transform:uppercase}
+.more-soon{font-size:12px;color:rgba(255,255,255,.35);font-style:italic;padding-top:4px}
+
+.jump-link{display:block;text-decoration:none;color:rgba(255,255,255,.65);
+  font-size:12.5px;padding:5px 4px;border-radius:5px;transition:all .15s}
+.jump-link:hover{color:#fff;background:rgba(255,255,255,.08);padding-left:8px}
+
+.legend-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.lchip{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;color:rgba(255,255,255,.65)}
+.lchip span{width:18px;height:18px;border-radius:4px;color:#fff;font-weight:800;
+  font-size:10px;display:inline-flex;align-items:center;justify-content:center}
+.lc5{background:var(--g5)}.lc4{background:var(--g4)}.lc3{background:var(--g3)}
+.lc2{background:var(--g2)}.lc1{background:var(--g1)}
+
+.sb-contact{font-size:12.5px;color:rgba(255,255,255,.7);line-height:1.6}
+.sb-contact a{color:var(--teal2);text-decoration:none;font-weight:600}
+.sb-contact a:hover{color:#fff}
+.sb-contact strong{color:#fff}
+.planning-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;padding:10px 11px;margin-top:6px}
+.planning-num{font-size:14px;font-weight:800;color:#fff;letter-spacing:.3px}
+.planning-num a{color:#fff;text-decoration:none}
+
+/* ── MOBILE TOP NAV ── */
+.mobile-nav{display:none;background:var(--navy);color:#fff;
+  padding:11px 16px;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.15)}
+.mn-back{color:rgba(255,255,255,.8);font-size:14px;font-weight:600;
+  text-decoration:none;display:flex;align-items:center;gap:6px}
+.mn-score{background:var(--g3);color:#fff;font-size:13px;font-weight:800;
+  padding:3px 10px;border-radius:7px}
+
+/* ── MAIN CONTENT ── */
+.main-content{flex:1;min-width:0}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 80px}
+
+.prop-header{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;padding:22px 18px}
+.ph-inner{max-width:860px;margin:0 auto}
 .showing-banner{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
   border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px;font-weight:600}
-h1{font-size:21px;margin-bottom:3px;letter-spacing:-.3px}
-.sub{opacity:.9;font-size:14px}
+.ph-title{font-size:21px;font-weight:800;margin-bottom:3px;letter-spacing:-.3px}
+.ph-sub{opacity:.9;font-size:14px}
 .score-row{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
 .score-badge{font-size:26px;font-weight:900;background:var(--g3);color:#fff;
   padding:6px 18px;border-radius:10px;letter-spacing:-1px}
 .score-meta{font-size:13px;opacity:.85}
 .score-meta strong{font-size:15px}
 
-section{margin:26px 0}
-h2{font-size:14px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;
-  border-left:4px solid var(--teal2);padding-left:10px;margin-bottom:12px}
+section{margin:28px 0}
+h2{font-size:14px;font-weight:700;color:var(--navy);text-transform:uppercase;
+  letter-spacing:.5px;border-left:4px solid var(--teal2);padding-left:10px;margin-bottom:14px}
 
-/* Plant warning */
 .plant-warning{background:#fee2e2;border:1px solid #fca5a5;border-left:5px solid #dc2626;
   border-radius:12px;padding:16px 18px;margin:18px 0}
 .warn-title{font-weight:800;font-size:15px;color:#991b1b;margin-bottom:8px}
 .plant-warning p{font-size:14px;color:#7f1d1d;line-height:1.55}
 .stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .stat-box{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.2);
-  border-radius:8px;padding:9px 12px;flex:1;min-width:130px;text-align:center}
-.stat-box b{display:block;font-size:19px;color:#991b1b;font-weight:900}
+  border-radius:8px;padding:9px 12px;flex:1;min-width:115px;text-align:center}
+.stat-box b{display:block;font-size:18px;color:#991b1b;font-weight:900}
 .stat-box span{font-size:11px;color:#7f1d1d}
 
-/* Quick facts */
+.feasibility-grid{display:flex;flex-direction:column;gap:10px}
+.feas-item{border-radius:11px;padding:15px 16px;display:flex;gap:13px;align-items:flex-start}
+.feas-yes{background:#dcfce7;border:1px solid #86efac;border-left:5px solid var(--g5)}
+.feas-info{background:#fefce8;border:1px solid #fde68a;border-left:5px solid var(--g3)}
+.feas-icon{font-size:22px;line-height:1;flex-shrink:0;margin-top:1px}
+.feas-title{font-weight:800;font-size:15px;margin-bottom:5px}
+.feas-yes .feas-title{color:#14532d}
+.feas-info .feas-title{color:#78350f}
+.feas-body p{font-size:13.5px;line-height:1.6}
+.feas-yes .feas-body p{color:#1a3a24}
+.feas-info .feas-body p{color:#713f12}
+.feas-call{background:var(--teal3);border:1px solid #a7e0e8;border-left:5px solid var(--teal);
+  border-radius:11px;padding:13px 15px;margin-top:6px}
+.feas-call strong{color:var(--navy);font-size:14px}
+.feas-call ol{margin:7px 0 0 18px;font-size:13px;line-height:1.8;color:var(--ink)}
+
 .facts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:9px}
 .fact{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
 .fact .lbl{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
 .fact .val{font-size:15px;font-weight:700;color:var(--navy);margin-top:1px}
-.fact .note{font-size:12px;color:var(--mut)}
+.fact .note{font-size:12px;color:var(--mut);margin-top:1px}
 
-/* Disqualifiers */
 .dq-list{list-style:none}
 .dq-list li{display:flex;align-items:flex-start;gap:9px;padding:9px 0;
   border-bottom:1px solid var(--line);font-size:14px}
 .dq-list li:last-child{border-bottom:none}
-.dq-icon{min-width:20px;font-size:15px}
+.dq-icon{min-width:20px;font-size:15px;margin-top:2px}
 .dq-text strong{color:var(--navy)}
 
-/* Score table */
 .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:11px;background:#fff}
 table{border-collapse:collapse;width:100%;font-size:13.5px}
 th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line)}
@@ -69,7 +153,6 @@ tr:nth-child(even) td{background:#fafcfc}
 .s5{background:var(--g5)}.s4{background:var(--g4)}.s3{background:var(--g3)}
 .s2{background:var(--g2)}.s1{background:var(--g1)}
 
-/* Callouts */
 .callout{background:#eaf6f7;border:1px solid #bfe3e7;border-left:5px solid var(--teal);
   border-radius:11px;padding:14px 16px;margin:10px 0;font-size:14px}
 .callout b{color:var(--navy)}
@@ -78,7 +161,6 @@ tr:nth-child(even) td{background:#fafcfc}
 .danger-callout{background:#fee2e2;border:1px solid #fca5a5;border-left:5px solid #dc2626;
   border-radius:11px;padding:14px 16px;margin:10px 0;font-size:14px;color:#7f1d1d}
 
-/* Recommendation box */
 .rec-box{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;
   border-radius:14px;padding:22px 20px}
 .rec-box h3{font-size:17px;margin-bottom:6px}
@@ -91,7 +173,6 @@ tr:nth-child(even) td{background:#fafcfc}
 .clist li{padding:4px 0;font-size:13.5px;opacity:.9}
 .clist li::before{content:"→ "}
 
-/* Visit checklist */
 .checklist{background:var(--card);border:1px solid var(--line);border-radius:11px;overflow:hidden}
 .chk-item{display:flex;align-items:flex-start;gap:11px;padding:12px 15px;
   border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s}
@@ -104,15 +185,11 @@ tr:nth-child(even) td{background:#fafcfc}
 .chk-box:checked::after{content:"✓";position:absolute;top:-1px;left:3px;
   color:#fff;font-size:13px;font-weight:700}
 .chk-priority{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--g1)}
-.chk-priority.yellow{color:var(--g2)}
-.chk-priority.green{color:var(--g5)}
-.chk-text{font-size:14px;line-height:1.5}
+.chk-text{font-size:14px;line-height:1.5;margin-top:1px}
 
-/* Plant data table */
-.plant-table td:first-child{font-size:13px;color:var(--mut);white-space:normal;min-width:220px}
+.plant-table td:first-child{font-size:13px;color:var(--mut);min-width:220px}
 .plant-table td:last-child{font-weight:600;color:var(--navy)}
 
-/* Links */
 .link-grid{display:flex;flex-wrap:wrap;gap:9px}
 .lbtn{display:block;text-decoration:none;padding:12px 18px;border-radius:10px;
   font-weight:700;font-size:14px;text-align:center;flex:1;min-width:130px}
@@ -124,135 +201,271 @@ tr:nth-child(even) td{background:#fafcfc}
 
 .footer{margin-top:36px;font-size:12px;color:var(--mut);border-top:1px solid var(--line);padding-top:14px}
 .footer a{color:var(--teal)}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .mobile-nav{display:flex}
+  .layout{display:block}
+}
+@media(max-width:480px){
+  .stat-box{min-width:100px}
+  .facts-grid{grid-template-columns:1fr 1fr}
+  .offer-row{gap:12px}
+}
 </style>
 </head>
 <body>
 
-<header>
-<div class="in">
-  <div class="showing-banner">🕕 Showing tonight 6 PM · Chris Ziebell · <a href="tel:7275152185" style="color:#fff">727-515-2185</a></div>
-  <h1>1275 Mickler Ln, Tarpon Springs FL 34689</h1>
-  <div class="sub">Anclote River · 1.31 ac teardown → build elevated on pilings · bridge-free Gulf access</div>
+<div class="mobile-nav">
+  <a class="mn-back" href="./">&#8592; All Properties</a>
+  <div>
+    <span style="font-size:12px;opacity:.7;margin-right:8px">1275 Mickler Ln</span>
+    <span class="mn-score">58/80</span>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- ══════ SIDEBAR ══════ -->
+<nav class="sidebar">
+  <div class="sb-brand">
+    <a class="sb-back" href="./">&#8592; All Properties</a>
+    <div class="sb-title" style="margin-top:12px">SeVe Waterfront</div>
+    <div class="sb-site">Property Search</div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Deep Research</div>
+    <a class="prop-item active" href="1275-mickler-ln.html">
+      <div class="prop-addr">1275 Mickler Ln</div>
+      <div class="prop-loc">Tarpon Springs &middot; Anclote River</div>
+      <div class="prop-chips">
+        <span class="score-chip">58/80</span>
+        <span class="tonight-chip">Tonight 6 PM</span>
+      </div>
+    </a>
+    <div class="more-soon">More properties added as research completes</div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Jump to</div>
+    <a class="jump-link" href="#plant-warning">&#9888;&#65039; Plant Noise Warning</a>
+    <a class="jump-link" href="#build-feasibility">&#9989; Build Feasibility</a>
+    <a class="jump-link" href="#quick-facts">Quick Facts</a>
+    <a class="jump-link" href="#disqualifiers">Hard Disqualifiers</a>
+    <a class="jump-link" href="#scores">Score Breakdown</a>
+    <a class="jump-link" href="#recommendation">Offer &amp; Recommendation</a>
+    <a class="jump-link" href="#checklist">Tonight's Checklist</a>
+    <a class="jump-link" href="#acoustic">Plant Noise Data</a>
+    <a class="jump-link" href="#links">Links</a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">How scores work</div>
+    <div class="sb-contact" style="font-size:12px;margin-bottom:6px">16 categories &middot; 5 pts each &middot; /80 total</div>
+    <div class="legend-row">
+      <span class="lchip"><span class="lc5">5</span> Best</span>
+      <span class="lchip"><span class="lc4">4</span> Strong</span>
+      <span class="lchip"><span class="lc3">3</span> OK</span>
+      <span class="lchip"><span class="lc2">2</span> Weak</span>
+      <span class="lchip"><span class="lc1">1</span> Poor</span>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Showing tonight &middot; 6 PM</div>
+    <div class="sb-contact">
+      <strong>Chris Ziebell</strong><br>
+      Realty ONE Group Beyond<br>
+      <a href="tel:7275152185">727-515-2185</a>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Pinellas County Planning</div>
+    <div class="planning-box">
+      <div style="font-size:11px;color:rgba(255,255,255,.55);margin-bottom:4px">Call to confirm build rights</div>
+      <div class="planning-num"><a href="tel:7274643648">(727) 464-3648</a></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.45);margin-top:4px">Height &middot; duplex &middot; lot width grandfathering</div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════ MAIN CONTENT ══════ -->
+<main class="main-content">
+
+<div class="prop-header">
+<div class="ph-inner">
+  <div class="showing-banner">&#128341; Showing tonight 6 PM &nbsp;&middot;&nbsp; Chris Ziebell &nbsp;&middot;&nbsp; <a href="tel:7275152185" style="color:#fff">727-515-2185</a></div>
+  <div class="ph-title">1275 Mickler Ln, Tarpon Springs FL 34689</div>
+  <div class="ph-sub">Anclote River &middot; 1.31 ac &middot; two platted lots (Lots 27 &amp; 28) &middot; teardown &#8594; build elevated on pilings &middot; bridge-free Gulf access</div>
   <div class="score-row">
     <div class="score-badge">58/80</div>
     <div class="score-meta">
-      <strong>Consider — two-home compound build</strong><br>
-      Ask $975K · Open $675K · Ceiling $800K<br>
-      <span style="font-size:11px;opacity:.7">Updated 2026-06-16 · two platted lots confirmed · noise revised</span>
+      <strong>Consider &mdash; two-home compound build</strong><br>
+      Ask $975K &middot; Open $675K &middot; Ceiling $800K<br>
+      <span style="font-size:11px;opacity:.7">Updated 2026-06-16 &middot; build feasibility confirmed &middot; noise revised &middot; two platted lots</span>
     </div>
   </div>
 </div>
-</header>
+</div>
 
 <div class="wrap">
 
-<!-- ⚠️ PLANT WARNING — shown first -->
-<div class="plant-warning">
-  <div class="warn-title">⚠️ Anclote Power Plant — Corrected Assessment (EPA data 2026-06-16)</div>
-  <p>Earlier framing ("occasional peaker, mostly off") was wrong. EPA CEMS hourly data for 10 months (Jun 2025 – Mar 2026) shows the plant is essentially <strong>always running</strong> — it idles at minimum load rather than shutting down, because cold-starts are expensive for steam plants.</p>
+<!-- PLANT WARNING -->
+<div id="plant-warning">
+<div class="plant-warning" style="margin-top:22px">
+  <div class="warn-title">&#9888;&#65039; Anclote Power Plant &mdash; Corrected Assessment (EPA data, 2026-06-16)</div>
+  <p>Earlier framing (&ldquo;occasional peaker, mostly off&rdquo;) was wrong. EPA CEMS hourly data for 10 months (Jun 2025 &ndash; Mar 2026) shows the plant is essentially <strong>always running</strong> &mdash; it idles at minimum load rather than shutting down, because cold-starts are expensive for steam plants.</p>
   <div class="stat-row">
     <div class="stat-box"><b>89.6%</b><span>of all hours running</span></div>
     <div class="stat-box"><b>9.2%</b><span>of days fully off (28/304)</span></div>
-    <div class="stat-box"><b>85.2%</b><span>nights running at min load</span></div>
+    <div class="stat-box"><b>85.2%</b><span>nights at min load</span></div>
     <div class="stat-box"><b>79 MW</b><span>median night output (idle)</span></div>
   </div>
-  <p style="margin-top:12px">At idle, the turbine still spins at constant 3,600 RPM and the transformer hums at 60 Hz. <strong>Low-frequency background is essentially always present.</strong> "Two jet engines" startup events (~12×/10 mo for Unit 2) are the audible peaks; the everyday reality is steady low-grade industrial background over water.</p>
-  <p style="margin-top:8px">Your 6 PM showing is at <strong>PEAK LOAD time (~480–515 MW median)</strong> — the loudest operating state. If you can't hear it at 6 PM from the back yard, that's useful. The real test is a 3 AM return visit.</p>
+  <p style="margin-top:12px">At idle, the turbine still spins at constant 3,600 RPM and the transformer hums at 60 Hz. <strong>Low-frequency background is essentially always present.</strong> Tonight&rsquo;s 6 PM showing is at <strong>PEAK LOAD time (~480&ndash;515 MW median)</strong> &mdash; the loudest operating state. If you can&rsquo;t hear it from the back yard at 6 PM, that&rsquo;s useful. The real test is a 3 AM return visit.</p>
+</div>
 </div>
 
+<!-- BUILD FEASIBILITY -->
+<section id="build-feasibility">
+<h2>Build feasibility &mdash; confirmed answers (2026-06-16)</h2>
+<div class="feasibility-grid">
+
+  <div class="feas-item feas-yes">
+    <div class="feas-icon">&#9989;</div>
+    <div>
+      <div class="feas-title">Three stories: confirmed YES</div>
+      <p>Pinellas &sect;138-3501(a)(3) allows height measured from BFE in VE flood zones &mdash; your &ldquo;clock&rdquo; starts at 13 ft above grade (BFE 12 ft + 1 ft required freeboard), then the R-4 cap adds 35 ft on top. <strong>Total effective height: ~48 ft above grade.</strong></p>
+      <p style="margin-top:8px"><strong>What fits:</strong> Breakaway parking level (0&ndash;13 ft, doesn&rsquo;t count toward height limit) &#8594; Level 1: main living, orangery, kitchen (14&ndash;25 ft, 11&rsquo; ceilings) &#8594; Level 2: bedrooms + cinema room (25&ndash;34 ft, 9&rsquo; ceilings) &#8594; Rooftop terrace to ~47 ft peak. Comfortable headroom.</p>
+      <p style="margin-top:6px;font-size:13px;color:#166534"><em>Confirm on the planning call: Is BFE height measurement standard practice in VE without a special finding?</em></p>
+    </div>
+  </div>
+
+  <div class="feas-item feas-yes">
+    <div class="feas-icon">&#9989;</div>
+    <div>
+      <div class="feas-title">Second dwelling at any size: confirmed YES &mdash; build as duplex, not ADU</div>
+      <p>An ADU in this coastal flood zone is capped at 750 sf &mdash; a 3,000 sf guest house cannot be permitted as an ADU. But <strong>R-4 allows a second principal dwelling (duplex) by-right.</strong></p>
+      <p style="margin-top:8px">R-4 duplex requires 7,500 sf min lot (this parcel is 57,055 sf &mdash; 7.6&times; over) and 75 ft min width (this parcel is 100 ft). PCPAO Use Code 0810 (&ldquo;more than one house per parcel&rdquo;) is already on the property &mdash; no rezone, no variance needed. Both units: no size cap, no owner-occupancy requirement, fully rentable.</p>
+      <p style="margin-top:6px;font-size:13px;color:#166534"><em>Confirm on the planning call: By-right duplex OK on 1.31-acre R-4 parcel with existing Use Code 0810?</em></p>
+    </div>
+  </div>
+
+  <div class="feas-item feas-info">
+    <div class="feas-icon">&#128176;</div>
+    <div>
+      <div class="feas-title">Build cost: Perplexity reference ~$5M all-in (Daniel disputes &mdash; actual TBD)</div>
+      <p>Perplexity modeled a large elevated dual-home compound in Pinellas at ~$4.5M construction + $750K land = ~$5.25M. <strong>Comparable resale value for a finished compound on this lot: $2.5&ndash;3.5M.</strong> This is a personal estate decision, not an investment build.</p>
+      <p style="margin-top:8px;font-size:13px">Daniel disputes the $5M figure &mdash; actual cost depends on program scope and finishes. Get 3 local builder quotes. The dominant cost variable is the build, not the land: land at $675K vs $800K is a small difference against a multi-million build budget.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="feas-call">
+  <strong>&#128222; Call Pinellas County Planning: (727) 464-3648</strong>
+  <ol>
+    <li>Is BFE height measurement standard practice in VE zones under &sect;138-3501(a)(3), or does it require a special application or finding?</li>
+    <li>On a 1.31-acre R-4 parcel with Use Code 0810 &mdash; can I build two principal dwellings (by-right duplex) without a variance or rezone?</li>
+    <li>Are the two 50-ft platted lots (Lots 27 &amp; 28, Plat Book 5/72) grandfathered as legal non-conforming lots with independent build rights under current R-4 minimums?</li>
+  </ol>
+</div>
+</section>
+
 <!-- QUICK FACTS -->
-<section>
+<section id="quick-facts">
 <h2>Quick facts</h2>
 <div class="facts-grid">
   <div class="fact"><div class="lbl">Asking price</div><div class="val">$975,000</div><div class="note">22% over county value ($755K)</div></div>
-  <div class="fact"><div class="lbl">Offer</div><div class="val">$675K open</div><div class="note">Ceiling $800K · acoustic contingency</div></div>
-  <div class="fact"><div class="lbl">Lot</div><div class="val">1.31 acres</div><div class="note">~100 × 284 ft · 100–118 ft river frontage</div></div>
-  <div class="fact"><div class="lbl">Water</div><div class="val">Anclote River</div><div class="note">~1 mi to mouth · bridge-free · 8–12 min Gulf run</div></div>
-  <div class="fact"><div class="lbl">Flood zone</div><div class="val">FEMA Zone VE</div><div class="note">BFE 12–16 ft · Evac Zone A · build elevated</div></div>
-  <div class="fact"><div class="lbl">Insurance (new build)</div><div class="val">~$1.2–5K/yr</div><div class="note">Elevated pilings · vs $8–20K for old house</div></div>
-  <div class="fact"><div class="lbl">Dock</div><div class="val">None today</div><div class="note">New: ~$45–60K · 538 sf drawing · 88 ft out</div></div>
-  <div class="fact"><div class="lbl">All-in cost</div><div class="val">~$1.8–2.5M</div><div class="note">Land + elevated build + dock + shoreline</div></div>
-  <div class="fact"><div class="lbl">ER</div><div class="val">11.6 min</div><div class="note">AdventHealth North Pinellas · ~4.5 mi</div></div>
-  <div class="fact"><div class="lbl">Neighbors</div><div class="val">RV Park SE</div><div class="note">Hickory Point · Duke Anclote plant ~1 mi NE across river</div></div>
-  <div class="fact"><div class="lbl">MLS</div><div class="val">TB8518495</div><div class="note">Active ~3 days · Realty ONE Group Beyond</div></div>
-  <div class="fact"><div class="lbl">Score</div><div class="val">58/80</div><div class="note">Build thesis · two platted lots · no hard disqualifiers</div></div>
+  <div class="fact"><div class="lbl">Offer strategy</div><div class="val">$675K open</div><div class="note">Ceiling $800K &middot; acoustic contingency</div></div>
+  <div class="fact"><div class="lbl">Lot</div><div class="val">1.31 acres</div><div class="note">~100 &times; 284 ft &middot; 100&ndash;118 ft river frontage</div></div>
+  <div class="fact"><div class="lbl">Build rights</div><div class="val">2 dwellings</div><div class="note">Use Code 0810 &middot; Lots 27 &amp; 28 &middot; by-right duplex</div></div>
+  <div class="fact"><div class="lbl">Water</div><div class="val">Anclote River</div><div class="note">~1 mi to mouth &middot; bridge-free &middot; 8&ndash;12 min Gulf</div></div>
+  <div class="fact"><div class="lbl">Flood zone</div><div class="val">FEMA Zone VE</div><div class="note">BFE 12&ndash;16 ft &middot; Evac Zone A &middot; build elevated</div></div>
+  <div class="fact"><div class="lbl">Height allowed</div><div class="val">~48 ft</div><div class="note">BFE + 35 ft R-4 cap &middot; 3 stories confirmed</div></div>
+  <div class="fact"><div class="lbl">Insurance (new build)</div><div class="val">~$1.2&ndash;5K/yr</div><div class="note">Elevated pilings &middot; vs $8&ndash;20K for old house</div></div>
+  <div class="fact"><div class="lbl">Dock</div><div class="val">None today</div><div class="note">New: ~$45&ndash;60K &middot; 538 sf drawing &middot; 88 ft out</div></div>
+  <div class="fact"><div class="lbl">ER</div><div class="val">11.6 min</div><div class="note">AdventHealth North Pinellas &middot; ~4.5 mi</div></div>
+  <div class="fact"><div class="lbl">Neighbors</div><div class="val">RV Park SE</div><div class="note">Duke Anclote plant ~1 mi NE across river</div></div>
+  <div class="fact"><div class="lbl">Score</div><div class="val">58/80</div><div class="note">Build thesis &middot; no hard disqualifiers</div></div>
 </div>
 </section>
 
-<!-- HARD DISQUALIFIER CHECK -->
-<section>
+<!-- HARD DISQUALIFIERS -->
+<section id="disqualifiers">
 <h2>Hard disqualifier check</h2>
 <ul class="dq-list">
-  <li><span class="dq-icon">✅</span><div class="dq-text"><strong>Legal dock access:</strong> Pass — Riparian right; inside Aquatic-Preserve 10:1 SF envelope (~1,000 sf for ~100 ft frontage); 538 sf proposed dock well within. Pro feasibility letter: "very well suited."</div></li>
-  <li><span class="dq-icon">✅</span><div class="dq-text"><strong>Navigable to Gulf:</strong> Pass — ~1 mi to river mouth, ~3 mi to open Gulf, bridge-free (downstream of Alt US-19). ~8–12 min at planing speed.</div></li>
-  <li><span class="dq-icon">🟡</span><div class="dq-text"><strong>Water depth adequate:</strong> Marginal — off-channel shore is shallow/shoaling. Dock must reach toward the 9-ft federal channel; may need minor dredging (homeowner cost per contractor estimate).</div></li>
-  <li><span class="dq-icon">✅</span><div class="dq-text"><strong>Flood insurance feasible:</strong> Pass — New elevated-on-pilings build ≈ $1.2–5K/yr. (Old house = $8–20K/yr — another reason to rebuild.)</div></li>
-  <li><span class="dq-icon">✅</span><div class="dq-text"><strong>HOA allows boats/dock:</strong> Pass — No HOA.</div></li>
-  <li><span class="dq-icon">🟡</span><div class="dq-text"><strong>Seawall rebuildable:</strong> Uncertain — County shows "Seawall: No"; dock drawing shows a low existing wall. Aquatic Preserve may require living shoreline over hard seawall. Budget into the build.</div></li>
-  <li><span class="dq-icon">✅</span><div class="dq-text"><strong>HV transmission lines:</strong> Pass — No HV lines or substation within 0.5 mi. Duke 230 kV substation + Anclote plant ~1 mi across the river in Pasco.</div></li>
-  <li><span class="dq-icon">✅</span><div class="dq-text"><strong>Hospital ER ≤20 min:</strong> Pass — AdventHealth North Pinellas ~4.5 mi / ~11.6 min (full ER, 168-bed).</div></li>
-  <li><span class="dq-icon">✅</span><div class="dq-text"><strong>Listing verified active:</strong> Pass — $975,000 confirmed. Showing tonight.</div></li>
+  <li><span class="dq-icon">&#9989;</span><div class="dq-text"><strong>Legal dock access:</strong> Pass &mdash; Riparian right; inside Aquatic-Preserve 10:1 SF envelope (~1,000 sf for ~100 ft frontage); 538 sf proposed dock well within. Pro feasibility letter: &ldquo;very well suited.&rdquo;</div></li>
+  <li><span class="dq-icon">&#9989;</span><div class="dq-text"><strong>Navigable to Gulf:</strong> Pass &mdash; ~1 mi to river mouth, ~3 mi to open Gulf, bridge-free (downstream of Alt US-19). ~8&ndash;12 min at planing speed.</div></li>
+  <li><span class="dq-icon">&#128993;</span><div class="dq-text"><strong>Water depth adequate:</strong> Marginal &mdash; off-channel shore is shallow/shoaling. Dock must reach toward the 9-ft federal channel; may need minor dredging.</div></li>
+  <li><span class="dq-icon">&#9989;</span><div class="dq-text"><strong>Flood insurance feasible:</strong> Pass &mdash; New elevated-on-pilings build &asymp; $1.2&ndash;5K/yr. (Old house = $8&ndash;20K/yr &mdash; another reason to rebuild.)</div></li>
+  <li><span class="dq-icon">&#9989;</span><div class="dq-text"><strong>HOA allows boats/dock:</strong> Pass &mdash; No HOA.</div></li>
+  <li><span class="dq-icon">&#128993;</span><div class="dq-text"><strong>Seawall rebuildable:</strong> Uncertain &mdash; County shows &ldquo;Seawall: No&rdquo;; dock drawing shows a low existing wall. Aquatic Preserve may require living shoreline over hard seawall. Budget into the build.</div></li>
+  <li><span class="dq-icon">&#9989;</span><div class="dq-text"><strong>HV transmission lines:</strong> Pass &mdash; No HV lines within 0.5 mi. Duke 230 kV substation + plant ~1 mi across the river in Pasco.</div></li>
+  <li><span class="dq-icon">&#9989;</span><div class="dq-text"><strong>Hospital ER &le;20 min:</strong> Pass &mdash; AdventHealth North Pinellas ~4.5 mi / ~11.6 min (full ER, 168-bed).</div></li>
+  <li><span class="dq-icon">&#9989;</span><div class="dq-text"><strong>Listing verified active:</strong> Pass &mdash; $975,000 confirmed. Showing tonight.</div></li>
 </ul>
-<p style="font-size:13px;color:var(--mut);margin-top:8px">Result: No hard disqualifiers. Two marginal items need on-site verify: water depth/shoaling and shoreline condition.</p>
+<p style="font-size:13px;color:var(--mut);margin-top:8px">No hard disqualifiers. Two marginal items need on-site verify: water depth/shoaling and shoreline condition.</p>
 </section>
 
 <!-- SCORE TABLE -->
-<section>
-<h2>Scores — build thesis (57/80)</h2>
+<section id="scores">
+<h2>Scores &mdash; build thesis (58/80)</h2>
 <div class="tbl-wrap">
 <table>
   <tr><th>Category</th><th>Score</th><th style="min-width:260px">Notes</th></tr>
-  <tr><td>Water Access</td><td><span class="sc s4">4</span>/5</td><td>Lower Anclote, ~1 mi to mouth, bridge-free, 8–12 min Gulf run. Not open-Gulf; off-channel shoaling = 4 not 5.</td></tr>
-  <tr><td>Dock &amp; Boat</td><td><span class="sc s3">3</span>/5</td><td>Pro feasibility + 538 sf permit-style drawing + $44,743 bounded estimate. Real risk: shallow/shoaling shore, possible dredging, seagrass survey decisive, Aquatic-Preserve permit = 6–12 mo.</td></tr>
-  <tr><td>Seawall / Shoreline</td><td><span class="sc s2">2</span>/5</td><td>County: "Seawall: No"; natural/shoaling shoreline (low wall per dock drawing). Living shoreline likely required. Inspect on site.</td></tr>
-  <tr><td>Flood &amp; Insurance</td><td><span class="sc s2">2</span>/5</td><td>VE velocity/wave zone, BFE 12–16 ft. New elevated pilings build = ~$1.2–5K/yr (feasible). VE velocity + Evac-A physical risk caps at 2.</td></tr>
-  <tr><td>Lot Buildability</td><td><span class="sc s5">5</span>/5</td><td><strong>Two platted lots (Lots 27 &amp; 28, Plat Book 5/72) — PCPAO Use Code 0810 ("more than one house per parcel"), Buildings: 2, Living Units: 2.</strong> Two full SFRs permitted — no ADU size cap. Each lot ~50×284 ft, ~50 ft river frontage. Confirm lot width vs R-4 minimum (likely grandfathered). Clean demo: "NOT Substantially Damaged." Dock pre-vetted. 5/5: two-home compound on one waterfront parcel is the program Daniel needs.</td></tr>
-  <tr><td>Lot Size &amp; Layout</td><td><span class="sc s5">5</span>/5</td><td>1.31 ac / ~100 × 284 ft — exceptional (most comps 0.16–0.25 ac). Room for elevated home + pool + detached garage + dock. Best lot in the set.</td></tr>
-  <tr><td>Views &amp; Orientation</td><td><span class="sc s4">4</span>/5</td><td>Wide-open SW view across ~500+ ft Anclote River; SW = afternoon/sunset over water. RV park SE affects one sightline. Elevated home lifts the view further.</td></tr>
-  <tr><td>Location &amp; Amenities</td><td><span class="sc s4">4</span>/5</td><td>Tarpon Springs (unincorporated NW tip). AdventHealth ~11.6 min, grocery nearby, Sponge Docks short drive, ~40 min Tampa. Held from 5 by gravel-lane edge + industrial Anclote Rd corridor.</td></tr>
+  <tr><td>Water Access</td><td><span class="sc s4">4</span>/5</td><td>Lower Anclote, ~1 mi to mouth, bridge-free, 8&ndash;12 min Gulf run. Not open-Gulf; off-channel shoaling = 4 not 5.</td></tr>
+  <tr><td>Dock &amp; Boat</td><td><span class="sc s3">3</span>/5</td><td>Pro feasibility + 538 sf permit-style drawing + $44,743 bounded estimate. Real risk: shallow/shoaling shore, possible dredging, seagrass survey decisive, Aquatic-Preserve permit = 6&ndash;12 mo.</td></tr>
+  <tr><td>Seawall / Shoreline</td><td><span class="sc s2">2</span>/5</td><td>County: &ldquo;Seawall: No&rdquo;; natural/shoaling shoreline (low wall per dock drawing). Living shoreline likely required. Inspect on site.</td></tr>
+  <tr><td>Flood &amp; Insurance</td><td><span class="sc s2">2</span>/5</td><td>VE velocity/wave zone, BFE 12&ndash;16 ft. New elevated pilings build = ~$1.2&ndash;5K/yr. VE + Evac-A physical risk caps at 2.</td></tr>
+  <tr><td>Lot Buildability</td><td><span class="sc s5">5</span>/5</td><td><strong>Two platted lots (Lots 27 &amp; 28, Plat Book 5/72) &mdash; PCPAO Use Code 0810. By-right duplex confirmed.</strong> No ADU size cap. ~50-ft river frontage per lot.</td></tr>
+  <tr><td>Lot Size &amp; Layout</td><td><span class="sc s5">5</span>/5</td><td>1.31 ac / ~100 &times; 284 ft &mdash; exceptional (most comps 0.16&ndash;0.25 ac). Room for elevated home + pool + second dwelling + dock. Best lot in the set.</td></tr>
+  <tr><td>Views &amp; Orientation</td><td><span class="sc s4">4</span>/5</td><td>Wide-open SW view across ~500+ ft Anclote River. SW = afternoon/sunset over water. RV park SE affects one sightline. Elevated home lifts view.</td></tr>
+  <tr><td>Location &amp; Amenities</td><td><span class="sc s4">4</span>/5</td><td>Tarpon Springs unincorporated NW tip. AdventHealth ~11.6 min, grocery nearby, Sponge Docks short drive, ~40 min Tampa. Held from 5 by gravel-lane edge + Anclote Rd corridor.</td></tr>
   <tr><td>Beach Proximity</td><td><span class="sc s3">3</span>/5</td><td>Fred Howard Park ~5.4 mi / ~15 min; Sunset Beach ~5.5 mi / ~15 min. Regular-activity distance, not walkable.</td></tr>
-  <tr><td>Emergency Care</td><td><span class="sc s4">4</span>/5</td><td>AdventHealth North Pinellas ~4.5 mi / ~11.6 min — full ER. Not a trauma center; 12 min is marginal in traffic / at the rail crossing.</td></tr>
-  <tr><td>EMF Exposure</td><td><span class="sc s4">4</span>/5</td><td>No HV transmission lines within 0.5 mi. One concealed cell tower ~0.35 mi NE. Duke plant ~1 mi across river. Low-EMF.</td></tr>
-  <tr><td>Dog-Friendly</td><td><span class="sc s5">5</span>/5</td><td>1.31 acres, no HOA, fenceable, quiet dead-end gravel lane (low traffic). Best in set for Casper — fence the water edge.</td></tr>
-  <tr><td>Neighborhood</td><td><span class="sc s2">2</span>/5</td><td>Hickory Point RV Park (immediate SE neighbor); Anclote Rd "Target Employment Center" (industrial-leaning); work-release center ~0.9 mi. <strong>+ Anclote Power Plant running 89.6% of all hours with constant low-frequency background (see acoustic analysis below).</strong> Offsets: ZIP 34689 crime grade A, river setting.</td></tr>
-  <tr><td>Hurricane Protection</td><td><span class="sc s3">3</span>/5</td><td>New elevated code build (pilings to DFE, impact glass, FBC, breakaway) would be 4–5 alone. But worst surge micro-zone in Pinellas — Evac A, Helene 7.23 ft above MHHW ~1 mi away, Milton forecast 10–15 ft. Net 3.</td></tr>
-  <tr><td>Internet</td><td><span class="sc s3">3</span>/5</td><td>Frontier Fiber (up to 7 Gbps) city-wide but <strong>UNCONFIRMED at this gravel-lane address</strong>. Spectrum cable near-certain. Starlink viable. Ask tonight — could flip to 5.</td></tr>
-  <tr><td>Price</td><td><span class="sc s5">5</span>/5</td><td>$975K land is within budget (≤$1.5M = 5/5). All-in ~$1.8–2.5M approaches ceiling at ask — negotiate the land entry price.</td></tr>
-  <tr style="font-weight:700;background:var(--sand)"><td colspan="3">TOTAL: 58/80 — Consider (two-home compound build thesis)</td></tr>
+  <tr><td>Emergency Care</td><td><span class="sc s4">4</span>/5</td><td>AdventHealth North Pinellas ~4.5 mi / ~11.6 min &mdash; full ER. Not a trauma center; 12 min is marginal in traffic.</td></tr>
+  <tr><td>EMF Exposure</td><td><span class="sc s4">4</span>/5</td><td>No HV lines within 0.5 mi. One concealed cell tower ~0.35 mi NE. Duke plant ~1 mi across river. Low-EMF.</td></tr>
+  <tr><td>Dog-Friendly</td><td><span class="sc s5">5</span>/5</td><td>1.31 acres, no HOA, fenceable, quiet dead-end gravel lane. Best in set for Casper &mdash; fence the water edge.</td></tr>
+  <tr><td>Neighborhood</td><td><span class="sc s2">2</span>/5</td><td>Hickory Point RV Park immediate SE neighbor; Anclote Rd industrial-leaning; <strong>plant running 89.6% of all hours &mdash; constant low-frequency background.</strong></td></tr>
+  <tr><td>Hurricane Protection</td><td><span class="sc s3">3</span>/5</td><td>New elevated code build (pilings to DFE, impact glass, FBC, breakaway) would be 4&ndash;5 alone. But worst surge micro-zone in Pinellas &mdash; Evac A, Helene 7.23 ft above MHHW ~1 mi away, Milton forecast 10&ndash;15 ft. Net 3.</td></tr>
+  <tr><td>Internet</td><td><span class="sc s3">3</span>/5</td><td>Frontier Fiber (up to 7 Gbps) city-wide but <strong>UNCONFIRMED at this gravel-lane address</strong>. Spectrum cable near-certain. Starlink viable. Ask tonight &mdash; could flip to 5.</td></tr>
+  <tr><td>Price</td><td><span class="sc s5">5</span>/5</td><td>$975K land is within budget (&le;$1.5M = 5/5). The dominant cost is the build, not the land &mdash; negotiate hard on land entry.</td></tr>
+  <tr style="font-weight:700;background:var(--sand)"><td colspan="3">TOTAL: 58/80 &mdash; Consider (two-home compound build thesis)</td></tr>
 </table>
 </div>
 </section>
 
 <!-- ANALYSIS -->
-<section>
+<section id="analysis">
 <h2>Analysis</h2>
 <div class="callout">
-  <b>Strengths:</b> 1.31-acre waterfront lot — by far the largest in the search; room for the home you'd design + pool + dock. Bridge-free ~8–12 min Gulf run (downstream of the only fixed bridge). R-4, clean demo ("NOT Substantially Damaged"), dock already feasibility-vetted and priced ($45–60K). Building elevated solves the flood-insurance problem: new pilings home = $1.2–5K/yr vs. $8–20K for the old house. $1,000/mo garage-apartment income + repair-and-hold option while designing. No HOA. Full ER 11.6 min. 1.31 ac for Casper.
+  <b>Strengths:</b> 1.31-acre waterfront lot &mdash; by far the largest in the search; room for the home you&rsquo;d design + pool + second dwelling + dock. Bridge-free ~8&ndash;12 min Gulf run. R-4, clean demo (&ldquo;NOT Substantially Damaged&rdquo;), dock already feasibility-vetted and priced ($45&ndash;60K). <strong>Building elevated solves the flood-insurance problem:</strong> new pilings home = $1.2&ndash;5K/yr vs. $8&ndash;20K for the old house. Two platted lots = by-right duplex (no ADU size cap). Three stories confirmed. No HOA. Full ER 11.6 min. 1.31 ac for Casper.
 </div>
 <div class="warn-callout">
-  <b>Weaknesses:</b> VE velocity zone + Evac Zone A — worst flood/surge exposure in the set; even an elevated home faces wave action, debris, dock loss, and first-out evacuation priority. Land priced 22% over market ($975K ask vs $755K county value). RV park as immediate SE neighbor + industrial Anclote Rd corridor. Dock/shore site risk (shoaling shore likely needs dredging; seagrass survey is the gate). Fiber unconfirmed at gravel-lane address. <strong>Plant noise: now known to run 89.6% of all hours with constant low-frequency background — more significant than originally assessed.</strong>
+  <b>Weaknesses:</b> VE velocity zone + Evac Zone A &mdash; worst flood/surge exposure in the set. Land priced 22% over market ($975K ask vs $755K county value). RV park as immediate SE neighbor + industrial Anclote Rd corridor. Dock/shore site risk (shoaling shore, seagrass survey is the gate). Fiber unconfirmed at gravel-lane address. <strong>Plant noise: runs 89.6% of all hours with constant low-frequency background.</strong>
 </div>
 <div class="danger-callout">
   <b>Major risks:</b><br><br>
-  <strong>Plant noise (severity revised upward):</strong> The plant is not an occasional peaker — it's essentially always running at low idle. Low-frequency turbine/transformer hum is nearly constant. The correct test: one nighttime visit during plant operation (hear the minimum-load baseline) vs. one visit during a confirmed maintenance outage (hear the true ambient floor). Only 3 off-periods in 10 months. If low-frequency-free ambient is a hard requirement, this is the wrong property.<br><br>
-  <strong>Aquatic-Preserve dock permit:</strong> 6–12+ month multi-agency process (Pinellas W&amp;N + FDEP/SWFWMD ERP + F.A.C. 18-20 + USACE), gated on a clean seagrass survey and reaching lift-grade depth. Make dock pre-application a contingency.<br><br>
-  <strong>FEMA 50% rule:</strong> Repair-and-hold work must stay under 50% of structure value or forces full rebuild early. Know the number before touching anything.<br><br>
-  <strong>All-in vs. budget:</strong> Land + elevated build + dock + shoreline = $2.0–2.5M. Negotiating land to ~$700–750K is what keeps the build inside the $2.5M ceiling.
+  <strong>Plant noise (severity revised upward):</strong> Essentially always running at low idle. Low-frequency turbine/transformer hum is nearly constant. One nighttime visit during operation + one during a confirmed maintenance outage needed. Only 3 off-periods in 10 months. If noise-free nights are a hard requirement, this is the wrong property.<br><br>
+  <strong>Aquatic-Preserve dock permit:</strong> 6&ndash;12+ month multi-agency process gated on a clean seagrass survey and reaching lift-grade depth. Make dock pre-application a contingency.<br><br>
+  <strong>FEMA 50% rule:</strong> Repair-and-hold work must stay under 50% of structure value or triggers mandatory full rebuild.<br><br>
+  <strong>Build cost:</strong> Actual cost for the full compound program is TBD &mdash; get 3 builder quotes. The land entry price ($675K&ndash;$800K) is a secondary variable against a multi-million build budget.
 </div>
 </section>
 
 <!-- RECOMMENDATION -->
-<section>
+<section id="recommendation">
 <h2>Recommendation</h2>
 <div class="rec-box">
-  <h3>Consider — buy the land at land value, then build.</h3>
-  <p style="font-size:14px;opacity:.9;margin:8px 0">57/80 on the build thesis. A rare 1.31-acre riverfront lot with bridge-free Gulf access and a pre-vetted dock, where building solves the flood-insurance problem. The drags: surge micro-zone, RV-park neighbor, plant noise (now more concerning than initially scored), and land priced above market.</p>
+  <h3>Consider &mdash; buy the land at land value, then build.</h3>
+  <p style="font-size:14px;opacity:.9;margin:8px 0">58/80 on the build thesis. A rare 1.31-acre riverfront lot with bridge-free Gulf access, pre-vetted dock, and confirmed two-home compound rights, where building elevated solves the flood-insurance problem. The drags: surge micro-zone, RV-park neighbor, plant noise, and land priced above market.</p>
   <div class="offer-row">
     <div class="offer-num"><div class="num">$675K</div><div class="lbl">Opening cash offer</div></div>
-    <div class="offer-sep">→</div>
+    <div class="offer-sep">&rarr;</div>
     <div class="offer-num"><div class="num">$800K</div><div class="lbl">Firm ceiling</div></div>
-    <div class="offer-sep">·</div>
-    <div class="offer-num"><div class="num">Walk</div><div class="lbl">Seller holds near $975K</div></div>
+    <div class="offer-sep">&middot;</div>
+    <div class="offer-num"><div class="num">Walk</div><div class="lbl">Near $975K ask</div></div>
   </div>
   <p style="font-size:12.5px;opacity:.8">$675K anchored to $755K county value less plant-noise discount; soft post-Helene market; 29%-under-list precedent at 1149 Marina Dr.</p>
   <ul class="clist">
@@ -260,131 +473,135 @@ tr:nth-child(even) td{background:#fafcfc}
     <li>FEMA elevation certificate</li>
     <li>1990 dock permit history (grandfather/rebuild rights)</li>
     <li>Septic/well inspection</li>
-    <li>Open-permit sweep (2020–21 work)</li>
+    <li>Open-permit sweep (2020&ndash;21 work)</li>
     <li>Garage-apartment lease review</li>
-    <li><strong>Acoustic contingency — nighttime visit during plant operation + one outage window</strong></li>
-    <li>Walk if: seagrass over dock alignment · rebuild doesn't pencil · seller holds near $975K · nighttime plant ambient is perceptible from the building site</li>
+    <li><strong>Acoustic contingency &mdash; nighttime visit during plant operation + one outage window</strong></li>
+    <li>Walk if: seagrass over dock alignment &middot; seller holds near $975K &middot; nighttime plant ambient is perceptible from building site</li>
   </ul>
 </div>
 </section>
 
-<!-- TONIGHT'S VISIT CHECKLIST -->
-<section>
-<h2>Tonight's visit — checklist (6 PM showing)</h2>
+<!-- TONIGHT'S CHECKLIST -->
+<section id="checklist">
+<h2>Tonight&rsquo;s visit &mdash; checklist (6 PM showing)</h2>
 <div class="checklist">
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🔴 Critical · plant noise</div><div class="chk-text">Stand in the back yard facing the river and <strong>listen</strong>. 6 PM = peak load (~480–515 MW median) — the loudest the plant gets. Hear a low hum? Note it. Not hearing it at 6 PM = encouraging, but doesn't clear the 3 AM minimum-load test.</div></div>
+    <div><div class="chk-priority">&#128308; Critical &middot; plant noise</div><div class="chk-text">Stand in the back yard facing the river and <strong>listen</strong>. 6 PM = peak load (~480&ndash;515 MW median) &mdash; the loudest the plant gets. Hear a low hum? Note it. Not hearing it at 6 PM is encouraging, but doesn&rsquo;t clear the 3 AM minimum-load test.</div></div>
   </label>
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🔴 Critical · dock</div><div class="chk-text">Walk to the water's edge. Can you see the bottom? Is there visible seagrass? How far out before it gets to lift-grade depth? Does the 88 ft dock drawing make sense from standing there?</div></div>
+    <div><div class="chk-priority">&#128308; Critical &middot; dock depth</div><div class="chk-text">Walk to the water&rsquo;s edge. Can you see the bottom? Is there visible seagrass? How far out before lift-grade depth? Does the 88 ft dock drawing make sense from standing there?</div></div>
   </label>
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🔴 Critical · dock</div><div class="chk-text">Ask Chris: what happened to the 1990 dock? Is there permit history? Any issue with prior dock rights or the Aquatic Preserve at this parcel?</div></div>
+    <div><div class="chk-priority">&#128308; Critical &middot; dock history</div><div class="chk-text">Ask Chris: what happened to the 1990 dock? Is there permit history? Any issue with Aquatic Preserve rights at this parcel?</div></div>
   </label>
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🟠 Important · internet</div><div class="chk-text">Ask Chris: is Frontier Fiber available at this specific address? City-wide coverage is 84–99%, but this gravel-lane dead-end is a real gap risk. Confirm yes or no — could flip the Internet score from 3/5 to 5/5.</div></div>
+    <div><div class="chk-priority">&#128992; Important &middot; internet</div><div class="chk-text">Ask Chris: is Frontier Fiber confirmed at this specific gravel-lane address? City-wide coverage is 84&ndash;99%, but dead-end roads are a real gap risk. Confirm yes or no &mdash; could flip Internet score from 3/5 to 5/5.</div></div>
   </label>
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🟠 Important · neighbors</div><div class="chk-text">Look SE at the RV Park. Activity level at 6 PM? How visible from the yard and from the waterfront? Can you smell or hear it?</div></div>
+    <div><div class="chk-priority">&#128992; Important &middot; neighbors</div><div class="chk-text">Look SE at the RV Park. Activity level at 6 PM? How visible from the yard and waterfront? Can you smell or hear it?</div></div>
   </label>
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🟠 Important · build</div><div class="chk-text">Walk the full depth of the property (it's 284 ft). Grade issues? Utility poles? Mature trees that complicate a build footprint? Where would the new home site square up?</div></div>
+    <div><div class="chk-priority">&#128992; Important &middot; lot walk</div><div class="chk-text">Walk the full 284 ft depth of the property. Grade issues? Utility poles? Mature trees that complicate the build footprint? Where would the main home site square up?</div></div>
   </label>
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🟠 Important · build</div><div class="chk-text">Find the septic access lid location. Understand the demo/build staging — where does the garage apartment sit relative to the likely new build footprint? Can it stay standing while you build?</div></div>
+    <div><div class="chk-priority">&#128992; Important &middot; staging</div><div class="chk-text">Find the septic access lid. Understand demo/build staging &mdash; where does the garage apartment sit relative to the new build footprint? Can it stay standing during construction?</div></div>
   </label>
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🟡 Info · permits</div><div class="chk-text">Ask about the 2020–21 work. What was done? Did permits get pulled and closed? Any open permits on the property right now?</div></div>
+    <div><div class="chk-priority">&#128993; Info &middot; permits</div><div class="chk-text">Ask about the 2020&ndash;21 work (windows/doors + siding permits). Did they close? Any open permits on the property right now?</div></div>
   </label>
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🟡 Info · income</div><div class="chk-text">Is the garage apartment lease month-to-month or fixed term? When does it turn? Who's the tenant?</div></div>
+    <div><div class="chk-priority">&#128993; Info &middot; tenant</div><div class="chk-text">Is the garage apartment lease month-to-month or fixed term? When does it turn?</div></div>
   </label>
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🟡 Info · cell signal</div><div class="chk-text">Check your signal bars at the property. Note carrier and bars. Dead-end gravel lane in a low-density area = possible weak signal.</div></div>
+    <div><div class="chk-priority">&#128993; Info &middot; cell signal</div><div class="chk-text">Check your signal bars at the property. Note carrier and bars.</div></div>
   </label>
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🟡 Info · ER timing</div><div class="chk-text">Time your drive from the property to AdventHealth North Pinellas (~4.5 mi). Note any delays at the rail crossing on US-19.</div></div>
+    <div><div class="chk-priority">&#128994; Strategy</div><div class="chk-text">Don&rsquo;t tip your offer range. Anchor by asking: &ldquo;How much other interest have you seen? When did the listing actually go live?&rdquo; (It&rsquo;s ~3 days old.)</div></div>
   </label>
   <label class="chk-item">
     <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🟢 Strategy</div><div class="chk-text">Don't tip your offer range. Anchor by asking: "How much other interest have you seen? When did the listing actually go live?" (It's ~3 days old.)</div></div>
-  </label>
-  <label class="chk-item">
-    <input type="checkbox" class="chk-box">
-    <div><div class="chk-priority">🟢 Follow-up</div><div class="chk-text">Schedule a return visit at 3 AM on a normal (non-outage) night to hear the plant at minimum load. This is the real acoustic baseline test.</div></div>
+    <div><div class="chk-priority">&#128994; Follow-up</div><div class="chk-text">Schedule a 3 AM return visit during normal plant operation to hear the minimum-load baseline. Call Pinellas Planning (727) 464-3648 tomorrow to confirm height, duplex rights, and lot-width grandfathering.</div></div>
   </label>
 </div>
 </section>
 
-<!-- ANCLOTE PLANT DEEP DATA -->
-<section>
-<h2>Anclote Power Plant — full acoustic data</h2>
-<p style="font-size:13px;color:var(--mut);margin-bottom:12px">Source: EPA CEMS hourly emissions data, Jun 2025 – Mar 2026 (7,296 hours). Confirmed against Duke Energy Florida 2025 Ten-Year Site Plan (FL PSC filing, 148 pp).</p>
+<!-- ANCLOTE PLANT DATA -->
+<section id="acoustic">
+<h2>Anclote Power Plant &mdash; full noise data</h2>
+<p style="font-size:13px;color:var(--mut);margin-bottom:12px">Source: EPA CEMS hourly emissions data, Jun 2025 &ndash; Mar 2026 (7,296 hours). Duke Energy Florida 2025 Ten-Year Site Plan (FL PSC).</p>
 <div class="tbl-wrap">
 <table class="plant-table">
   <tr><th>Metric</th><th>Value</th></tr>
-  <tr><td>Hours with ≥1 unit running</td><td>89.6% of all hours</td></tr>
+  <tr><td>Hours with &ge;1 unit running</td><td>89.6% of all hours</td></tr>
   <tr><td>Days completely off</td><td>28 of 304 days (9.2%)</td></tr>
   <tr><td>Days running all 24 hours</td><td>88.8% of days</td></tr>
   <tr><td>Nights with plant fully silent</td><td>10.5% of nights</td></tr>
-  <tr><td>Median night load (22:00–06:00)</td><td>79 MW</td></tr>
+  <tr><td>Median night load (22:00&ndash;06:00)</td><td>79 MW</td></tr>
   <tr><td>Mean night load</td><td>116 MW</td></tr>
   <tr><td>95th-pct night load</td><td>379 MW</td></tr>
-  <tr><td>Peak afternoon load (median, 17:00–19:00)</td><td>~480–515 MW</td></tr>
-  <tr><td>Off-streaks in 10 months</td><td>3 events: 15 days, 7 days, 6 days (scheduled maintenance)</td></tr>
-  <tr><td>Unit 2 startup events / 10 mo.</td><td>~12 (≈ 1.2× per month)</td></tr>
+  <tr><td>Peak afternoon load (17:00&ndash;19:00 median)</td><td>~480&ndash;515 MW</td></tr>
+  <tr><td>Off-streaks in 10 months</td><td>3 events: 15 days &middot; 7 days &middot; 6 days (scheduled maintenance)</td></tr>
+  <tr><td>Unit 2 startup events / 10 mo.</td><td>~12 (&asymp; 1.2&times; per month)</td></tr>
   <tr><td>Unit 1 startup events / 10 mo.</td><td>~5</td></tr>
-  <tr><td>Monthly capacity factor range</td><td>9% (Dec 2025) – 38% (Mar 2026)</td></tr>
+  <tr><td>Monthly capacity factor range</td><td>9% (Dec 2025) &ndash; 38% (Mar 2026)</td></tr>
   <tr><td>10-month average capacity factor</td><td>23.9%</td></tr>
-  <tr><td>Plant conversion history</td><td>Oil → Gas, 2013 (significant capital investment)</td></tr>
-  <tr><td>Retirement date (2025 TYSP, Schedule 1)</td><td>None listed for Anclote 1 or 2</td></tr>
-  <tr><td>Units scheduled for retirement (for reference)</td><td>Crystal River 4 &amp; 5 (coal, Citrus County): June 2034</td></tr>
+  <tr><td>Plant conversion history</td><td>Oil &rarr; Gas, 2013 (major capital investment)</td></tr>
+  <tr><td>Retirement date (2025 Ten-Year Site Plan)</td><td>None listed for Anclote 1 or 2</td></tr>
+  <tr><td>Units scheduled for retirement</td><td>Crystal River 4 &amp; 5 (coal, Citrus County): June 2034</td></tr>
 </table>
 </div>
 
 <div class="warn-callout" style="margin-top:12px">
-  <b>Why "23.9% capacity factor" sounds better than it is:</b> A 20–24% capacity factor implies the plant runs ~1 in 5 hours. Anclote's actual pattern is different — it idles at minimum load almost all the time rather than cycling off. Steam plants behave this way because cold-starts are expensive, time-consuming, and stressful on equipment. It's cheaper to throttle to 70–80 MW and stay warm than to shut down. The steam turbine spins at constant 3,600 RPM whether generating 80 MW or 500 MW. The transformer hums at 60 Hz constantly. Low-frequency content is load-independent.
+  <b>Why &ldquo;23.9% capacity factor&rdquo; sounds better than it is:</b> A 20&ndash;24% capacity factor implies the plant runs ~1 in 5 hours. Anclote&rsquo;s actual pattern is near-continuous idling rather than cycling off. Steam plants behave this way because cold-starts are expensive and stressful on equipment. The steam turbine spins at constant 3,600 RPM whether generating 80 MW or 500 MW. The transformer hums at 60 Hz constantly. Low-frequency content is load-independent.
 </div>
 
 <div class="callout" style="margin-top:10px">
-  <b>How to test this properly:</b>
-  <br>(1) <strong>Tonight at 6 PM</strong> = peak load → if you hear a hum from the back yard, that's the worst case. Note exactly what you hear.
-  <br>(2) <strong>Return at 3 AM</strong> on a normal running night → this is the minimum-load baseline you'd live with every night.
-  <br>(3) <strong>Return during a confirmed maintenance outage</strong> → this is the true ambient floor without the plant (only 3 windows in 10 months). Contact Duke Energy Florida or check the FL PSC docket for scheduled outages.
-  <br>The difference between (2) and (3) = your actual nightly noise exposure from the plant.
+  <b>How to test properly:</b><br>
+  (1) <strong>Tonight at 6 PM</strong> = peak load &rarr; loudest the plant gets &mdash; if you hear it from the back yard, note it.<br>
+  (2) <strong>Return at 3 AM</strong> on a normal running night &rarr; minimum-load baseline you&rsquo;d live with every night.<br>
+  (3) <strong>Return during a confirmed maintenance outage</strong> &rarr; true ambient floor without the plant (only 3 windows in 10 months).<br>
+  Difference between (2) and (3) = your actual nightly noise exposure.
+</div>
+
+<div style="margin-top:14px;text-align:center">
+  <img src="img/anclote_operating_pattern.png" alt="Anclote Power Plant operating pattern Jun 2025 &ndash; Mar 2026"
+    style="max-width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.06)">
+  <p style="font-size:12px;color:var(--mut);margin-top:6px">EPA CEMS hourly data &middot; Jun 2025 &ndash; Mar 2026 (7,296 hours)</p>
 </div>
 </section>
 
 <!-- LINKS -->
-<section>
-<h2>Links</h2>
+<section id="links">
+<h2>Links &amp; contacts</h2>
 <div class="link-grid">
-  <a class="lbtn lbtn-teal" href="https://smartreal.com/interactive-3d-home-tour/db95cb05-0a1c-4a44-9eee-44a1ae186743" target="_blank">🏠 3D Tour</a>
+  <a class="lbtn lbtn-teal" href="https://smartreal.com/interactive-3d-home-tour/db95cb05-0a1c-4a44-9eee-44a1ae186743" target="_blank">&#127968; 3D Tour</a>
   <a class="lbtn lbtn-navy" href="https://www.redfin.com/FL/Tarpon-Springs/1275-Mickler-Ln-34689/home/47893278" target="_blank">Redfin Listing</a>
   <a class="lbtn lbtn-sand" href="https://www.pcpao.gov/property-details?s=152703576720000270" target="_blank">PCPAO Record</a>
-  <a class="lbtn lbtn-green" href="tel:7275152185">📞 Chris 727-515-2185</a>
+  <a class="lbtn lbtn-green" href="tel:7275152185">&#128222; Chris Ziebell</a>
 </div>
-<p style="font-size:12.5px;color:var(--mut);margin-top:10px">Chris (Christine) Ziebell · Realty ONE Group Beyond · chris@rogbeyond.com · MLS TB8518495 + TB8518498</p>
+<p style="font-size:12.5px;color:var(--mut);margin-top:10px">Chris (Christine) Ziebell &middot; Realty ONE Group Beyond &middot; chris@rogbeyond.com &middot; MLS TB8518495 + TB8518498</p>
 </section>
 
 <div class="footer">
-  Source files: <code>SeVe/USA/Waterfront_Search/Source_Docs/1275_Mickler_Ln/</code> (10 files — dossier, PCPAO record, SD letter, dock feasibility, dock drawing, dock estimate, site aerial, acoustic CSV + chart)<br>
-  Scorecard: <code>SeVe/USA/Waterfront_Search/Scored_Properties/1275-mickler-ln-tarpon-springs.md</code><br><br>
-  <a href="./">← Back to full comparison</a>
-  &nbsp;·&nbsp; Generated 2026-06-16 · GutenOS waterfront scorer
+  MLS TB8518495 (SF) + TB8518498 (land) &middot; Ask $975K &middot; Parcel 03-27-15-57672-000-0270 &middot; Unincorporated Pinellas County<br>
+  Research complete 2026-06-16 &middot; EPA CEMS data &middot; PCPAO records &middot; Perplexity zoning research &middot; realtor packet + dock feasibility<br><br>
+  <a href="./">&#8592; Back to all properties</a> &nbsp;&middot;&nbsp; GutenOS waterfront scorer &middot; SeVe 2026
 </div>
-</div>
+
+</div><!-- /wrap -->
+</main>
+</div><!-- /layout -->
 
 </body>
 </html>
